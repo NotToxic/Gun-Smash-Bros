@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 
-public class gss implements ActionListener{
+public class gss implements ActionListener, KeyListener{
     // Properties
     JFrame theFrame = new JFrame("Game Smash Bros");
     newPanel thePanel = new newPanel();
@@ -17,6 +17,29 @@ public class gss implements ActionListener{
         }
     }
 
+    public void keyPressed(KeyEvent evt){
+        if (evt.getKeyChar() == 'w'){
+            thePanel.intChar1Y -= 50;
+        } 
+        /*
+         if (evt.getKeyChar() == 's'){
+            thePanel.intChar1Y += 10;
+        }
+        */
+       
+        if (evt.getKeyChar() == 'd'){
+            thePanel.intChar1X += 10;
+        }
+        if (evt.getKeyChar() == 'a'){
+            thePanel.intChar1X -= 10;
+        }
+    }
+    public void keyReleased(KeyEvent evt){
+    }
+    public void keyTyped(KeyEvent evt){
+    }
+
+
     // Constructor
     public gss(){
         thePanel.setLayout(null);
@@ -27,6 +50,7 @@ public class gss implements ActionListener{
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theFrame.setResizable(false);
         theFrame.setVisible(true);
+        theFrame.addKeyListener(this);
 
         theTimer.start();
 
