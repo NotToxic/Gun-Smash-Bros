@@ -13,28 +13,18 @@ public class gss implements ActionListener, KeyListener{
     // Methods
     public void actionPerformed(ActionEvent evt){
         if (evt.getSource() == theTimer){
+            thePanel.char1.outOfBounds();
             thePanel.repaint();
         }
     }
 
     public void keyPressed(KeyEvent evt){
-        if (evt.getKeyChar() == 'w'){
-            thePanel.intChar1Y -= 50;
-        } 
-        /*
-         if (evt.getKeyChar() == 's'){
-            thePanel.intChar1Y += 10;
-        }
-        */
-       
-        if (evt.getKeyChar() == 'd'){
-            thePanel.intChar1X += 10;
-        }
-        if (evt.getKeyChar() == 'a'){
-            thePanel.intChar1X -= 10;
-        }
+        thePanel.char1.deflectionX(evt.getKeyChar(), false);
+        thePanel.char1.deflectionY(evt.getKeyChar(), false);
     }
     public void keyReleased(KeyEvent evt){
+        thePanel.char1.deflectionX(evt.getKeyChar(), true);
+        thePanel.char1.deflectionY(evt.getKeyChar(), true);
     }
     public void keyTyped(KeyEvent evt){
     }
