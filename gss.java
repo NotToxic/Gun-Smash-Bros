@@ -20,7 +20,7 @@ public class gss implements ActionListener{
     // Constructor
     public gss(){
         thePanel.setLayout(null);
-        thePanel.setPreferredSize(new Dimension(1200,800));
+        thePanel.setPreferredSize(new Dimension(1280,720));
 
         theFrame.setContentPane(thePanel);
         theFrame.pack();
