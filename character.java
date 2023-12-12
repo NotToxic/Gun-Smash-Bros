@@ -4,20 +4,22 @@ public class character {
     int intPosY;
     int intDefX;
     int intDefY;
+    int intJumpCounter = 0;
+    boolean blnJumpPressed = false;
 
     // Methods
     
     // Movement in the x-axis
     public void deflectionY(char charKeyPressed, boolean blnKeyReleased){
-        if (blnKeyReleased && (charKeyPressed == 'w' || charKeyPressed == 's')){
+        if (blnKeyReleased && charKeyPressed == 'w'){
             intDefY = 0;
+            blnJumpPressed = false;
         } else {
-            if (charKeyPressed == 'w'){
-                intDefY = -10;
+            if (charKeyPressed == 'w' && intJumpCounter < 2){
+                intJumpCounter++;
+                System.out.println(intJumpCounter);
+                intDefY = -50;
             } 
-                if (charKeyPressed == 's'){
-                intDefY = 10;
-            }
         }
            
     }
@@ -37,6 +39,13 @@ public class character {
     public void movement(){
         intPosX += intDefX;
         intPosY += intDefY;
+        if (intPosY < 630){
+            intDefY += 1;
+        } 
+        else if (intPosY >= 630){
+            intDefY = 0;
+            intJumpCounter = 0;
+        }
     }
 
     public void outOfBounds(){

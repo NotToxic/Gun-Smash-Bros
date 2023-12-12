@@ -14,6 +14,7 @@ public class newPanel extends JPanel{
 
         g.setColor(Color.RED);
         char1.movement();
+        char1.outOfBounds();
         g.fillRect(char1.intPosX, char1.intPosY, 50, 90);
     }
 
