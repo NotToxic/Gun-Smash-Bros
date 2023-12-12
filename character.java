@@ -5,23 +5,19 @@ public class character {
     int intDefX;
     int intDefY;
     int intJumpCounter = 0;
-    boolean blnJumpPressed = false;
 
     // Methods
     
     // Movement in the x-axis
     public void deflectionY(char charKeyPressed, boolean blnKeyReleased){
         if (blnKeyReleased && charKeyPressed == 'w'){
-            intDefY = 0;
-            blnJumpPressed = false;
-        } else {
             if (charKeyPressed == 'w' && intJumpCounter < 2){
                 intJumpCounter++;
-                System.out.println(intJumpCounter);
-                intDefY = -50;
+                intDefY = -200;
+                movement();
+                intDefY = 0;
             } 
         }
-           
     }
     public void deflectionX(char charKeyPressed, boolean blnKeyReleased){
         if (blnKeyReleased && (charKeyPressed == 'a' || charKeyPressed == 'd')){

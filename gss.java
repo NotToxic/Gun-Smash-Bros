@@ -19,13 +19,13 @@ public class gss implements ActionListener, KeyListener{
 
     public void keyPressed(KeyEvent evt){
         thePanel.char1.deflectionX(evt.getKeyChar(), false);
+        thePanel.char1.deflectionY(evt.getKeyChar(), false);
     }
     public void keyReleased(KeyEvent evt){
         thePanel.char1.deflectionX(evt.getKeyChar(), true);
         thePanel.char1.deflectionY(evt.getKeyChar(), true);
     }
     public void keyTyped(KeyEvent evt){
-        thePanel.char1.deflectionY(evt.getKeyChar(), false);
     }
 
     // Constructor

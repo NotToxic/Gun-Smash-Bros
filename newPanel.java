@@ -9,6 +9,8 @@ public class newPanel extends JPanel{
     
     // Methods
     public void paintComponent(Graphics g){
+        Graphics2D g2d = (Graphics2D)g;
+
         g.setColor(Color.WHITE);
         g.fillRect(0,0,1280,720);
 
