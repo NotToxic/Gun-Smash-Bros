@@ -58,11 +58,11 @@ public class Player {
     if (y > 600) {
       ySpeed = 0;
       if (keyUp) {
-        ySpeed = -7;
+        ySpeed = -12;
       }
     }
 
-    ySpeed += 0.3;
+    ySpeed += 0.7;
 
     x += xSpeed;
     y += ySpeed;
