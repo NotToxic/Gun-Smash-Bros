@@ -25,6 +25,8 @@ public class Player {
 
   public boolean doubleJumped = false;
 
+  public int jumpCounter = 0;
+
   public Player(int x, int y, int width, int height, GamePanel gamePanel) {
     this.x = x;
     this.y = y;
@@ -55,19 +57,34 @@ public class Player {
     if (xSpeed > 8) xSpeed = 8;
     if (xSpeed < -8) xSpeed = -8;
 
-    if (y > 600) {
+    if (y >= 600) {
       ySpeed = 0;
-      if (keyUp) {
-        ySpeed = -12;
-      }
+      y = 600;
+      jumpCounter = 0;
+    } else {
+      ySpeed += 0.7;
     }
-
-    ySpeed += 0.7;
+  
+    if (keyUp && jumpCounter < 2) {
+      jumpCounter++;
+      ySpeed = -12.5;
+      keyUp = false;
+    }
 
     x += xSpeed;
     y += ySpeed;
 
+    collision();
+
     hitbox.x = x;
     hitbox.y = y;
+  }
+
+  public void collision(){
+    if (y < 0){
+      y = 0;
+    } else if (y > 600){
+      y = 600;
+    }
   }
 }
