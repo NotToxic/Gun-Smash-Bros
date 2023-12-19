@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import src.inputs.KeyInputs;
+
 public class StartPanel extends JPanel implements ActionListener{
     
     JButton connectButton = new JButton("Connect");
@@ -14,6 +16,11 @@ public class StartPanel extends JPanel implements ActionListener{
     }
 
     public StartPanel(){
+        SwingUtilities.invokeLater(() -> {
+            setFocusable(true);
+            requestFocusInWindow();
+            setLayout(null);
+        });
         setPreferredSize(new Dimension(1280,720));
 
         playButton.setSize(200,200);

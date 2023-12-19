@@ -31,6 +31,7 @@ public class GamePanel extends JPanel{
       addKeyListener(new KeyInputs(player));
       setFocusable(true);
       requestFocusInWindow();
+      setLayout(null);
     });
     backButton.setSize(200,200);
     backButton.setLocation(100,100);
