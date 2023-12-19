@@ -1,10 +1,10 @@
-package src.main;
+package main;
 
 import java.awt.*;
 import javax.swing.*;
 
-import src.inputs.KeyInputs;
-import src.player.Player;
+import inputs.KeyInputs;
+import player.Player;
 
 public class GamePanel extends JPanel{
 

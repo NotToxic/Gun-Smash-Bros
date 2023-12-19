@@ -1,9 +1,8 @@
-package src.player;
+package player;
 
-import src.main.GamePanel;
+import main.GamePanel;
 
 import java.awt.*;
-import javax.swing.*;
 
 public class Player {
 
