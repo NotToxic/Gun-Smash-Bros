@@ -134,6 +134,7 @@ public class SuperSocketMaster{
   private synchronized void addActionListener(ActionListener listener) {
     actionListener = AWTEventMulticaster.add(actionListener, listener);
   }
+  @SuppressWarnings("unused")
   private synchronized void removeActionListener(ActionListener listener) {
     actionListener = AWTEventMulticaster.remove(actionListener, listener);
   }
@@ -186,8 +187,8 @@ public class SuperSocketMaster{
     Socket socketObject = null;
     PrintWriter outBuffer = null;
     BufferedReader inBuffer = null;
-    String strMyIP;
-    String strMyHostname;
+    @SuppressWarnings("unused")
+    String strMyIP, strMyHostname;
     Vector<ClientConnection> clientconnections = new Vector<ClientConnection>();
     boolean blnListenForClients = true;
     

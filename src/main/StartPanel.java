@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import src.inputs.KeyInputs;
-
 public class StartPanel extends JPanel implements ActionListener{
     
     JButton connectButton = new JButton("Connect");

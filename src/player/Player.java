@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class Player {
 
+  @SuppressWarnings("unused")
   private GamePanel gamePanel;
 
   public int x;
