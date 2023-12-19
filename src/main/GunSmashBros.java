@@ -40,6 +40,9 @@ public class GunSmashBros extends JFrame implements ActionListener {
     startPanel.playButton.addActionListener(this);
     startPanel.connectButton.addActionListener(this);
     gamePanel.backButton.addActionListener(this);
+    connectPanel.backButton.addActionListener(this);
+    connectPanel.hostButton.addActionListener(this);
+    connectPanel.joinButton.addActionListener(this);
     
     pack();
     setTitle("heheha");
