@@ -7,8 +7,8 @@ import javax.swing.event.*;
 
 public class StartPanel extends JPanel implements ActionListener{
     
-    JButton connect = new JButton("Connect");
-    JButton play = new JButton("Play");
+    JButton connectButton = new JButton("Connect");
+    JButton playButton = new JButton("Play");
 
     public void actionPerformed(ActionEvent e){
     
@@ -17,15 +17,13 @@ public class StartPanel extends JPanel implements ActionListener{
     public StartPanel(){
         setPreferredSize(new Dimension(1280,720));
 
-        play.setSize(200,200);
-        play.setLocation(750,250);
-        play.addActionListener(this);
+        playButton.setSize(200,200);
+        playButton.setLocation(750,250);
 
-        connect.setSize(200,200);
-        connect.setLocation(750, 475);
-        connect.addActionListener(this);
+        connectButton.setSize(200,200);
+        connectButton.setLocation(750, 475);
 
-        add(play);
-        add(connect);
+        add(playButton);
+        add(connectButton);
     }
 }

@@ -10,6 +10,8 @@ public class GamePanel extends JPanel{
 
   Player player = new Player(300, 500, 45, 90, this);
 
+  JButton backButton = new JButton("Back");
+
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -30,5 +32,8 @@ public class GamePanel extends JPanel{
       setFocusable(true);
       requestFocusInWindow();
     });
+    backButton.setSize(200,200);
+    backButton.setLocation(100,100);
+    add(backButton);
   }
 }

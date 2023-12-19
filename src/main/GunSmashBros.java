@@ -18,19 +18,30 @@ public class GunSmashBros extends JFrame implements ActionListener {
     if (e.getSource() == gameTimer) {
       gamePanel.repaint();
     }
-    if (e.getSource() == startPanel.play){
+    if (e.getSource() == startPanel.playButton){
       this.setVisible(false);
       this.setContentPane(gamePanel);
       this.setVisible(true);
+      gamePanel.repaint();
     }
-    if (e.getSource() == startPanel.connect){
+    if (e.getSource() == startPanel.connectButton){
+      this.setVisible(false);
       this.setContentPane(connectPanel);
+      this.setVisible(true);
       connectPanel.repaint();
+    }
+    if (e.getSource() == gamePanel.backButton || e.getSource() == connectPanel.backButton){
+      this.setContentPane(startPanel);
+      startPanel.repaint();
     }
   }
 
   public GunSmashBros() {
     setContentPane(startPanel);
+    startPanel.playButton.addActionListener(this);
+    startPanel.connectButton.addActionListener(this);
+    gamePanel.backButton.addActionListener(this);
+    
 
     pack();
     setTitle("heheha");
