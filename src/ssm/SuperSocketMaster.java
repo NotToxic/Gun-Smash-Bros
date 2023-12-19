@@ -1,4 +1,4 @@
-package src.ssm;
+package ssm;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
