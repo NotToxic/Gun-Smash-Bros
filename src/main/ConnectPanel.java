@@ -12,6 +12,12 @@ public class ConnectPanel extends JPanel{
 
     public ConnectPanel(){
 
+        SwingUtilities.invokeLater(() -> {
+            setFocusable(true);
+            requestFocusInWindow();
+            setLayout(null);
+        });
+
         setPreferredSize(new Dimension(1280,720));
 
         ipField.setSize(200,200);
