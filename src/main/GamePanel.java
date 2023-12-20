@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import inputs.KeyInputs;
 import player.Player;
+import guns.Bullet;
 
 public class GamePanel extends JPanel{
 

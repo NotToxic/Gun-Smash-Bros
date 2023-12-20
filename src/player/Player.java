@@ -1,6 +1,7 @@
 package player;
 
 import main.GamePanel;
+import guns.Bullet;
 
 import java.awt.*;
 
@@ -22,6 +23,8 @@ public class Player {
   public boolean keyLeft;
   public boolean keyUp;
   public boolean keyDown;
+
+  public boolean shoot;
 
   public boolean doubleJumped = false;
 
@@ -74,6 +77,7 @@ public class Player {
     x += xSpeed;
     y += ySpeed;
 
+    shoot();
     collision();
 
     hitbox.x = x;
@@ -85,6 +89,13 @@ public class Player {
       y = 0;
     } else if (y > 600){
       y = 600;
+    }
+  }
+
+  public void shoot(){
+    if (this.shoot){
+      System.out.println("shoot");
+      this.shoot = false;  
     }
   }
 }
