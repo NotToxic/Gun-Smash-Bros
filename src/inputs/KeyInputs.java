@@ -33,6 +33,9 @@ public class KeyInputs implements KeyListener {
     if (key == KeyEvent.VK_A) {
       player.keyLeft = true;
     }
+    if (key == KeyEvent.VK_J) {
+      player.shoot = true;
+    }
   }
 
   @Override
@@ -50,6 +53,9 @@ public class KeyInputs implements KeyListener {
     }
     if (key == KeyEvent.VK_A) {
       player.keyLeft = false;
+    }
+    if (key == KeyEvent.VK_J) {
+      player.shoot = false;
     }
   }
 }
