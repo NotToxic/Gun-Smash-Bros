@@ -1,16 +1,21 @@
-package main;
+package ui;
 
 import java.awt.*;
 import javax.swing.*;
 
 public class ConnectPanel extends JPanel{
+
+    public DisplayPanel displayPanel;
+
     JTextField ipField = new JTextField();
     JTextField portField = new JTextField();
     JButton hostButton = new JButton("Host");
     JButton joinButton = new JButton("Join");
-    JButton backButton = new JButton("Back");
+    UIButton backButton;
 
-    public ConnectPanel(){
+    public ConnectPanel(DisplayPanel displayPanel){
+        this.displayPanel = displayPanel;
+        backButton = new UIButton("Back", "menu", displayPanel);
 
         SwingUtilities.invokeLater(() -> {
             setFocusable(true);
