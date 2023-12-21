@@ -1,6 +1,6 @@
 package guns;
 
-public abstract class gun {
+public abstract class Gun {
   String gunName;
   double bulletSize;
   double bulletSpeed;
