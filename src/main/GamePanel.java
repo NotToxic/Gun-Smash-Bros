@@ -3,6 +3,10 @@ package main;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -15,14 +19,9 @@ public class GamePanel extends JPanel{
 
   DisplayPanel displayPanel;
   Player player = new Player(300, 500, 45, 90, this);
-
-<<<<<<< Updated upstream
   UIButton backButton;
-=======
-  JButton backButton = new JButton("Back");
   BufferedReader map1CSV;
   String[][] strMap;
->>>>>>> Stashed changes
 
   @Override
   public void paintComponent(Graphics g) {
@@ -60,21 +59,7 @@ public class GamePanel extends JPanel{
     backButton.setSize(200,200);
     backButton.setLocation(100,100);
     add(backButton);
-<<<<<<< Updated upstream
-=======
-
-   // int intCount2;
-   // int intCount3;
-
-    strMap = loadMap("Gun-Smash-Bros/src/CPTMap1.csv");
-
-   // for(intCount2 = 0; intCount2 <=159; intCount2++){
-     //    for(intCount3 = 0; intCount3 <= 89; intCount3++){
-     //      System.out.println(strMap[intCount2][intCount3]);
-     //    }
-     //  }
-  
->>>>>>> Stashed changes
+    strMap = loadMap("src\\CPTMap1.csv");
   }
 
   public static String[][] loadMap(String strMapName){
@@ -83,7 +68,7 @@ public class GamePanel extends JPanel{
     int intCounter;
     String strLine;
     String[] strSplit;
-    String strMap[][] = new String[90][160];
+    String[][] map = new String[90][160];
 
 
     try{
@@ -93,7 +78,7 @@ public class GamePanel extends JPanel{
         strSplit = strLine.split(",");
 
         for(intCounter = 0; intCounter < 160; intCounter++){
-          strMap[intCount][intCounter] = strSplit[intCounter];
+          map[intCount][intCounter] = strSplit[intCounter];
         }
 
       }
@@ -105,7 +90,7 @@ public class GamePanel extends JPanel{
     }catch(IOException e){
       System.out.println("error");
     }
-    return strMap;
+    return map;
   }
   public void paintMap(String[][] strMap, Graphics2D g2D){
 
