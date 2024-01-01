@@ -31,7 +31,7 @@ public class GamePanel extends JPanel{
     g2d.fillRect(0, 0, 1280, 720);
 
     g2d.setColor(Color.BLACK);
-    player.move();
+    player.move(strMap);
     paintMap(strMap, g2d);
     g2d.fillRect(player.x, player.y, player.width, player.height);
   }

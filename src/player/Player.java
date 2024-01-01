@@ -39,7 +39,7 @@ public class Player {
     this.gamePanel = gamePanel;
   }
 
-  public void move() {
+  public void move(String[][] map) {
     if (keyLeft && keyRight || !keyLeft && !keyRight) {
       xSpeed *= 0.7;
     }
@@ -78,17 +78,34 @@ public class Player {
     y += ySpeed;
 
     shoot();
-    collision();
+    collision(map);
 
     hitbox.x = x;
     hitbox.y = y;
   }
 
-  public void collision(){
-    if (y < 0){
-      y = 0;
-    } else if (y > 600){
+  public void collision(String[][] map){
+    if (y > 600){
       y = 600;
+    }
+
+    if (platform(map, x, y) && ySpeed > 0){
+      ySpeed = 0;
+      jumpCounter = 0;
+    }
+  }
+
+  public boolean platform(String[][] map, int x, int y){
+    try{
+      if (map[(y+90)/8][x/8].equals("p") || map[(y+90)/8][(x+45)/8].equals("p")){
+        System.out.println("true");
+        return true;
+      } else {
+        System.out.println("false");
+        return false;
+      }
+    }catch(IndexOutOfBoundsException e){
+      return false;
     }
   }
 
