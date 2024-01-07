@@ -4,6 +4,7 @@ import main.GamePanel;
 import guns.Bullet;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Player {
 
@@ -24,11 +25,15 @@ public class Player {
   public boolean keyUp;
   public boolean keyDown;
 
+  public String direction = "right";
+
   public boolean shoot;
 
   public boolean doubleJumped = false;
 
   public int jumpCounter = 0;
+
+  private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
   public Player(int x, int y, int width, int height, GamePanel gamePanel) {
     this.x = x;
@@ -98,10 +103,8 @@ public class Player {
   public boolean platform(String[][] map, int x, int y){
     try{
       if (map[(y+90)/8][x/8].equals("p") || map[(y+90)/8][(x+45)/8].equals("p")){
-        System.out.println("true");
         return true;
       } else {
-        System.out.println("false");
         return false;
       }
     }catch(IndexOutOfBoundsException e){
@@ -111,8 +114,18 @@ public class Player {
 
   public void shoot(){
     if (this.shoot){
-      System.out.println("shoot");
-      this.shoot = false;  
+      if (direction.equals("right")){
+        Bullet b = new Bullet(x + 45, y + 45, direction);
+        bullets.add(b);
+      } else if (direction.equals("left")){
+        Bullet b = new Bullet(x, y + 45, direction);
+        bullets.add(b);
+      }
+      shoot = false;
     }
+  }
+
+  public ArrayList getBulletList(){
+    return bullets;
   }
 }

@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -14,6 +16,7 @@ import inputs.KeyInputs;
 import player.Player;
 import ui.DisplayPanel;
 import ui.UIButton;
+import guns.Bullet;
 
 public class GamePanel extends JPanel{
 
@@ -34,6 +37,18 @@ public class GamePanel extends JPanel{
     player.move(strMap);
     paintMap(strMap, g2d);
     g2d.fillRect(player.x, player.y, player.width, player.height);
+
+    ArrayList bullets = player.getBulletList();
+    for (int i = 0; i < bullets.size(); i++){
+      Bullet b = (Bullet)bullets.get(i);
+      if (b.isVisible() == true){
+        b.bulletMove();
+        g.setColor(Color.YELLOW);
+        g.fillOval(b.getX(), b.getY(), 10, 10);
+      } else {
+        bullets.remove(i);
+      }
+    }
   }
 
   public GamePanel(DisplayPanel displayPanel) {

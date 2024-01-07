@@ -29,9 +29,11 @@ public class KeyInputs implements KeyListener {
     }
     if (key == KeyEvent.VK_D) {
       player.keyRight = true;
+      player.direction = "right";
     }
     if (key == KeyEvent.VK_A) {
       player.keyLeft = true;
+      player.direction = "left";
     }
     if (key == KeyEvent.VK_J) {
       player.shoot = true;
