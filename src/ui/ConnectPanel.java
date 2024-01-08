@@ -7,6 +7,10 @@ public class ConnectPanel extends JPanel{
 
     public DisplayPanel displayPanel;
 
+    JLabel ipLabel = new JLabel("IP:");
+    JLabel portLabel = new JLabel("Port:");
+    JLabel ipDisplay = new JLabel("IP: Not Connected");
+    JLabel portDisplay = new JLabel("Port: Not Connected");
     JTextField ipField = new JTextField();
     JTextField portField = new JTextField();
     JButton hostButton = new JButton("Host");
@@ -25,23 +29,39 @@ public class ConnectPanel extends JPanel{
 
         setPreferredSize(new Dimension(1280,720));
 
-        ipField.setSize(200,200);
-        ipField.setLocation(200,300);
+        ipLabel.setSize(25,25);
+        ipLabel.setLocation(315, 425);
 
-        portField.setSize(200,200);
-        portField.setLocation(700,300);
+        portLabel.setSize(50, 25);
+        portLabel.setLocation(895, 425);
 
-        hostButton.setSize(200,200);
-        hostButton.setLocation(200,500);
+        ipField.setSize(450,90);
+        ipField.setLocation(100,450);
 
-        joinButton.setSize(200,200);
-        joinButton.setLocation(700,500);
+        portField.setSize(450,90);
+        portField.setLocation(680,450);
+        
+        ipDisplay.setSize(90, 900);
+        ipDisplay.setLocation(190,275);
 
-        backButton.setSize(200,200);
-        backButton.setLocation(50,50);
+        portDisplay.setSize(90, 900);
+        portDisplay.setLocation(190,370);
+
+        hostButton.setSize(450,125);
+        hostButton.setLocation(680,545);
+
+        joinButton.setSize(450,125);
+        joinButton.setLocation(100,545);
+
+        backButton.setSize(250,125);
+        backButton.setLocation(20,20);
 
         add(ipField);
         add(portField);
+        add(ipLabel);
+        add(portLabel);
+        add(ipDisplay);
+        add(portDisplay);
         add(hostButton);
         add(joinButton);
         add(backButton);
