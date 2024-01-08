@@ -18,8 +18,9 @@ public class Bullet {
         this.x = x;
         this.y = y;
         if (direction.equals("right")){
+            this.speed = 10;
         } else if (direction.equals("left")){
-            this.speed *= -10;
+            this.speed = -10;
         }
         visible = true;
     }
