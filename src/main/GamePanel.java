@@ -75,7 +75,7 @@ public class GamePanel extends JPanel{
     backButton.setSize(200,200);
     backButton.setLocation(100,100);
     add(backButton);
-    strMap = loadMap("src\\CPTMap1.csv");
+    strMap = loadMap("src/CPTMap1.csv");
   }
 
   public static String[][] loadMap(String strMapName){
@@ -106,6 +106,7 @@ public class GamePanel extends JPanel{
     }catch(IOException e){
       System.out.println("error");
     }
+    System.out.println(map[0][0]);
     return map;
   }
   public void paintMap(String[][] strMap, Graphics2D g2D){

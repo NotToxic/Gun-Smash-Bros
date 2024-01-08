@@ -17,11 +17,13 @@ public class UIButton extends JButton {
 	// Customize properties when creating button
 	private void initialize() {
 		// Set the background color to a dark gray
-		setBackground(new Color(7, 35, 68));
+		setBackground(new Color(0, 0, 0));
 		
 		// Set the foreground color to white
 		setForeground(new Color(219, 226, 239));
 		
+		setOpaque(true);
+
 		setFocusPainted(false);  // Remove the default focus border
 		setBorderPainted(false); // Remove the default button border
 
