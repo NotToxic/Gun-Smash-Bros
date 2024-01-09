@@ -24,6 +24,7 @@ public class GamePanel extends JPanel{
   DisplayPanel displayPanel;
   Player player = new Player(300, 500, 45, 90, this);
   UIButton backButton;
+  UIButton chatButton;
   BufferedReader map1CSV;
   String[][] strMap;
 
@@ -56,6 +57,7 @@ public class GamePanel extends JPanel{
 
     this.displayPanel = displayPanel;
     backButton = new UIButton("BACK", "menu", displayPanel);
+    //chatButton = new UIButton("Chat","",)
 
     setPreferredSize(new Dimension(1280, 720));
 
@@ -75,7 +77,7 @@ public class GamePanel extends JPanel{
     backButton.setSize(200,200);
     backButton.setLocation(100,100);
     add(backButton);
-    strMap = loadMap("src/CPTMap1Rev.csv");
+    strMap = loadMap("Gun-Smash-Bros/src/CPTMap1Rev.csv");
   }
 
   public static String[][] loadMap(String strMapName){
