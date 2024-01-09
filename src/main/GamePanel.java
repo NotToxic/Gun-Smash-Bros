@@ -44,7 +44,7 @@ public class GamePanel extends JPanel{
       Bullet b = (Bullet)bullets.get(i);
       if (b.isVisible() == true){
         b.bulletMove();
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.RED);
         g.fillOval(b.getX(), b.getY(), 10, 10);
       } else {
         bullets.remove(i);
@@ -75,7 +75,7 @@ public class GamePanel extends JPanel{
     backButton.setSize(200,200);
     backButton.setLocation(100,100);
     add(backButton);
-    strMap = loadMap("src/CPTMap1.csv");
+    strMap = loadMap("src/CPTMap1Rev.csv");
   }
 
   public static String[][] loadMap(String strMapName){
