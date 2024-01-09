@@ -50,6 +50,14 @@ public class GamePanel extends JPanel{
         bullets.remove(i);
       }
     }
+
+    if (player.getDead()){
+      player.deathTimer -= 1;
+      System.out.println(player.deathTimer);
+      if (player.deathTimer == 0){
+        player.respawn();
+      }
+    }
   }
 
   public GamePanel(DisplayPanel displayPanel) {

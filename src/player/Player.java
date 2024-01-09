@@ -6,6 +6,8 @@ import guns.Bullet;
 import java.awt.*;
 import java.util.ArrayList;
 
+import javax.swing.Timer;
+
 public class Player {
 
   @SuppressWarnings("unused")
@@ -28,8 +30,12 @@ public class Player {
   public String direction = "right";
 
   public boolean shoot;
+  public int shootTimer = 10;
 
   public boolean doubleJumped = false;
+
+  public boolean dead = false;
+  public int deathTimer = 120;
 
   public int jumpCounter = 0;
 
@@ -65,24 +71,29 @@ public class Player {
     if (xSpeed > 8) xSpeed = 8;
     if (xSpeed < -8) xSpeed = -8;
 
-    if (y >= 600) {
-      ySpeed = 0;
-      y = 600;
-      jumpCounter = 0;
-    } else {
-      ySpeed += 0.7;
-    }
+    ySpeed += 0.7;
   
     if (keyUp && jumpCounter < 2) {
       jumpCounter++;
       ySpeed = -12.5;
       keyUp = false;
     }
+    if (keyDown && platform(map, x, y) == 0){
+      y += 10;
+      if (ySpeed != 0){
+        ySpeed = 6;
+      }
+    }
 
     x += xSpeed;
     y += ySpeed;
 
-    shoot();
+    if (shoot && shootTimer == 0){
+      shoot();
+    } else if (shootTimer != 0){
+      shootTimer -= 1;
+    }
+    
     collision(map);
 
     hitbox.x = x;
@@ -91,41 +102,61 @@ public class Player {
 
   public void collision(String[][] map){
     if (y > 600){
-      y = 600;
+      dead = true;
     }
 
-    if (platform(map, x, y) && ySpeed > 0){
+    // Variable to see how far away the player is from the platform
+    int platformDistance = platform(map, x, y);
+    if (platformDistance == 0 && ySpeed > 0){
       ySpeed = 0;
       jumpCounter = 0;
+    } else if (platformDistance > 0 && ySpeed > 0){
+      if (platformDistance < ySpeed){
+        ySpeed = 0;
+        jumpCounter = 0;
+        y += platformDistance;
+      }
     }
   }
 
-  public boolean platform(String[][] map, int x, int y){
+  public int platform(String[][] map, int x, int y){
     try{
-      if (map[(y+90)/8][x/8].equals("p") || map[(y+90)/8][(x+45)/8].equals("p")){
-        return true;
-      } else {
-        return false;
+      for (int i = 0; i < 6; i++){
+        if (map[(y+90+(8*i))/8][x/8].equals("p") || map[(y+90+(8*i))/8][(x+45)/8].equals("p")){
+          return i*8;
+        }
       }
-    }catch(IndexOutOfBoundsException e){
-      return false;
+      return -1;
+    } catch (IndexOutOfBoundsException e){
+      return -1;
     }
   }
 
   public void shoot(){
-    if (this.shoot){
-      if (direction.equals("right")){
-        Bullet b = new Bullet(x + 45, y + 45, direction);
-        bullets.add(b);
-      } else if (direction.equals("left")){
-        Bullet b = new Bullet(x, y + 45, direction);
-        bullets.add(b);
-      }
-      shoot = false;
+    if (direction.equals("right")){
+      Bullet b = new Bullet(x + 45, y + 45, direction);
+      bullets.add(b);
+    } else if (direction.equals("left")){
+      Bullet b = new Bullet(x, y + 45, direction);
+      bullets.add(b);
     }
+    shootTimer = 10;
+    shoot = false;
   }
 
   public ArrayList getBulletList(){
     return bullets;
+  }
+  
+  public boolean getDead(){
+    return dead;
+  }
+
+  public void respawn(){
+    x = 300;
+    y = 500;
+    ySpeed = 0;
+    deathTimer = 120;
+    dead = false;
   }
 }
