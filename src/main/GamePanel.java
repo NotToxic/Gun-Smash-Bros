@@ -90,7 +90,7 @@ public class GamePanel extends JPanel{
     chatButton.setSize(100,50);
     chatButton.setLocation(1178,668);
     add(chatButton, "chat");
-    strMap = loadMap("Gun-Smash-Bros/src/CPTMap1Rev.csv");
+    strMap = loadMap("CPTMap1Rev.csv");
   }
 
   public static String[][] loadMap(String strMapName){
@@ -103,7 +103,7 @@ public class GamePanel extends JPanel{
 
 
     try{
-      mapCSV = new BufferedReader(new FileReader(strMapName));
+      mapCSV = new BufferedReader(new FileReader("Gun-Smash-Bros/src/" + strMapName));
       for(intCount = 0; intCount < 90; intCount++){
         strLine = mapCSV.readLine();
         strSplit = strLine.split(",");
@@ -117,10 +117,31 @@ public class GamePanel extends JPanel{
       mapCSV.close();
 
     }catch(FileNotFoundException e){
-      System.out.println("File not found");
+      System.out.println("Mac file not found");
     }catch(IOException e){
       System.out.println("error");
     }
+
+    try{
+      mapCSV = new BufferedReader(new FileReader("src/" + strMapName));
+      for(intCount = 0; intCount < 90; intCount++){
+        strLine = mapCSV.readLine();
+        strSplit = strLine.split(",");
+
+        for(intCounter = 0; intCounter < 160; intCounter++){
+          map[intCount][intCounter] = strSplit[intCounter];
+        }
+
+      }
+
+      mapCSV.close();
+
+    }catch(FileNotFoundException e){
+      System.out.println("Windows file not found");
+    }catch(IOException e){
+      System.out.println("error");
+    }
+
     System.out.println(map[0][0]);
     return map;
   }
