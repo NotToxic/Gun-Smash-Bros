@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import main.GamePanel;
 import ssm.SuperSocketMaster;
@@ -18,6 +19,8 @@ public class ChatPanel extends JPanel implements ActionListener{
 	JScrollPane thescroll = new JScrollPane(chatArea);
 	JTextField sendField = new JTextField();
     SuperSocketMaster ssm = null;
+	UIButton backButton;
+
 
     public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
@@ -31,18 +34,29 @@ public class ChatPanel extends JPanel implements ActionListener{
 		}
 	}
     	// Constructor
-	public ChatPanel(){
-		ChatPanel.setPreferredSize(new Dimension(1280,720));
+	public ChatPanel(DisplayPanel displayPanel){
+
+		SwingUtilities.invokeLater(() -> {
+            setFocusable(true);
+            requestFocusInWindow();
+            setLayout(null);
+        });
+		backButton = new UIButton("BACK TO GAME", "game", displayPanel);
+		backButton.setSize(200,50);
+    	backButton.setLocation(1080,0);
+    	add(backButton);
+
+		setPreferredSize(new Dimension(1280,720));
 	
-		thescroll.setSize(400, 400);
+		thescroll.setSize(740, 620);
 		thescroll.setLocation(0,0);
 		
-		sendField.setSize(400, 50);
-		sendField.setLocation(0,400);
+		sendField.setSize(740, 100);
+		sendField.setLocation(0,620);
 		sendField.addActionListener(this);
 
-		ChatPanel.add(thescroll);	
-		ChatPanel.add(sendField);
+		add(thescroll);	
+		add(sendField);
 	}
     
 

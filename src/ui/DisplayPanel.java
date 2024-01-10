@@ -5,13 +5,14 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 
 import main.GamePanel;
+import ui.ChatPanel;
 
 public class DisplayPanel extends JPanel{
 
     public GamePanel gamePanel = new GamePanel(this);
     public MenuPanel menuPanel = new MenuPanel(this);
     public ConnectPanel connectPanel = new ConnectPanel(this);
-    
+    public ChatPanel chatPanel = new ChatPanel(this);
 
     CardLayout display = new CardLayout();
 
@@ -28,6 +29,7 @@ public class DisplayPanel extends JPanel{
       add(menuPanel, "menu");
 		  add(gamePanel, "game");
 		  add(connectPanel, "connect");
+      add(chatPanel, "chat");
      
 
       display.show(this, "menu");

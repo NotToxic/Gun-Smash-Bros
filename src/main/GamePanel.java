@@ -14,6 +14,7 @@ import javax.swing.*;
 
 import inputs.KeyInputs;
 import player.Player;
+import ui.ChatPanel;
 import ui.DisplayPanel;
 import ui.UIButton;
 import guns.Bullet;
@@ -27,6 +28,7 @@ public class GamePanel extends JPanel{
   UIButton chatButton;
   BufferedReader map1CSV;
   String[][] strMap;
+
 
   @Override
   public void paintComponent(Graphics g) {
@@ -65,7 +67,7 @@ public class GamePanel extends JPanel{
 
     this.displayPanel = displayPanel;
     backButton = new UIButton("BACK", "menu", displayPanel);
-    //chatButton = new UIButton("Chat","",)
+    chatButton = new UIButton("Chat","chat",displayPanel);
 
     setPreferredSize(new Dimension(1280, 720));
 
@@ -82,9 +84,12 @@ public class GamePanel extends JPanel{
       requestFocusInWindow();
       setLayout(null);
     });
-    backButton.setSize(200,200);
-    backButton.setLocation(100,100);
+    backButton.setSize(100,50);
+    backButton.setLocation(0,0);
     add(backButton);
+    chatButton.setSize(100,50);
+    chatButton.setLocation(1178,668);
+    add(chatButton, "chat");
     strMap = loadMap("Gun-Smash-Bros/src/CPTMap1Rev.csv");
   }
 
