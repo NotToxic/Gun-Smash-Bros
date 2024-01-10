@@ -11,6 +11,7 @@ public class DisplayPanel extends JPanel{
     public GamePanel gamePanel = new GamePanel(this);
     public MenuPanel menuPanel = new MenuPanel(this);
     public ConnectPanel connectPanel = new ConnectPanel(this);
+    
 
     CardLayout display = new CardLayout();
 
@@ -27,6 +28,7 @@ public class DisplayPanel extends JPanel{
       add(menuPanel, "menu");
 		  add(gamePanel, "game");
 		  add(connectPanel, "connect");
+     
 
       display.show(this, "menu");
     }

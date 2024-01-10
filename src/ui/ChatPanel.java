@@ -3,7 +3,6 @@ package ui;
 import java.awt.Dimension;
 import java.awt.event.*;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -33,7 +32,7 @@ public class ChatPanel extends JPanel implements ActionListener{
 	}
     	// Constructor
 	public ChatPanel(){
-		ChatPanel.setPreferredSize(new Dimension(400, 550));
+		ChatPanel.setPreferredSize(new Dimension(1280,720));
 	
 		thescroll.setSize(400, 400);
 		thescroll.setLocation(0,0);
@@ -45,5 +44,6 @@ public class ChatPanel extends JPanel implements ActionListener{
 		ChatPanel.add(thescroll);	
 		ChatPanel.add(sendField);
 	}
+    
 
 }
