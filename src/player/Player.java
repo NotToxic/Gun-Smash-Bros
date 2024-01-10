@@ -79,12 +79,13 @@ public class Player {
       keyUp = false;
     }
     if (keyDown && platform(map, x, y) == 0){
-      y += 10;
+      y += 6;
+      ySpeed = 2.25;
+      jumpCounter = 1;
       if (ySpeed != 0){
-        ySpeed = 6;
       }
-    }
-
+    } 
+    
     x += xSpeed;
     y += ySpeed;
 
