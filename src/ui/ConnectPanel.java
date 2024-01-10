@@ -53,8 +53,8 @@ public class ConnectPanel extends JPanel{
         joinButton.setSize(450,125);
         joinButton.setLocation(100,545);
 
-        backButton.setSize(250,125);
-        backButton.setLocation(20,20);
+        backButton.setSize(200,50);
+    	backButton.setLocation(0,0);
 
         add(ipField);
         add(portField);

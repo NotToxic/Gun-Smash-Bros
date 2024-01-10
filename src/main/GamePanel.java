@@ -90,7 +90,7 @@ public class GamePanel extends JPanel{
     chatButton.setSize(100,50);
     chatButton.setLocation(1178,668);
     add(chatButton, "chat");
-    strMap = loadMap("Gun-Smash-Bros/src/CPTMap1Rev.csv");
+    strMap = loadMap("src/CPTMap1Rev.csv");
   }
 
   public static String[][] loadMap(String strMapName){

@@ -102,7 +102,7 @@ public class Player {
   }
 
   public void collision(String[][] map){
-    if (y > 600){
+    if (y > 800){
       dead = true;
     }
 
@@ -154,8 +154,8 @@ public class Player {
   }
 
   public void respawn(){
-    x = 300;
-    y = 500;
+    x = 750;
+    y = -100;
     ySpeed = 0;
     deathTimer = 120;
     dead = false;
