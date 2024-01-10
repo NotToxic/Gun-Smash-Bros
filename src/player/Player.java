@@ -35,7 +35,7 @@ public class Player {
   public boolean doubleJumped = false;
 
   public boolean dead = false;
-  public int deathTimer = 120;
+  public int deathTimer = 90;
 
   public int jumpCounter = 0;
 
@@ -157,7 +157,7 @@ public class Player {
     x = 750;
     y = -100;
     ySpeed = 0;
-    deathTimer = 120;
+    deathTimer = 90;
     dead = false;
   }
 }
