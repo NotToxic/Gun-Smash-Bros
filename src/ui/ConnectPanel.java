@@ -2,22 +2,37 @@ package ui;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import ssm.SuperSocketMaster;
 
 public class ConnectPanel extends JPanel{
 
     public DisplayPanel displayPanel;
 
-    JLabel ipLabel = new JLabel("IP:");
-    JLabel portLabel = new JLabel("Port:");
-    JLabel ipDisplay = new JLabel("IP: Not Connected");
-    JLabel portDisplay = new JLabel("Port: Not Connected");
-    JTextField ipField = new JTextField();
-    JTextField portField = new JTextField();
-    JButton hostButton = new JButton("Host");
-    JButton joinButton = new JButton("Join");
+    JLabel ipLabel = new JLabel("IP:", JLabel.CENTER);
+    JLabel portLabel = new JLabel("Port:", JLabel.CENTER);
+    JLabel ipDisplay = new JLabel("IP: Not Connected", JLabel.CENTER);
+    JLabel portDisplay = new JLabel("Port: Not Connected", JLabel.CENTER);
+    public JTextField ipField = new JTextField();
+    public JTextField portField = new JTextField();
+    public JButton hostButton = new JButton("Host");
+    public JButton joinButton = new JButton("Join");
     UIButton backButton;
 
-    public ConnectPanel(DisplayPanel displayPanel){
+    public void host(ActionListener listener, SuperSocketMaster ssm){
+        ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()), listener);
+        ssm.connect();
+        ipDisplay.setText("IP: " + ssm.getMyAddress());
+        portDisplay.setText("Port: " + portField.getText());
+    }
+    public void connect(ActionListener listener, SuperSocketMaster ssm){
+        ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()), listener);
+        ssm.connect();
+        ipDisplay.setText("IP: " + ipField.getText());
+        portDisplay.setText("Port: " + portField.getText());
+    }
+
+    public ConnectPanel(DisplayPanel displayPanel, ActionListener listener){
         this.displayPanel = displayPanel;
         backButton = new UIButton("Back", "menu", displayPanel);
 
@@ -41,11 +56,11 @@ public class ConnectPanel extends JPanel{
         portField.setSize(450,90);
         portField.setLocation(680,450);
         
-        ipDisplay.setSize(90, 900);
-        ipDisplay.setLocation(190,275);
+        ipDisplay.setSize(900, 90);
+        ipDisplay.setLocation(190,175);
 
-        portDisplay.setSize(90, 900);
-        portDisplay.setLocation(190,370);
+        portDisplay.setSize(900, 90);
+        portDisplay.setLocation(190,270);
 
         hostButton.setSize(450,125);
         hostButton.setLocation(680,545);
@@ -65,5 +80,8 @@ public class ConnectPanel extends JPanel{
         add(hostButton);
         add(joinButton);
         add(backButton);
+
+        hostButton.addActionListener(listener);
+        joinButton.addActionListener(listener);
     }
 }

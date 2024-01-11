@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import main.GamePanel;
@@ -11,7 +12,7 @@ public class DisplayPanel extends JPanel{
 
     public GamePanel gamePanel = new GamePanel(this);
     public MenuPanel menuPanel = new MenuPanel(this);
-    public ConnectPanel connectPanel = new ConnectPanel(this);
+    public ConnectPanel connectPanel = null;
     public ChatPanel chatPanel = new ChatPanel(this);
 
     CardLayout display = new CardLayout();
@@ -20,7 +21,10 @@ public class DisplayPanel extends JPanel{
         display.show(DisplayPanel.this, path);
     }
 
-    public DisplayPanel(){
+    public DisplayPanel(ActionListener listener){
+
+      connectPanel = new ConnectPanel(this, listener);
+
       setFocusable(true);
       requestFocusInWindow();
       setLayout(display);
@@ -30,7 +34,6 @@ public class DisplayPanel extends JPanel{
 		  add(gamePanel, "game");
 		  add(connectPanel, "connect");
       add(chatPanel, "chat");
-     
 
       display.show(this, "menu");
     }
