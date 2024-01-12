@@ -15,26 +15,25 @@ import ssm.SuperSocketMaster;
 
 public class ChatPanel extends JPanel implements ActionListener{
 
-    public GamePanel ChatPanel;
+  public GamePanel ChatPanel;
     JTextArea chatArea = new JTextArea();
-	JScrollPane thescroll = new JScrollPane(chatArea);
-	JTextField sendField = new JTextField();
-    SuperSocketMaster ssm = GunSmashBros.ssm;
-	UIButton backButton;
+		JScrollPane thescroll = new JScrollPane(chatArea);
+		JTextField sendField = new JTextField();
+		UIButton backButton;
 
-
-    public void actionPerformed(ActionEvent evt){
+  public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
-			System.out.println("send: "+sendField.getText());
-			//ssm.sendText(ssm.getMyAddress() + "," + sendField.getText());
-			ssm.sendText( sendField.getText());
-			chatArea.append(sendField.getText() + "\n");
-			sendField.setText("");
-		}else if(evt.getSource() == ssm){
-            chatArea.append(ssm.readText() + "\n");
-		}
+				System.out.println("send: "+sendField.getText());
+				//ssm.sendText(ssm.getMyAddress() + "," + sendField.getText());
+				GunSmashBros.ssm.sendText( sendField.getText());
+				chatArea.append(sendField.getText() + "\n");
+				sendField.setText("");
+			} else if(evt.getSource() == GunSmashBros.ssm){
+				chatArea.append(GunSmashBros.ssm.readText() + "\n");
+			}
 	}
-    	// Constructor
+  
+	// Constructor
 	public ChatPanel(DisplayPanel displayPanel){
 
 		SwingUtilities.invokeLater(() -> {
@@ -42,10 +41,11 @@ public class ChatPanel extends JPanel implements ActionListener{
             requestFocusInWindow();
             setLayout(null);
         });
+
 		backButton = new UIButton("BACK TO GAME", "game", displayPanel);
 		backButton.setSize(200,50);
-    	backButton.setLocation(1080,0);
-    	add(backButton);
+    backButton.setLocation(1080,0);
+    add(backButton);
 
 		setPreferredSize(new Dimension(1280,720));
 	
