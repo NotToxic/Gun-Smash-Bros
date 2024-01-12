@@ -14,7 +14,7 @@ public class GunSmashBros extends JFrame implements ActionListener {
 
   Timer gameTimer = new Timer(1000/60, this);
   
-  SuperSocketMaster ssm = null;
+  public static SuperSocketMaster ssm = null;
 
   @Override
   public void actionPerformed(ActionEvent e) {

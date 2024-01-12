@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import main.GamePanel;
+import main.GunSmashBros;
 import ssm.SuperSocketMaster;
 
 public class ChatPanel extends JPanel implements ActionListener{
@@ -18,7 +19,7 @@ public class ChatPanel extends JPanel implements ActionListener{
     JTextArea chatArea = new JTextArea();
 	JScrollPane thescroll = new JScrollPane(chatArea);
 	JTextField sendField = new JTextField();
-    SuperSocketMaster ssm = null;
+    SuperSocketMaster ssm = GunSmashBros.ssm;
 	UIButton backButton;
 
 
