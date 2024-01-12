@@ -2,6 +2,9 @@ package ui;
 
 import java.awt.*;
 import javax.swing.*;
+
+import main.GunSmashBros;
+
 import java.awt.event.ActionListener;
 import ssm.SuperSocketMaster;
 
@@ -21,19 +24,19 @@ public class ConnectPanel extends JPanel{
     public JButton disconnectButton = new JButton("Disconnect");
     UIButton backButton;
 
-    public void host(ActionListener listener, SuperSocketMaster ssm){
-        ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()), listener);
-        ssm.connect();
-        ipDisplay.setText("IP: " + ssm.getMyAddress());
+    public void host(ActionListener listener){
+        GunSmashBros.ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()), listener);
+        GunSmashBros.ssm.connect();
+        ipDisplay.setText("IP: " + GunSmashBros.ssm.getMyAddress());
         portDisplay.setText("Port: " + portField.getText());
         connectDisplay.setText("Hosting");
         disconnectButton.setVisible(true);
         joinButton.setEnabled(false);
         hostButton.setEnabled(false);
     }
-    public void connect(ActionListener listener, SuperSocketMaster ssm){
-        ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()), listener);
-        ssm.connect();
+    public void connect(ActionListener listener){
+        GunSmashBros.ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()), listener);
+        GunSmashBros.ssm.connect();
         ipDisplay.setText("IP: " + ipField.getText());
         portDisplay.setText("Port: " + portField.getText());
         connectDisplay.setText("Connected");
@@ -41,8 +44,9 @@ public class ConnectPanel extends JPanel{
         joinButton.setEnabled(false);
         hostButton.setEnabled(false);
     }
-    public void disconnect(SuperSocketMaster ssm){
-        ssm.disconnect();
+    public void disconnect(){
+        
+        GunSmashBros.ssm.disconnect();
         disconnectButton.setVisible(false);
         joinButton.setEnabled(true);
         hostButton.setEnabled(true);
