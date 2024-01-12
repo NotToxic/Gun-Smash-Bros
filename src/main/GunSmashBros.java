@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import ssm.SuperSocketMaster;
+import ui.ChatPanel;
 import ui.DisplayPanel;
 
 
@@ -39,6 +40,9 @@ public class GunSmashBros extends JFrame implements ActionListener {
       }
     } else if (e.getSource() == displayPanel.connectPanel.disconnectButton){
       displayPanel.connectPanel.disconnect();
+    } 
+    if(e.getSource() == ssm){
+      ChatPanel.chatArea.append(ssm.readText() + "\n");
     }
   }
 

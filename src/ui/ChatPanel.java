@@ -16,7 +16,7 @@ import ssm.SuperSocketMaster;
 public class ChatPanel extends JPanel implements ActionListener{
 
   public GamePanel ChatPanel;
-    JTextArea chatArea = new JTextArea();
+    	public static JTextArea chatArea = new JTextArea();
 		JScrollPane thescroll = new JScrollPane(chatArea);
 		JTextField sendField = new JTextField();
 		UIButton backButton;
@@ -28,9 +28,7 @@ public class ChatPanel extends JPanel implements ActionListener{
 				GunSmashBros.ssm.sendText( sendField.getText());
 				chatArea.append(sendField.getText() + "\n");
 				sendField.setText("");
-			} else if(evt.getSource() == GunSmashBros.ssm){
-				chatArea.append(GunSmashBros.ssm.readText() + "\n");
-			}
+		} 
 	}
   
 	// Constructor
