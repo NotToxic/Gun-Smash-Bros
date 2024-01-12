@@ -42,7 +42,7 @@ public class GunSmashBros extends JFrame implements ActionListener {
       displayPanel.connectPanel.disconnect();
     } 
     if(e.getSource() == ssm){
-      ChatPanel.chatArea.append(ssm.readText() + "\n");
+      ChatPanel.chatArea.append("Opponenet: "+ssm.readText() + "\n");
     }
   }
 

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
+import inputs.ChatInput;
 import main.GamePanel;
 import ui.ChatPanel;
 
@@ -15,7 +16,7 @@ public class DisplayPanel extends JPanel{
     public ConnectPanel connectPanel = null;
     public ChatPanel chatPanel = new ChatPanel(this);
 
-    CardLayout display = new CardLayout();
+    public CardLayout display = new CardLayout();
 
     public void changePanel(String path){
         display.show(DisplayPanel.this, path);
@@ -36,5 +37,14 @@ public class DisplayPanel extends JPanel{
       add(chatPanel, "chat");
 
       display.show(this, "menu");
+    }
+
+    public void openChat(){ 
+      if(ChatInput.page = true){
+          display.show(chatPanel, "chat");
+          ChatInput.page = false;
+      }else if(ChatInput.page = false){
+          display.show(gamePanel, "game");
+      }
     }
 }

@@ -1,6 +1,8 @@
 package inputs;
 
 import player.Player;
+import ui.ChatPanel;
+import ui.DisplayPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

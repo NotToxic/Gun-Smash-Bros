@@ -42,8 +42,8 @@ public class ChatPanel extends JPanel implements ActionListener{
 
 		backButton = new UIButton("BACK TO GAME", "game", displayPanel);
 		backButton.setSize(200,50);
-    backButton.setLocation(1080,0);
-    add(backButton);
+		backButton.setLocation(1080,0);
+		add(backButton);
 
 		setPreferredSize(new Dimension(1280,720));
 	
