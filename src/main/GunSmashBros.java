@@ -32,7 +32,7 @@ public class GunSmashBros extends JFrame implements ActionListener {
         
     } else if (e.getSource() == displayPanel.connectPanel.joinButton){
       try{
-        displayPanel.connectPanel.host(this, ssm);
+        displayPanel.connectPanel.connect(this, ssm);
         System.out.println("Start socket in join mode");
       } catch (NumberFormatException ex){
         System.out.println("Please enter a port number and IP addess");
