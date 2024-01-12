@@ -26,6 +26,7 @@ public class ConnectPanel extends JPanel{
         ssm.connect();
         ipDisplay.setText("IP: " + ssm.getMyAddress());
         portDisplay.setText("Port: " + portField.getText());
+        connectDisplay.setText("Hosting");
         disconnectButton.setVisible(true);
         joinButton.setEnabled(false);
         hostButton.setEnabled(false);
@@ -35,6 +36,7 @@ public class ConnectPanel extends JPanel{
         ssm.connect();
         ipDisplay.setText("IP: " + ipField.getText());
         portDisplay.setText("Port: " + portField.getText());
+        connectDisplay.setText("Connected");
         disconnectButton.setVisible(true);
         joinButton.setEnabled(false);
         hostButton.setEnabled(false);
@@ -72,13 +74,13 @@ public class ConnectPanel extends JPanel{
         portField.setLocation(680,450);
         
         ipDisplay.setSize(900, 90);
-        ipDisplay.setLocation(190,175);
+        ipDisplay.setLocation(190,160);
 
         portDisplay.setSize(900, 90);
-        portDisplay.setLocation(190,270);
+        portDisplay.setLocation(190,230);
 
         connectDisplay.setSize(900, 90);
-        connectDisplay.setLocation(190, 365);
+        connectDisplay.setLocation(190, 300);
 
         hostButton.setSize(450,125);
         hostButton.setLocation(680,545);
