@@ -2,10 +2,12 @@ package guns;
 
 public class Bullet {
     int size = 10;
-    int speed = 10;
+    int baseSpeed = 6;
+    int speed;
     int x;
     int y;
     boolean visible;
+    String direction = "right";
 
     public void bulletMove(){
         this.x += speed;
@@ -17,9 +19,11 @@ public class Bullet {
     public Bullet(int x, int y, String direction){
         this.x = x;
         this.y = y;
-        if (direction.equals("right")){
-        } else if (direction.equals("left")){
-            this.speed *= -1;
+        this.direction = direction;
+        if (this.direction.equals("right")){
+            this.speed = baseSpeed;
+        } else if (this.direction.equals("left")){
+            this.speed = baseSpeed * -1;
         }
         visible = true;
     }
@@ -34,5 +38,9 @@ public class Bullet {
 
     public int getY(){
         return y;
+    }
+
+    public String getDirection(){
+        return direction;
     }
 }

@@ -68,8 +68,8 @@ public class Player {
       xSpeed = 0;
     }
 
-    if (xSpeed > 8) xSpeed = 8;
-    if (xSpeed < -8) xSpeed = -8;
+    if (xSpeed > 8) xSpeed -= 1;
+    if (xSpeed < -8) xSpeed += 1;
 
     ySpeed += 0.7;
   
@@ -105,6 +105,21 @@ public class Player {
     if (y > 800){
       dead = true;
     }
+
+    try{
+      for (int i = 0; i < GamePanel.bullets.size(); i++){
+        Bullet b = (Bullet)GamePanel.bullets.get(i);
+        if (b.getX() > x && b.getX() < x && b.getY() > y && b.getY() < y){
+          if (b.getDirection().equals("left")){
+            xSpeed -= 20;
+          } else if (b.getDirection().equals("right")){
+            xSpeed += 20;
+          }
+          System.out.println("hit");
+          bullets.remove(i);
+        }
+      }
+    } catch (NullPointerException e){}
 
     // Variable to see how far away the player is from the platform
     int platformDistance = platform(map, x, y);
