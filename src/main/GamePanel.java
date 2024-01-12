@@ -29,7 +29,6 @@ public class GamePanel extends JPanel{
   BufferedReader map1CSV;
   String[][] strMap;
 
-
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);

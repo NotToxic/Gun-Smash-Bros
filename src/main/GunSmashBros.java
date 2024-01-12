@@ -37,6 +37,8 @@ public class GunSmashBros extends JFrame implements ActionListener {
       } catch (NumberFormatException ex){
         System.out.println("Please enter a port number and IP addess");
       }
+    } else if (e.getSource() == displayPanel.connectPanel.disconnectButton){
+      displayPanel.connectPanel.disconnect(ssm);
     }
   }
 
