@@ -107,19 +107,20 @@ public class Player {
     }
 
     try{
-      for (int i = 0; i < GamePanel.bullets.size(); i++){
-        Bullet b = (Bullet)GamePanel.bullets.get(i);
-        if (b.getX() > x && b.getX() < x && b.getY() > y && b.getY() < y){
+      for (int i = 0; i < GamePanel.bulletList.size(); i++){
+        Bullet b = (Bullet)GamePanel.bulletList.get(i);
+        if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
           if (b.getDirection().equals("left")){
             xSpeed -= 20;
           } else if (b.getDirection().equals("right")){
             xSpeed += 20;
           }
           System.out.println("hit");
-          bullets.remove(i);
+          GamePanel.bulletList.remove(i);
         }
       }
     } catch (NullPointerException e){}
+    
 
     // Variable to see how far away the player is from the platform
     int platformDistance = platform(map, x, y);

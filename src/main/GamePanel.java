@@ -28,7 +28,7 @@ public class GamePanel extends JPanel{
   UIButton chatButton;
   BufferedReader map1CSV;
   String[][] strMap;
-  public static ArrayList bullets;
+  public static ArrayList bulletList;
 
   @Override
   public void paintComponent(Graphics g) {
@@ -42,15 +42,15 @@ public class GamePanel extends JPanel{
     paintMap(strMap, g2d);
     g2d.fillRect(player.x, player.y, player.width, player.height);
 
-    bullets = player.getBulletList();
-    for (int i = 0; i < bullets.size(); i++){
-      Bullet b = (Bullet)bullets.get(i);
+    bulletList = player.getBulletList();
+    for (int i = 0; i < bulletList.size(); i++){
+      Bullet b = (Bullet)bulletList.get(i);
       if (b.isVisible() == true){
         b.bulletMove();
         g.setColor(Color.RED);
         g.fillOval(b.getX(), b.getY(), 10, 10);
       } else {
-        bullets.remove(i);
+        bulletList.remove(i);
       }
     }
 
