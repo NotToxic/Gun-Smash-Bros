@@ -2,6 +2,7 @@ package player;
 
 import main.GamePanel;
 import guns.Bullet;
+import guns.Gun;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,9 +29,8 @@ public class Player {
   public boolean keyDown;
 
   public String direction = "right";
-
   public boolean shoot;
-  public int shootTimer = 10;
+  public int shootTimer;
 
   public boolean doubleJumped = false;
 
@@ -38,6 +38,8 @@ public class Player {
   public int deathTimer = 90;
 
   public int jumpCounter = 0;
+
+  public Gun gun = new Gun("lightGuy");
 
   private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
@@ -90,7 +92,8 @@ public class Player {
     y += ySpeed;
 
     if (shoot && shootTimer == 0){
-      shoot();
+      gun.shoot(x, y, direction);
+      shootTimer = gun.getFireRate();
     } else if (shootTimer != 0){
       shootTimer -= 1;
     }
@@ -111,7 +114,7 @@ public class Player {
         Bullet b = (Bullet)GamePanel.bulletList.get(i);
         if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
           if (b.getDirection().equals("left")){
-            xSpeed -= 20;
+            xSpeed -= b.getKnockback();
           } else if (b.getDirection().equals("right")){
             xSpeed += 20;
           }
@@ -149,20 +152,8 @@ public class Player {
     }
   }
 
-  public void shoot(){
-    if (direction.equals("right")){
-      Bullet b = new Bullet(x + 45, y + 45, direction);
-      bullets.add(b);
-    } else if (direction.equals("left")){
-      Bullet b = new Bullet(x, y + 45, direction);
-      bullets.add(b);
-    }
-    shootTimer = 10;
-    shoot = false;
-  }
-
   public ArrayList getBulletList(){
-    return bullets;
+    return Gun.getBulletList();
   }
   
   public boolean getDead(){

@@ -50,7 +50,7 @@ public class GamePanel extends JPanel{
       if (b.isVisible() == true){
         b.bulletMove();
         g.setColor(Color.RED);
-        g.fillOval(b.getX(), b.getY(), 10, 10);
+        g.fillOval(b.getX(), b.getY(), b.getSize(), b.getSize());
       } else {
         bulletList.remove(i);
       }
