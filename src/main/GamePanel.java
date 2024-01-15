@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import inputs.ChatInput;
 import inputs.KeyInputs;
 import player.Player;
 import ui.ChatPanel;
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel{
   UIButton chatButton;
   BufferedReader map1CSV;
   String[][] strMap;
+
   public static ArrayList bulletList;
 
   @Override
@@ -70,6 +72,7 @@ public class GamePanel extends JPanel{
     chatButton = new UIButton("Chat","chat",displayPanel);
 
     setPreferredSize(new Dimension(1280, 720));
+    //addKeyListener(new ChatInput());
 
     addComponentListener(new ComponentAdapter() {
       @Override

@@ -15,11 +15,13 @@ import ssm.SuperSocketMaster;
 
 public class ChatPanel extends JPanel implements ActionListener{
 
+
   public GamePanel ChatPanel;
     	public static JTextArea chatArea = new JTextArea();
 		JScrollPane thescroll = new JScrollPane(chatArea);
 		JTextField sendField = new JTextField();
 		UIButton backButton;
+		
 
   public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
@@ -57,6 +59,5 @@ public class ChatPanel extends JPanel implements ActionListener{
 		add(thescroll);	
 		add(sendField);
 	}
-    
 
 }
