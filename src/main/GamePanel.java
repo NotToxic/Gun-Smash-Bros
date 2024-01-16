@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
 
 import inputs.ChatInput;
 import inputs.KeyInputs;
@@ -22,6 +23,7 @@ import guns.Bullet;
 
 // Comment
 public class GamePanel extends JPanel{
+  BufferedImage Background1 = null;
 
   DisplayPanel displayPanel;
   Player player = new Player(300, 500, 45, 90, this);
@@ -63,6 +65,7 @@ public class GamePanel extends JPanel{
         player.respawn();
       }
     }
+
   }
 
   public GamePanel(DisplayPanel displayPanel) {
@@ -87,6 +90,24 @@ public class GamePanel extends JPanel{
       requestFocusInWindow();
       setLayout(null);
     });
+
+    try{
+      Image Background1 = ImageIO.read(new File("Gun-Smash-Bros/src/CPTMap1.png"));
+    }catch (IOException e){
+    }
+
+    InputStream imageclass = this.getClass().getResourceAsStream("Gun-Smash-Bros/src/CPTMap1.png");
+    
+    if(imageclass == null){
+      System.out.println("Cannot find help screen image");
+    } else {
+      try {
+        Background1 = ImageIO.read(imageclass);
+      } catch(IOException e) {
+        System.out.println("Cannot read help screen image file"); //Handle exception
+      }
+    }
+
     backButton.setSize(100,50);
     backButton.setLocation(0,0);
     add(backButton);
@@ -149,6 +170,8 @@ public class GamePanel extends JPanel{
     return map;
   }
   public void paintMap(String[][] strMap, Graphics2D g2D){
+
+    g2D.drawImage(Background1, 0, 0, null);
 
     g2D.setColor(Color.BLACK);
     int intCount;
