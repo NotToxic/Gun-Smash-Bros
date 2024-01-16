@@ -25,7 +25,7 @@ import guns.Bullet;
 public class GamePanel extends JPanel{
   BufferedImage Background1 = null;
 
-  DisplayPanel displayPanel;
+  public static DisplayPanel displayPanel;
   Player player = new Player(300, 500, 45, 90, this);
   UIButton backButton;
   UIButton chatButton;
@@ -75,7 +75,6 @@ public class GamePanel extends JPanel{
     chatButton = new UIButton("Chat","chat",displayPanel);
 
     setPreferredSize(new Dimension(1280, 720));
-    //addKeyListener(new ChatInput());
 
     addComponentListener(new ComponentAdapter() {
       @Override
@@ -85,10 +84,12 @@ public class GamePanel extends JPanel{
     });
 
     SwingUtilities.invokeLater(() -> {
+      addKeyListener(new ChatInput());
       addKeyListener(new KeyInputs(player));
       setFocusable(true);
       requestFocusInWindow();
       setLayout(null);
+
     });
 
     try{

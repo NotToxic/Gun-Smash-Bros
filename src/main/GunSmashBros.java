@@ -9,7 +9,7 @@ import ui.ChatPanel;
 import ui.DisplayPanel;
 
 
-public class GunSmashBros extends JFrame implements ActionListener {
+public class GunSmashBros extends JFrame implements ActionListener{
 
   DisplayPanel displayPanel = new DisplayPanel(this);
 

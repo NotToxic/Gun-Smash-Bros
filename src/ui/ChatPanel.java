@@ -9,18 +9,17 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import main.GamePanel;
 import main.GunSmashBros;
 import ssm.SuperSocketMaster;
 
 public class ChatPanel extends JPanel implements ActionListener{
+	public static JTextArea chatArea = new JTextArea();
+	JScrollPane thescroll = new JScrollPane(chatArea);
+	JTextField sendField = new JTextField();
+	UIButton backButton;
 
-
-  public GamePanel ChatPanel;
-    	public static JTextArea chatArea = new JTextArea();
-		JScrollPane thescroll = new JScrollPane(chatArea);
-		JTextField sendField = new JTextField();
-		UIButton backButton;
+  public ChatPanel() {
+  }
 		
 
   public void actionPerformed(ActionEvent evt){
