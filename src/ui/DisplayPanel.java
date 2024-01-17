@@ -12,8 +12,7 @@ import ui.ChatPanel;
 
 public class DisplayPanel extends JPanel{
 
-    SuperSocketMaster ssm;
-
+  SuperSocketMaster ssm;
     public GamePanel gamePanel = new GamePanel(this, ssm);
     public MenuPanel menuPanel = new MenuPanel(this);
     public ConnectPanel connectPanel = null;
@@ -27,7 +26,7 @@ public class DisplayPanel extends JPanel{
 
     public DisplayPanel(ActionListener listener, SuperSocketMaster ssm){
       this.ssm = ssm;
-
+      
       connectPanel = new ConnectPanel(this, listener);
 
       setFocusable(true);
@@ -43,17 +42,5 @@ public class DisplayPanel extends JPanel{
 
       display.show(this, "menu");
     }
-    /* 
-    public void openChat(){ 
-      if(ChatInput.page == 1){
-          display.show(chatPanel, "chat");
-          ChatInput.page = 1;
-          System.out.println("done");
-      }else if(ChatInput.page == 1){
-          display.show(gamePanel,"game");
-      }
-    }
-    */
-    
     
 }

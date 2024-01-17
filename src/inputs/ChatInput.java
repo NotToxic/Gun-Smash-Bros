@@ -28,10 +28,6 @@ public class ChatInput implements KeyListener{
     // Unused
     public void keyReleased(KeyEvent e) {}
 
-    public ChatInput(String path){
-
-    }
-
     public ChatInput(String path, DisplayPanel displayPanel){
        this.path = path;
        this.displayPanel = displayPanel;
