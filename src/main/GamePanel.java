@@ -43,7 +43,7 @@ public class GamePanel extends JPanel{
 
     g2d.setColor(Color.BLACK);
     player.move(strMap);
-    paintMap(strMap, g2d);
+    paintMap(strMap, g2d, Background1);
     g2d.fillRect(player.x, player.y, player.width, player.height);
 
     bulletList = player.getBulletList();
@@ -93,27 +93,20 @@ public class GamePanel extends JPanel{
     });
 
     try{
-      Image Background1 = ImageIO.read(new File("Gun-Smash-Bros/src/CPTMap1.png"));
+      Background1 = ImageIO.read(new File("Gun-Smash-Bros/src/CPTMap1.png"));
     }catch (IOException e){
     }
-
-    InputStream imageclass = this.getClass().getResourceAsStream("Gun-Smash-Bros/src/CPTMap1.png");
     
-    if(imageclass == null){
-      System.out.println("Cannot find help screen image");
-    } else {
-      try {
-        Background1 = ImageIO.read(imageclass);
-      } catch(IOException e) {
-        System.out.println("Cannot read help screen image file"); //Handle exception
-      }
+    if(Background1 == null){
+      System.out.println("Cant fine image");
     }
+
 
     backButton.setSize(100,50);
     backButton.setLocation(0,0);
     add(backButton);
     chatButton.setSize(100,50);
-    chatButton.setLocation(1178,668);
+    chatButton.setLocation(1180,670);
     add(chatButton, "chat");
     strMap = loadMap("CPTMap1Rev.csv");
   }
@@ -170,7 +163,7 @@ public class GamePanel extends JPanel{
     System.out.println(map[0][0]);
     return map;
   }
-  public void paintMap(String[][] strMap, Graphics2D g2D){
+  public void paintMap(String[][] strMap, Graphics2D g2D, BufferedImage Background1){
 
     g2D.drawImage(Background1, 0, 0, null);
 
