@@ -101,8 +101,6 @@ public class GamePanel extends JPanel{
 
     SwingUtilities.invokeLater(() -> {
       addKeyListener(new ChatInput("chat", displayPanel));
-      addKeyListener(new KeyInputs(player1));
-      addKeyListener(new KeyInputs(player2));
       setFocusable(true);
       requestFocusInWindow();
       setLayout(null);
