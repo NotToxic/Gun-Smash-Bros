@@ -13,34 +13,34 @@ import ui.ChatPanel;
 public class DisplayPanel extends JPanel{
 
   SuperSocketMaster ssm;
-    public GamePanel gamePanel = new GamePanel(this, ssm);
-    public MenuPanel menuPanel = new MenuPanel(this);
-    public ConnectPanel connectPanel = null;
-    public ChatPanel chatPanel = new ChatPanel(this);
+  public GamePanel gamePanel = new GamePanel(this, ssm);
+  public MenuPanel menuPanel = new MenuPanel(this);
+  public ConnectPanel connectPanel = null;
+  public ChatPanel chatPanel = new ChatPanel(this);
 
-    public CardLayout display = new CardLayout();
+  public CardLayout display = new CardLayout();
 
-    public void changePanel(String path){
-        display.show(DisplayPanel.this, path);
-    }
+  public void changePanel(String path){
+      display.show(DisplayPanel.this, path);
+  }
 
-    public DisplayPanel(ActionListener listener, SuperSocketMaster ssm){
-      this.ssm = ssm;
-      
-      connectPanel = new ConnectPanel(this, listener);
-
-      setFocusable(true);
-      requestFocusInWindow();
-      setLayout(display);
-      addKeyListener(new ChatInput("game", this));
-      setPreferredSize(new Dimension(1280,720));
-
-      add(menuPanel, "menu");
-		  add(gamePanel, "game");
-		  add(connectPanel, "connect");
-      add(chatPanel, "chat");
-
-      display.show(this, "menu");
-    }
+  public DisplayPanel(ActionListener listener, SuperSocketMaster ssm){
+    this.ssm = ssm;
     
+    connectPanel = new ConnectPanel(this, listener);
+
+    setFocusable(true);
+    requestFocusInWindow();
+    setLayout(display);
+    addKeyListener(new ChatInput("game", this));
+    setPreferredSize(new Dimension(1280,720));
+
+    add(menuPanel, "menu");
+    add(gamePanel, "game");
+    add(connectPanel, "connect");
+    add(chatPanel, "chat");
+
+    display.show(this, "menu");
+  }
+  
 }
