@@ -110,7 +110,7 @@ public class GamePanel extends JPanel{
     });
 
     try{
-      Background1 = ImageIO.read(new File("Gun-Smash-Bros/src/CPTMap1.png"));
+      Background1 = ImageIO.read(new File("src/CPTMap1.png"));
     }catch (IOException e){
     }
     
