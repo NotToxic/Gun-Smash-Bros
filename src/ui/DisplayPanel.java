@@ -33,7 +33,7 @@ public class DisplayPanel extends JPanel{
       setFocusable(true);
       requestFocusInWindow();
       setLayout(display);
-      addKeyListener(new ChatInput());
+      addKeyListener(new ChatInput("game", this));
       setPreferredSize(new Dimension(1280,720));
 
       add(menuPanel, "menu");
@@ -43,6 +43,7 @@ public class DisplayPanel extends JPanel{
 
       display.show(this, "menu");
     }
+    /* 
     public void openChat(){ 
       if(ChatInput.page == 1){
           display.show(chatPanel, "chat");
@@ -52,5 +53,7 @@ public class DisplayPanel extends JPanel{
           display.show(gamePanel,"game");
       }
     }
+    */
+    
     
 }

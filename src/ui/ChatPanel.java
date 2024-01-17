@@ -11,12 +11,15 @@ import javax.swing.SwingUtilities;
 
 import main.GunSmashBros;
 import ssm.SuperSocketMaster;
+import inputs.ChatInput;
 
 public class ChatPanel extends JPanel implements ActionListener{
 	public static JTextArea chatArea = new JTextArea();
+	public static DisplayPanel displayPanel;
 	JScrollPane thescroll = new JScrollPane(chatArea);
 	JTextField sendField = new JTextField();
 	UIButton backButton;
+	ChatInput chatInput;
 
   public ChatPanel() {
   }
@@ -24,21 +27,23 @@ public class ChatPanel extends JPanel implements ActionListener{
 
   public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
-				System.out.println("send: "+sendField.getText());
-				//ssm.sendText(ssm.getMyAddress() + "," + sendField.getText());
-				GunSmashBros.ssm.sendText( sendField.getText());
-				chatArea.append(sendField.getText() + "\n");
-				sendField.setText("");
+			System.out.println("send: "+sendField.getText());
+			//ssm.sendText(ssm.getMyAddress() + "," + sendField.getText());
+			GunSmashBros.ssm.sendText( sendField.getText());
+			chatArea.append(sendField.getText() + "\n");
+			sendField.setText("");
 		} 
 	}
   
 	// Constructor
 	public ChatPanel(DisplayPanel displayPanel){
+		this.displayPanel = displayPanel;
 
 		SwingUtilities.invokeLater(() -> {
             setFocusable(true);
             requestFocusInWindow();
             setLayout(null);
+			addKeyListener(new ChatInput("game", displayPanel));
         });
 
 		backButton = new UIButton("BACK TO GAME", "game", displayPanel);

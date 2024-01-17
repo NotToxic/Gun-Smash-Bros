@@ -7,29 +7,33 @@ import ui.DisplayPanel;
 
 public class ChatInput implements KeyListener{
 
-    public static DisplayPanel displayPanel;
-    public static int page = 0;
+    private DisplayPanel displayPanel;
+    private String path;
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // Unused
-      }
+    // Unused
+    public void keyTyped(KeyEvent e) {}
     
     @Override
     public void keyPressed(KeyEvent e) {
       int key = e.getKeyCode();
         
       if (key == KeyEvent.VK_P) {
-        System.out.println("he");
+        displayPanel.changePanel(path);
+        System.out.println(path);
       }
     }
     
     @Override
-    public void keyReleased(KeyEvent e) {
+    // Unused
+    public void keyReleased(KeyEvent e) {}
+
+    public ChatInput(String path){
 
     }
 
-    public ChatInput(){
-       
+    public ChatInput(String path, DisplayPanel displayPanel){
+       this.path = path;
+       this.displayPanel = displayPanel;
     }
 }
