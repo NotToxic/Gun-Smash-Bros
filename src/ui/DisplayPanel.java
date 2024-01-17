@@ -7,11 +7,14 @@ import javax.swing.JPanel;
 
 import inputs.ChatInput;
 import main.GamePanel;
+import ssm.SuperSocketMaster;
 import ui.ChatPanel;
 
 public class DisplayPanel extends JPanel{
 
-    public GamePanel gamePanel = new GamePanel(this);
+    SuperSocketMaster ssm;
+
+    public GamePanel gamePanel = new GamePanel(this, ssm);
     public MenuPanel menuPanel = new MenuPanel(this);
     public ConnectPanel connectPanel = null;
     public ChatPanel chatPanel = new ChatPanel(this);
@@ -22,7 +25,8 @@ public class DisplayPanel extends JPanel{
         display.show(DisplayPanel.this, path);
     }
 
-    public DisplayPanel(ActionListener listener){
+    public DisplayPanel(ActionListener listener, SuperSocketMaster ssm){
+      this.ssm = ssm;
 
       connectPanel = new ConnectPanel(this, listener);
 

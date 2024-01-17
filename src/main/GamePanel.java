@@ -15,7 +15,9 @@ import javax.imageio.*;
 
 import inputs.ChatInput;
 import inputs.KeyInputs;
+import player.MovementHandler;
 import player.Player;
+import ssm.SuperSocketMaster;
 import ui.ChatPanel;
 import ui.DisplayPanel;
 import ui.UIButton;
@@ -23,10 +25,14 @@ import guns.Bullet;
 
 // Comment
 public class GamePanel extends JPanel{
+
+  SuperSocketMaster ssm;
   BufferedImage Background1 = null;
 
   public static DisplayPanel displayPanel;
-  Player player = new Player(300, 500, 45, 90, this);
+  public Player player1 = new Player(300, 500, 45, 90, this);
+  public Player player2 = new Player(500, 700, 45, 90, this);
+  MovementHandler mvh;
   UIButton backButton;
   UIButton chatButton;
   BufferedReader map1CSV;
@@ -42,11 +48,13 @@ public class GamePanel extends JPanel{
     g2d.fillRect(0, 0, 1280, 720);
 
     g2d.setColor(Color.BLACK);
-    player.move(strMap);
+    player1.move(strMap);
+    player2.move(strMap);
     paintMap(strMap, g2d);
-    g2d.fillRect(player.x, player.y, player.width, player.height);
+    g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
+    g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
 
-    bulletList = player.getBulletList();
+    bulletList = player1.getBulletList();
     for (int i = 0; i < bulletList.size(); i++){
       Bullet b = (Bullet)bulletList.get(i);
       if (b.isVisible() == true){
@@ -58,17 +66,25 @@ public class GamePanel extends JPanel{
       }
     }
 
-    if (player.getDead()){
-      player.deathTimer -= 1;
-      System.out.println(player.deathTimer);
-      if (player.deathTimer == 0){
-        player.respawn();
+    if (player1.getDead()){
+      player1.deathTimer -= 1;
+      System.out.println(player1.deathTimer);
+      if (player1.deathTimer == 0){
+        player1.respawn();
+      }
+    }
+    if (player2.getDead()){
+      player2.deathTimer -= 1;
+      System.out.println(player2.deathTimer);
+      if (player2.deathTimer == 0){
+        player2.respawn();
       }
     }
 
   }
 
-  public GamePanel(DisplayPanel displayPanel) {
+  public GamePanel(DisplayPanel displayPanel, SuperSocketMaster ssm) {
+    this.ssm = ssm;
 
     this.displayPanel = displayPanel;
     backButton = new UIButton("BACK", "menu", displayPanel);
@@ -85,7 +101,6 @@ public class GamePanel extends JPanel{
 
     SwingUtilities.invokeLater(() -> {
       addKeyListener(new ChatInput());
-      addKeyListener(new KeyInputs(player));
       setFocusable(true);
       requestFocusInWindow();
       setLayout(null);
@@ -192,9 +207,18 @@ public class GamePanel extends JPanel{
         }
         //intY = intY + 8;
     }
-
-
   }
+
+  public void playerControl(int playerNum) {
+    if (playerNum == 1) {
+      addKeyListener(new KeyInputs(player1));
+      mvh = new MovementHandler(1, ssm, player1, this);
+    }
+    else if (playerNum == 2) {
+      addKeyListener(new KeyInputs(player2));
+      mvh = new MovementHandler(2, ssm, player2, this);
+    }
+  } 
 
 }
 
