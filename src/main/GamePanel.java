@@ -17,7 +17,6 @@ import inputs.ChatInput;
 import inputs.KeyInputs;
 import player.MovementHandler;
 import player.Player;
-import ssm.SuperSocketMaster;
 import ui.ChatPanel;
 import ui.DisplayPanel;
 import ui.UIButton;
@@ -26,7 +25,6 @@ import guns.Bullet;
 // Comment
 public class GamePanel extends JPanel{
 
-  SuperSocketMaster ssm;
   BufferedImage Background1 = null;
 
   public static DisplayPanel displayPanel;
@@ -85,9 +83,8 @@ public class GamePanel extends JPanel{
 
   }
 
-  public GamePanel(DisplayPanel displayPanel, SuperSocketMaster ssm) {
-    this.ssm = ssm;
-
+  public GamePanel(DisplayPanel displayPanel) {
+    
     this.displayPanel = displayPanel;
     backButton = new UIButton("BACK", "menu", displayPanel);
     chatButton = new UIButton("Chat","chat",displayPanel);
@@ -207,11 +204,11 @@ public class GamePanel extends JPanel{
   public void playerControl(int playerNum) {
     if (playerNum == 1) {
       addKeyListener(new KeyInputs(player1));
-      mvh = new MovementHandler(1, ssm, player1, this);
+      mvh = new MovementHandler(1, player1, this);
     }
     else if (playerNum == 2) {
       addKeyListener(new KeyInputs(player2));
-      mvh = new MovementHandler(2, ssm, player2, this);
+      mvh = new MovementHandler(2, player2, this);
     }
   } 
 
