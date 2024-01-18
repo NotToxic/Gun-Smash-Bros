@@ -13,7 +13,7 @@ import ui.ChatPanel;
 public class DisplayPanel extends JPanel{
 
   SuperSocketMaster ssm;
-  public GamePanel gamePanel = new GamePanel(this, ssm);
+  public GamePanel gamePanel = new GamePanel(this);
   public MenuPanel menuPanel = new MenuPanel(this);
   public ConnectPanel connectPanel = null;
   public ChatPanel chatPanel = new ChatPanel(this);
