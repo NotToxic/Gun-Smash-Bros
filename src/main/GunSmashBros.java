@@ -43,9 +43,6 @@ public class GunSmashBros extends JFrame implements ActionListener{
     } else if (e.getSource() == displayPanel.connectPanel.disconnectButton){
       displayPanel.connectPanel.disconnect();
     } 
-    if (e.getSource() == ssm){
-      displayPanel.gamePanel.ssh.getData();
-    }
   }
 
   public GunSmashBros() {
