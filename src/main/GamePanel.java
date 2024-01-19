@@ -50,8 +50,7 @@ public class GamePanel extends JPanel{
     player2.move(strMap);
     try{
       ssh.sendData();
-      ssh.getData();
-    } catch (NullPointerException e){
+    } catch (NullPointerException e){ 
       System.out.println("Error");
 
     }
