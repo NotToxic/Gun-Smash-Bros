@@ -15,7 +15,7 @@ import javax.imageio.*;
 
 import inputs.ChatInput;
 import inputs.KeyInputs;
-import player.MovementHandler;
+import player.ssmHandler;
 import player.Player;
 import ui.ChatPanel;
 import ui.DisplayPanel;
@@ -30,7 +30,7 @@ public class GamePanel extends JPanel{
   public static DisplayPanel displayPanel;
   public Player player1 = new Player(300, 0, 45, 90, this);
   public Player player2 = new Player(800, 0, 45, 90, this);
-  MovementHandler mvh;
+  public static ssmHandler ssh;
   UIButton backButton;
   UIButton chatButton;
   BufferedReader map1CSV;
@@ -49,8 +49,8 @@ public class GamePanel extends JPanel{
     player1.move(strMap);
     player2.move(strMap);
     try{
-      mvh.sendData();
-      mvh.getData();
+      ssh.sendData();
+      ssh.getData();
     } catch (NullPointerException e){
       System.out.println("Error");
 
@@ -97,7 +97,7 @@ public class GamePanel extends JPanel{
     
     this.displayPanel = displayPanel;
     backButton = new UIButton("BACK", "menu", displayPanel);
-    chatButton = new UIButton("Chat","chat",displayPanel);
+    chatButton = new UIButton("Chat","chat", displayPanel);
 
     setPreferredSize(new Dimension(1280, 720));
 
@@ -215,11 +215,11 @@ public class GamePanel extends JPanel{
   public void playerControl(int playerNum) {
     if (playerNum == 1) {
       addKeyListener(new KeyInputs(player1));
-      mvh = new MovementHandler(1, player1, this);
+      ssh = new ssmHandler(1, player1, this, displayPanel);
     }
     else if (playerNum == 2) {
       addKeyListener(new KeyInputs(player2));
-      mvh = new MovementHandler(2, player2, this);
+      ssh = new ssmHandler(2, player2, this, displayPanel);
     }
   } 
 

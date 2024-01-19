@@ -2,23 +2,28 @@ package player;
 
 import guns.Gun;
 import main.GamePanel;
+import ui.DisplayPanel;
 import main.GunSmashBros;
+import ui.ChatPanel;
 
 //Use ssm to find and set values for player positions
-public class MovementHandler {
+public class ssmHandler {
   
-  private int playerID;
+  public int playerID;
   private Player player;
   private int otherPlayerID;
   GamePanel gamePanel;
+  DisplayPanel displayPanel;
+
   String data;
   String[] dataSplit; 
-  String ID = "<>:*{}.data";
+  public String ID = "<>:*{}.data";
 
-  public MovementHandler (int playerID, Player player, GamePanel gamePanel) {
+  public ssmHandler (int playerID, Player player, GamePanel gamePanel, DisplayPanel displayPanel) {
     this.playerID = playerID;
     this.player = player;
     this.gamePanel = gamePanel;
+    this.displayPanel = displayPanel;
   }
 
   public void sendData() {
@@ -49,7 +54,7 @@ public class MovementHandler {
               gamePanel.player1.direction = dataSplit[6];
               break;
             case "chat":
-              System.out.println("y:" + gamePanel.player1.y);
+              displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3]);
               break;
           }
         } else if (dataSplit[1].equals("2")){
@@ -66,45 +71,6 @@ public class MovementHandler {
           }
         }
       }
-
-    /* 
-    System.out.println("Received");
-    data = GunSmashBros.ssm.readText();
-    if (data != null) {
-      System.out.println("not null");
-      dataSplit = data.split(",");
-      if (dataSplit[0].equals(ID)) {
-        System.out.println("Id");
-
-        // Update for player1
-        if (dataSplit[1].equals("1")) {
-          switch (dataSplit[2]) {
-            case "x":
-              gamePanel.player1.x = Integer.parseInt(dataSplit[3]);
-              System.out.println("x:" + gamePanel.player1.x);
-              break;
-            case "y":
-              gamePanel.player1.y = Integer.parseInt(dataSplit[3]);
-              System.out.println("y:" + gamePanel.player1.y);
-              break;
-          }
-        }
-
-        // Update for player2
-        else {
-          switch (dataSplit[2]) {
-            case "x":
-              gamePanel.player2.x = Integer.parseInt(dataSplit[3]);
-              System.out.println("x:" + gamePanel.player2.x);
-              break;
-            case "y":
-              gamePanel.player2.y = Integer.parseInt(dataSplit[3]);
-              System.out.println("y:" + gamePanel.player2.y);
-              break;
-          }
-        }
-      }
-      */
     }
   }
 }

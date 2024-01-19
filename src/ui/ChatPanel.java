@@ -10,7 +10,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import main.GunSmashBros;
+import main.GamePanel;
 import ssm.SuperSocketMaster;
+import player.ssmHandler;
 import inputs.ChatInput;
 
 public class ChatPanel extends JPanel implements ActionListener{
@@ -28,9 +30,8 @@ public class ChatPanel extends JPanel implements ActionListener{
   public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
 			System.out.println("send: "+sendField.getText());
-			//ssm.sendText(ssm.getMyAddress() + "," + sendField.getText());
-			GunSmashBros.ssm.sendText( sendField.getText());
-			chatArea.append(sendField.getText() + "\n");
+			GunSmashBros.ssm.sendText(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
+			chatArea.append("You: " + sendField.getText() + "\n");
 			sendField.setText("");
 		} 
 	}
