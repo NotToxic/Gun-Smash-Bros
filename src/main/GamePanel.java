@@ -28,15 +28,15 @@ public class GamePanel extends JPanel{
   BufferedImage Background1 = null;
 
   public static DisplayPanel displayPanel;
-  public Player player1 = new Player(300, 500, 45, 90, this);
-  public Player player2 = new Player(500, 700, 45, 90, this);
+  public Player player1 = new Player(300, 0, 45, 90, this);
+  public Player player2 = new Player(800, 0, 45, 90, this);
   MovementHandler mvh;
   UIButton backButton;
   UIButton chatButton;
   BufferedReader map1CSV;
   String[][] strMap;
 
-  public static ArrayList bulletList;
+  public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
 
   @Override
   public void paintComponent(Graphics g) {
@@ -48,22 +48,32 @@ public class GamePanel extends JPanel{
     g2d.setColor(Color.BLACK);
     player1.move(strMap);
     player2.move(strMap);
-    mvh.sendData();
-    mvh.getData();
+    try{
+      mvh.sendData();
+      mvh.getData();
+    } catch (NullPointerException e){
+      System.out.println("Error");
+
+    }
     paintMap(strMap, g2d, Background1);
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
     g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
 
-    bulletList = player1.getBulletList();
-    for (int i = 0; i < bulletList.size(); i++){
-      Bullet b = (Bullet)bulletList.get(i);
-      if (b.isVisible() == true){
-        b.bulletMove();
-        g.setColor(Color.RED);
-        g.fillOval(b.getX(), b.getY(), b.getSize(), b.getSize());
-      } else {
-        bulletList.remove(i);
+    //System.out.println("2: " + player2.getBulletList().size());
+    try{
+      System.out.println(bulletList.size());
+      for (int i = 0; i < bulletList.size(); i++){
+        Bullet b = (Bullet)bulletList.get(i);
+        if (b.isVisible() == true){
+          b.bulletMove();
+          g.setColor(Color.RED);
+          g.fillOval(b.getX(), b.getY(), b.getSize(), b.getSize());
+        } else {
+          bulletList.remove(i);
+        }
       }
+    } catch (NullPointerException e){
+      System.out.println("error2");
     }
 
     if (player1.getDead()){
@@ -123,6 +133,7 @@ public class GamePanel extends JPanel{
     chatButton.setLocation(1180,670);
     add(chatButton, "chat");
     strMap = loadMap("CPTMap1Rev.csv");
+
   }
 
   public static String[][] loadMap(String strMapName){

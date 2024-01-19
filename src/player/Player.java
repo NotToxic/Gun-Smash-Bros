@@ -41,8 +41,6 @@ public class Player {
 
   public Gun gun = new Gun("lightGuy");
 
-  private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-
   public Player(int x, int y, int width, int height, GamePanel gamePanel) {
     this.x = x;
     this.y = y;
@@ -95,6 +93,9 @@ public class Player {
       gun.shoot(x, y, direction);
       shootTimer = gun.getFireRate();
     } else if (shootTimer != 0){
+      if (shootTimer == 10){
+        shoot = false;
+      }
       shootTimer -= 1;
     }
     
