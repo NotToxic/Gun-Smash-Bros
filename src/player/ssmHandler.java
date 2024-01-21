@@ -13,6 +13,7 @@ public class ssmHandler {
   private Player player;
   private int otherPlayerID;
   GamePanel gamePanel;
+  ChatPanel chatPanel;
   DisplayPanel displayPanel;
 
   String data;
@@ -23,6 +24,13 @@ public class ssmHandler {
     this.playerID = playerID;
     this.player = player;
     this.gamePanel = gamePanel;
+    this.displayPanel = displayPanel;
+  }
+
+  public ssmHandler (int playerID, Player player, ChatPanel chatPanel, DisplayPanel displayPanel){
+    this.playerID = playerID;
+    this.player = player;
+    this.chatPanel = chatPanel;
     this.displayPanel = displayPanel;
   }
 
@@ -38,9 +46,14 @@ public class ssmHandler {
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction);
   }
 
+  public void sendText(String ID, int playerID, String chatMessage){
+    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "chat" + "," + chatMessage);
+    System.out.println("s");
+  }
+
   public void getData() {
     data = GunSmashBros.ssm.readText();
-    System.out.println(GunSmashBros.ssm.readText());
+    //System.out.println(GunSmashBros.ssm.readText());
     if (data != null){
       dataSplit = data.split(",");
       if (dataSplit[0].equals(ID)) {

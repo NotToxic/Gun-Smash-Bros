@@ -93,7 +93,7 @@ public class Player {
       gun.shoot(x, y, direction);
       shootTimer = gun.getFireRate();
     } else if (shootTimer != 0){
-      if (shootTimer == 10){
+      if (shootTimer == gun.getFireRate() - 1){
         shoot = false;
       }
       shootTimer -= 1;

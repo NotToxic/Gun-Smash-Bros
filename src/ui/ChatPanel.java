@@ -14,6 +14,7 @@ import main.GamePanel;
 import ssm.SuperSocketMaster;
 import player.ssmHandler;
 import inputs.ChatInput;
+import inputs.KeyInputs;
 
 public class ChatPanel extends JPanel implements ActionListener{
 	public static JTextArea chatArea = new JTextArea();
@@ -22,14 +23,12 @@ public class ChatPanel extends JPanel implements ActionListener{
 	JTextField sendField = new JTextField();
 	UIButton backButton;
 	ChatInput chatInput;
+	ssmHandler ssh;
 
-  public ChatPanel() {
-  }
-
-  public void actionPerformed(ActionEvent evt){
+	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
 			System.out.println(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
-			GunSmashBros.ssm.sendText(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
+			this.ssh.sendText(GamePanel.ssh.ID, GamePanel.ssh.playerID, sendField.getText());
 			chatArea.append("You: " + sendField.getText() + "\n");
 			sendField.setText("");
 		} 
@@ -40,11 +39,11 @@ public class ChatPanel extends JPanel implements ActionListener{
 		this.displayPanel = displayPanel;
 
 		SwingUtilities.invokeLater(() -> {
-            setFocusable(true);
-            requestFocusInWindow();
-            setLayout(null);
+			setFocusable(true);
+			requestFocusInWindow();
+			setLayout(null);
 			addKeyListener(new ChatInput("game", displayPanel));
-        });
+		});
 
 		backButton = new UIButton("BACK TO GAME", "game", displayPanel);
 		backButton.setSize(200,50);
@@ -52,7 +51,7 @@ public class ChatPanel extends JPanel implements ActionListener{
 		add(backButton);
 
 		setPreferredSize(new Dimension(1280,720));
-	
+
 		thescroll.setSize(740, 620);
 		thescroll.setLocation(0,0);
 		
@@ -62,6 +61,15 @@ public class ChatPanel extends JPanel implements ActionListener{
 
 		add(thescroll);	
 		add(sendField);
+	}
+
+	public void chatMessages(int playerNum){
+		if (playerNum == 1) {
+			this.ssh = new ssmHandler(1, displayPanel.gamePanel.player1, this, displayPanel);
+		}
+		else if (playerNum == 2) {
+			this.ssh = new ssmHandler(2, displayPanel.gamePanel.player2, this, displayPanel);
+		}
 	}
 
 }

@@ -215,6 +215,7 @@ public class GamePanel extends JPanel{
     if (playerNum == 1) {
       addKeyListener(new KeyInputs(player1));
       ssh = new ssmHandler(1, player1, this, displayPanel);
+      System.out.println("1");
     }
     else if (playerNum == 2) {
       addKeyListener(new KeyInputs(player2));

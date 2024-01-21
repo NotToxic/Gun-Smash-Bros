@@ -22,11 +22,11 @@ public class GunSmashBros extends JFrame implements ActionListener{
     if (e.getSource() == gameTimer) {
       displayPanel.repaint();
     } else if (e.getSource() == ssm){
-
     } else if (e.getSource() == displayPanel.connectPanel.hostButton){
       try{
         displayPanel.connectPanel.host(this);
         displayPanel.gamePanel.playerControl(1);
+        displayPanel.chatPanel.chatMessages(1);
         System.out.println("Start socket in server mode");
       } catch (NumberFormatException ex){
         System.out.println("Please enter a port number");
@@ -36,6 +36,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
       try{
         displayPanel.connectPanel.connect(this);
         displayPanel.gamePanel.playerControl(2);
+        displayPanel.chatPanel.chatMessages(2);
         System.out.println("Start socket in join mode");
       } catch (NumberFormatException ex){
         System.out.println("Please enter a port number and IP addess");
