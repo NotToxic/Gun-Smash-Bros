@@ -40,6 +40,7 @@ public class ssmHandler {
 
   public void getData() {
     data = GunSmashBros.ssm.readText();
+    System.out.println(GunSmashBros.ssm.readText());
     if (data != null){
       dataSplit = data.split(",");
       if (dataSplit[0].equals(ID)) {
@@ -55,6 +56,7 @@ public class ssmHandler {
               break;
             case "chat":
               displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3]);
+              System.out.println("c");
               break;
           }
         } else if (dataSplit[1].equals("2")){
@@ -66,7 +68,8 @@ public class ssmHandler {
               gamePanel.player2.direction = dataSplit[6];
               break;
             case "chat":
-              System.out.println("y:" + gamePanel.player2.y);
+              System.out.println("c");
+              displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3]);
               break;
           }
         }

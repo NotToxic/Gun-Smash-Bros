@@ -53,7 +53,6 @@ public class GamePanel extends JPanel{
       ssh.getData();
     } catch (NullPointerException e){
       System.out.println("Error");
-
     }
     paintMap(strMap, g2d, Background1);
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
