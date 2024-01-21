@@ -47,7 +47,7 @@ public class Gun{
         String[][] stats = new String[3][5];
 
         try{
-            bulletStatsCSV = new BufferedReader(new FileReader("Gun-Smash-Bros/src/bulletStats.csv"));
+            bulletStatsCSV = new BufferedReader(new FileReader("Gun-Smash-Bros/assets/objects/bulletStats.csv"));
             for(int i = 0; i < 3; i++){
                 strLine = bulletStatsCSV.readLine();
                 strSplit = strLine.split(",");
@@ -66,7 +66,7 @@ public class Gun{
         }
 
         try{
-            bulletStatsCSV = new BufferedReader(new FileReader("src/bulletStats.csv"));
+            bulletStatsCSV = new BufferedReader(new FileReader("assets/objects/bulletStats.csv"));
             for(int i = 0; i < 3; i++){
             strLine = bulletStatsCSV.readLine();
             strSplit = strLine.split(",");

@@ -116,7 +116,7 @@ public class GamePanel extends JPanel{
     });
 
     try{
-      Background1 = ImageIO.read(new File("src/CPTMap1.png"));
+      Background1 = ImageIO.read(new File("assets/maps/CPTMap1.png"));
     }catch (IOException e){
     }
     
@@ -145,7 +145,7 @@ public class GamePanel extends JPanel{
 
 
     try{
-      mapCSV = new BufferedReader(new FileReader("Gun-Smash-Bros/src/" + strMapName));
+      mapCSV = new BufferedReader(new FileReader("Gun-Smash-Bros/assets/maps/" + strMapName));
       for(intCount = 0; intCount < 90; intCount++){
         strLine = mapCSV.readLine();
         strSplit = strLine.split(",");
@@ -165,7 +165,7 @@ public class GamePanel extends JPanel{
     }
 
     try{
-      mapCSV = new BufferedReader(new FileReader("src/" + strMapName));
+      mapCSV = new BufferedReader(new FileReader("assets/maps/" + strMapName));
       for(intCount = 0; intCount < 90; intCount++){
         strLine = mapCSV.readLine();
         strSplit = strLine.split(",");
