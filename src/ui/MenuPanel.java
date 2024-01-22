@@ -19,6 +19,7 @@ public class MenuPanel extends JPanel{
 
         playButton.setSize(200, 100);
         playButton.setLocation(50, 300);
+        playButton.setEnabled(false);
 
         connectButton.setSize(200, 100);
         connectButton.setLocation(50, 420);

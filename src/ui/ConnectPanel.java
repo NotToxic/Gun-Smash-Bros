@@ -38,6 +38,7 @@ public class ConnectPanel extends JPanel{
         disconnectButton.setVisible(true);
         joinButton.setEnabled(false);
         hostButton.setEnabled(false);
+        displayPanel.menuPanel.playButton.setEnabled(true);
     }
     public void connect(ActionListener listener){
         GunSmashBros.ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()), listener);
@@ -48,6 +49,7 @@ public class ConnectPanel extends JPanel{
         disconnectButton.setVisible(true);
         joinButton.setEnabled(false);
         hostButton.setEnabled(false);
+        displayPanel.menuPanel.playButton.setEnabled(true);
     }
     public void disconnect(){
         
@@ -55,6 +57,7 @@ public class ConnectPanel extends JPanel{
         disconnectButton.setVisible(false);
         joinButton.setEnabled(true);
         hostButton.setEnabled(true);
+        displayPanel.menuPanel.playButton.setEnabled(false);
     }
 
     public void mapChosen(ActionListener listener){
