@@ -1,19 +1,15 @@
 package ui;
 
+//Import libraries
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-//Import libraries
-
-
 //Buttons for the navbar section of gui
 public class UIButton extends JButton {
 	public String path;
-	private DisplayPanel displayPanel;
-
 	// Customize properties when creating button
 	private void initialize() {
 		// Set the background color to a dark gray
@@ -27,7 +23,12 @@ public class UIButton extends JButton {
 		setFocusPainted(false);  // Remove the default focus border
 		setBorderPainted(false); // Remove the default button border
 
-		// Add action listeners to switch between panels
+	}
+
+	//Constructor for panel switching buttons
+	public UIButton(String text, String path, DisplayPanel displayPanel) {
+		super(text);
+		this.path = path;
 		addActionListener(new ActionListener() {
             
 			@Override
@@ -36,14 +37,13 @@ public class UIButton extends JButton {
 			  displayPanel.changePanel(path); 
 			}
 		});
+
+		initialize();
 	}
 
-	//Constructor
-	public UIButton(String text, String path, DisplayPanel displayPanel) {
+	//Constructor for regular jbuttons
+	public UIButton(String text) {
 		super(text);
-		this.path = path;
-		this.displayPanel = displayPanel;
-        
 		initialize();
 	}
 }

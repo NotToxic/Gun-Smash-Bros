@@ -8,15 +8,14 @@ import javax.swing.JPanel;
 import inputs.ChatInput;
 import main.GamePanel;
 import ssm.SuperSocketMaster;
-import ui.ChatPanel;
 
 public class DisplayPanel extends JPanel{
 
   SuperSocketMaster ssm;
   public GamePanel gamePanel = new GamePanel(this);
   public MenuPanel menuPanel = new MenuPanel(this);
-  public ConnectPanel connectPanel = null;
   public ChatPanel chatPanel = new ChatPanel(this);
+  public ConnectPanel connectPanel = null;
 
   public CardLayout display = new CardLayout();
 

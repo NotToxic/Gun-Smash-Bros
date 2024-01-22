@@ -17,11 +17,12 @@ public class ConnectPanel extends JPanel{
     JLabel ipDisplay = new JLabel("IP: Not Connected", JLabel.CENTER);
     JLabel portDisplay = new JLabel("Port: Not Connected", JLabel.CENTER);
     JLabel connectDisplay = new JLabel("Not Connected", JLabel.CENTER);
+    
     public JTextField ipField = new JTextField();
     public JTextField portField = new JTextField();
-    public JButton hostButton = new JButton("Host");
-    public JButton joinButton = new JButton("Join");
-    public JButton disconnectButton = new JButton("Disconnect");
+    public UIButton hostButton = new UIButton("Host");
+    public UIButton joinButton = new UIButton("Join");
+    public UIButton disconnectButton = new UIButton("Disconnect");
     UIButton backButton;
 
     public void host(ActionListener listener){

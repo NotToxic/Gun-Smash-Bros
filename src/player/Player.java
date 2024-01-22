@@ -7,8 +7,6 @@ import guns.Gun;
 import java.awt.*;
 import java.util.ArrayList;
 
-import javax.swing.Timer;
-
 public class Player {
 
   @SuppressWarnings("unused")

@@ -11,20 +11,16 @@ import javax.swing.SwingUtilities;
 
 import main.GunSmashBros;
 import main.GamePanel;
-import ssm.SuperSocketMaster;
-import player.ssmHandler;
+
 import inputs.ChatInput;
 
 public class ChatPanel extends JPanel implements ActionListener{
 	public static JTextArea chatArea = new JTextArea();
-	public static DisplayPanel displayPanel;
+	public DisplayPanel displayPanel;
 	JScrollPane thescroll = new JScrollPane(chatArea);
 	JTextField sendField = new JTextField();
 	UIButton backButton;
 	ChatInput chatInput;
-
-  public ChatPanel() {
-  }
 
   public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
@@ -45,7 +41,7 @@ public class ChatPanel extends JPanel implements ActionListener{
             setFocusable(true);
             requestFocusInWindow();
             setLayout(null);
-			addKeyListener(new ChatInput("game", displayPanel));
+						addKeyListener(new ChatInput("game", displayPanel));
         });
 
 		backButton = new UIButton("BACK TO GAME", "game", displayPanel);

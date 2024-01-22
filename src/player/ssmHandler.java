@@ -1,17 +1,14 @@
 package player;
 
-import guns.Gun;
 import main.GamePanel;
 import ui.DisplayPanel;
 import main.GunSmashBros;
-import ui.ChatPanel;
 
 //Use ssm to find and set values for player positions
 public class ssmHandler {
   
   public int playerID;
   private Player player;
-  private int otherPlayerID;
   GamePanel gamePanel;
   DisplayPanel displayPanel;
 
@@ -27,13 +24,6 @@ public class ssmHandler {
   }
 
   public void sendData() {
-    //Send data, ID + playerID + data type + data value
-
-    //Send x and y position
-    System.out.println("Sent");
-    //GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "x" + "," + player.x); 
-    //GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "y" + "," + player.y);
-
     //Send data: ID + player + game/chat + location of player + player shot + direction
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction);
   }
