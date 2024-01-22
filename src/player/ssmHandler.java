@@ -3,6 +3,7 @@ package player;
 import main.GamePanel;
 import ui.DisplayPanel;
 import main.GunSmashBros;
+import guns.Gun;
 
 //Use ssm to find and set values for player positions
 public class ssmHandler {
@@ -25,7 +26,7 @@ public class ssmHandler {
 
   public void sendData() {
     //Send data: ID + player + game/chat + location of player + player shot + direction
-    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction);
+    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction + "," + player.gun.gunName);
   }
 
   public void sendText(String ID, int playerID, String chatMessage){
@@ -78,6 +79,7 @@ public class ssmHandler {
               gamePanel.player1.y = Integer.parseInt(dataSplit[4]);
               gamePanel.player1.shoot = Boolean.valueOf(dataSplit[5]);
               gamePanel.player1.direction = dataSplit[6];
+              gamePanel.player1.gun = new Gun(dataSplit[7]);
               break;
           }
         } else if (dataSplit[1].equals("2")){
@@ -87,6 +89,7 @@ public class ssmHandler {
               gamePanel.player2.y = Integer.parseInt(dataSplit[4]);
               gamePanel.player2.shoot = Boolean.valueOf(dataSplit[5]);
               gamePanel.player2.direction = dataSplit[6];
+              gamePanel.player2.gun = new Gun(dataSplit[7]);
               break;
           }
         }

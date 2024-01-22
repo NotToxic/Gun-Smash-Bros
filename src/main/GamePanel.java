@@ -21,6 +21,7 @@ import ui.ChatPanel;
 import ui.DisplayPanel;
 import ui.UIButton;
 import guns.Bullet;
+import guns.Crate;
 
 // Comment
 public class GamePanel extends JPanel{
@@ -37,6 +38,8 @@ public class GamePanel extends JPanel{
   String[][] strMap;
 
   public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+  // The crate has a 1/100000 to spawn
+  public static ArrayList<Crate> crateList = new ArrayList<Crate>();
 
   @Override
   public void paintComponent(Graphics g) {
@@ -60,7 +63,6 @@ public class GamePanel extends JPanel{
 
     //System.out.println("2: " + player2.getBulletList().size());
     try{
-      System.out.println(bulletList.size());
       for (int i = 0; i < bulletList.size(); i++){
         Bullet b = (Bullet)bulletList.get(i);
         if (b.isVisible() == true){
@@ -71,8 +73,35 @@ public class GamePanel extends JPanel{
           bulletList.remove(i);
         }
       }
-    } catch (NullPointerException e){
-      System.out.println("error2");
+    } catch (NullPointerException e){}
+
+    if (crateList != null){
+      if (crateList.size() == 0){
+        if ((int)(Math.random() * 100) + 1 == 1){
+          System.out.println("crate");
+          // max - min
+          int range = 950 - 250;
+          // randomNum + min
+          int x = (int)(Math.random() * range) + 250;
+          // if random number rounds to 0, spawn a lightgun crate
+          if ((int)Math.random() == 0){
+            Crate c = new Crate(strMap, "lightGuy", x);
+            crateList.add(c);
+          } else {
+            Crate c = new Crate(strMap, "heavyGuy", x);
+            crateList.add(c);
+          }
+        }
+      } else {
+        Crate c = (Crate)crateList.get(0);
+        if (c.visible){
+          c.move();
+          g.setColor(Color.RED);
+          g.fillRect(c.x, c.y, c.size, c.size);
+        } else {
+          crateList.remove(0);
+        }
+      }
     }
 
     if (player1.getDead()){

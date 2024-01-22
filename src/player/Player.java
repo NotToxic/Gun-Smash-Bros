@@ -3,6 +3,7 @@ package player;
 import main.GamePanel;
 import guns.Bullet;
 import guns.Gun;
+import guns.Crate;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -122,6 +123,15 @@ public class Player {
         }
       }
     } catch (NullPointerException e){}
+
+    try{
+      Crate c = (Crate)GamePanel.crateList.get(0);
+      if (c.x > x && c.x < x+45 && c.y > y && c.y < y+90){
+        gun = new Gun(c.gunName);
+        GamePanel.crateList.remove(0);
+      }
+    } catch (NullPointerException e){
+    } catch (IndexOutOfBoundsException ex){}
     
 
     // Variable to see how far away the player is from the platform

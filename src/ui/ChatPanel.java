@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.*;
 
 import javax.swing.JPanel;
@@ -22,7 +23,7 @@ public class ChatPanel extends JPanel implements ActionListener{
 	UIButton backButton;
 	ChatInput chatInput;
 
-  public void actionPerformed(ActionEvent evt){
+  	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
 			System.out.println(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
 			GunSmashBros.ssm.sendText(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
@@ -31,6 +32,12 @@ public class ChatPanel extends JPanel implements ActionListener{
 			}
 			sendField.setText("");
 		} 
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		displayPanel.gamePanel.ssh.getGameData();
+		displayPanel.gamePanel.ssh.sendData();
 	}
   
 	// Constructor

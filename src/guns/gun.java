@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import main.GamePanel;
 
 public class Gun{
-    String gunName;
+    public String gunName;
     int bulletSize;
     double bulletSpeed;
     double bulletKnockback;
@@ -24,10 +24,10 @@ public class Gun{
 
     public void shoot(int x, int y, String direction){
         if (direction.equals("right")){
-            Bullet b = new Bullet(x + 60, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
+            Bullet b = new Bullet(x+45, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
             GamePanel.bulletList.add(b);
         } else if (direction.equals("left")){
-            Bullet b = new Bullet(x - 15, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
+            Bullet b = new Bullet(x, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
             GamePanel.bulletList.add(b);
         }
     }
