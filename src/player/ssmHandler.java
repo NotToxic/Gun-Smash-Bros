@@ -38,7 +38,42 @@ public class ssmHandler {
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction);
   }
 
-  public void getData() {
+  public void sendText(String ID, int playerID, String chatMessage){
+    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "chat" + "," + chatMessage);
+    System.out.println("s");
+  }
+
+  // A method to a specific index of the ssm message
+  public String chatData(int index){
+    data = GunSmashBros.ssm.readText();
+    if (data != null){
+      dataSplit = data.split(",");
+      try{
+        return dataSplit[index];
+      } catch (ArrayIndexOutOfBoundsException e){
+        return "";
+      }
+    } else {
+      return null;
+    }
+  }
+
+  /* 
+  public void getChatData(){
+    data = GunSmashBros.ssm.readText();
+    //System.out.println(GunSmashBros.ssm.readText());
+    if (data != null){
+      dataSplit = data.split(",");
+      if (dataSplit[0].equals(ID)) {
+        if (dataSplit.equals("chat")){
+          displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
+        }
+      }
+    }
+  }
+  */
+
+  public void getGameData() {
     data = GunSmashBros.ssm.readText();
     System.out.println(GunSmashBros.ssm.readText());
     if (data != null){
@@ -54,10 +89,6 @@ public class ssmHandler {
               gamePanel.player1.shoot = Boolean.valueOf(dataSplit[5]);
               gamePanel.player1.direction = dataSplit[6];
               break;
-            case "chat":
-              displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3]);
-              System.out.println("c");
-              break;
           }
         } else if (dataSplit[1].equals("2")){
           switch (dataSplit[2]){
@@ -66,10 +97,6 @@ public class ssmHandler {
               gamePanel.player2.y = Integer.parseInt(dataSplit[4]);
               gamePanel.player2.shoot = Boolean.valueOf(dataSplit[5]);
               gamePanel.player2.direction = dataSplit[6];
-              break;
-            case "chat":
-              System.out.println("c");
-              displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3]);
               break;
           }
         }

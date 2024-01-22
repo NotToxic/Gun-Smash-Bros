@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import player.ssmHandler;
 import ssm.SuperSocketMaster;
 import ui.ChatPanel;
 import ui.DisplayPanel;
@@ -14,6 +15,9 @@ public class GunSmashBros extends JFrame implements ActionListener{
   DisplayPanel displayPanel = new DisplayPanel(this, ssm);
 
   Timer gameTimer = new Timer(1000/60, this);
+
+  String previousMsg = "";
+
   
   public static SuperSocketMaster ssm = null;
 
@@ -22,7 +26,13 @@ public class GunSmashBros extends JFrame implements ActionListener{
     if (e.getSource() == gameTimer) {
       displayPanel.repaint();
     } else if (e.getSource() == ssm){
-
+      if (displayPanel.gamePanel.ssh.chatData(2).equals("chat")){
+        if (!previousMsg.equals(displayPanel.gamePanel.ssh.chatData(3))){
+          previousMsg = displayPanel.gamePanel.ssh.chatData(3);
+          displayPanel.chatPanel.chatArea.append("Opponent: " + displayPanel.gamePanel.ssh.chatData(3) + "\n");
+        }
+      }
+      
     } else if (e.getSource() == displayPanel.connectPanel.hostButton){
       try{
         displayPanel.connectPanel.host(this);

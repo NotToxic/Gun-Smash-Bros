@@ -30,7 +30,9 @@ public class ChatPanel extends JPanel implements ActionListener{
 		if(evt.getSource() == sendField){
 			System.out.println(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
 			GunSmashBros.ssm.sendText(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
-			chatArea.append("You: " + sendField.getText() + "\n");
+			if (!sendField.getText().equals("")){
+				chatArea.append("You: " + sendField.getText() + "\n");
+			}
 			sendField.setText("");
 		} 
 	}
