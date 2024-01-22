@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import main.GunSmashBros;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import ssm.SuperSocketMaster;
 
@@ -24,6 +25,9 @@ public class ConnectPanel extends JPanel{
     public UIButton joinButton = new UIButton("Join");
     public UIButton disconnectButton = new UIButton("Disconnect");
     UIButton backButton;
+    UIButton gameButton1 = new UIButton("Map 1: Fight In The Sky");
+    UIButton gameButton2 = new UIButton("Map 2: Fight At Our School!");
+    public static String strMapName = null;
 
     public void host(ActionListener listener){
         GunSmashBros.ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()), listener);
@@ -51,6 +55,16 @@ public class ConnectPanel extends JPanel{
         disconnectButton.setVisible(false);
         joinButton.setEnabled(true);
         hostButton.setEnabled(true);
+    }
+
+    public void mapChosen(ActionListener listener){
+        if(listener == gameButton1){
+            strMapName = "CPTMap1.csv";
+            System.out.println(strMapName);
+        }else if(listener == gameButton2){
+            strMapName = "CPTMap2.csv";
+            System.out.println(strMapName);
+        }
     }
 
     public ConnectPanel(DisplayPanel displayPanel, ActionListener listener){
@@ -100,6 +114,11 @@ public class ConnectPanel extends JPanel{
         disconnectButton.setLocation(1040,30);
         disconnectButton.setVisible(false);
 
+        gameButton1.setSize(200, 100);
+        gameButton1.setLocation(500,0);
+        gameButton2.setSize(200, 100);
+        gameButton2.setLocation(800,0);
+
         add(ipField);
         add(portField);
         add(ipLabel);
@@ -111,7 +130,11 @@ public class ConnectPanel extends JPanel{
         add(joinButton);
         add(backButton);
         add(disconnectButton);
+        add(gameButton1);
+        add(gameButton2);
 
+        gameButton1.addActionListener(listener);
+        gameButton2.addActionListener(listener);
         hostButton.addActionListener(listener);
         joinButton.addActionListener(listener);
         disconnectButton.addActionListener(listener);

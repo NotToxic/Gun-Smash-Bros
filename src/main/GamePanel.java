@@ -18,6 +18,7 @@ import inputs.KeyInputs;
 import player.ssmHandler;
 import player.Player;
 import ui.ChatPanel;
+import ui.ConnectPanel;
 import ui.DisplayPanel;
 import ui.UIButton;
 import guns.Bullet;
@@ -160,7 +161,7 @@ public class GamePanel extends JPanel{
     chatButton.setSize(100,50);
     chatButton.setLocation(1180,670);
     add(chatButton, "chat");
-    strMap = loadMap("CPTMap1Rev.csv");
+    strMap = loadMap(ConnectPanel.strMapName);
 
   }
 
