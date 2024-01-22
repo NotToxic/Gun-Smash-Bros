@@ -48,7 +48,7 @@ public class ChatPanel extends JPanel implements ActionListener{
             setFocusable(true);
             requestFocusInWindow();
             setLayout(null);
-						addKeyListener(new ChatInput("game", displayPanel));
+				addKeyListener(new ChatInput("game", displayPanel));
         });
 
 		backButton = new UIButton("BACK TO GAME", "game", displayPanel);

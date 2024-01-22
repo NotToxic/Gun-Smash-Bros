@@ -55,9 +55,7 @@ public class GamePanel extends JPanel{
     try{
       ssh.sendData();
       ssh.getGameData();
-    } catch (NullPointerException e){
-      System.out.println("Error");
-    }
+    } catch (NullPointerException e){}
     paintMap(strMap, g2d, Background1);
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
     g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
@@ -81,16 +79,19 @@ public class GamePanel extends JPanel{
         if ((int)(Math.random() * 100) + 1 == 1){
           System.out.println("crate");
           // max - min
-          int range = 950 - 250;
+          int range = 950 - 250 + 1;
           // randomNum + min
           int x = (int)(Math.random() * range) + 250;
           // if random number rounds to 0, spawn a lightgun crate
-          if ((int)Math.random() == 0){
+          int gunType = (int)(Math.random() * 2) + 1;
+          if (gunType == 1){
             Crate c = new Crate(strMap, "lightGuy", x);
             crateList.add(c);
+            System.out.println("light");
           } else {
             Crate c = new Crate(strMap, "heavyGuy", x);
             crateList.add(c);
+            System.out.println("heavy");
           }
         }
       } else {

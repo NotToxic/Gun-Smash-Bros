@@ -126,7 +126,7 @@ public class Player {
 
     try{
       Crate c = (Crate)GamePanel.crateList.get(0);
-      if (c.x > x && c.x < x+45 && c.y > y && c.y < y+90){
+      if ((c.x >= x && c.x <= x+45 && c.y >= y && c.y <= y+90) || (c.x+48 > x && c.x+48 < x+45 && c.y+45 >= y && c.y+45 <= y+90)){
         gun = new Gun(c.gunName);
         GamePanel.crateList.remove(0);
       }
