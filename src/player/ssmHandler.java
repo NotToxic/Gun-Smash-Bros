@@ -25,7 +25,7 @@ public class ssmHandler {
   }
 
   public void sendData() {
-    //Send data: ID + player + game/chat + location of player + player shot + direction
+    //Send data: ID + player + game/chat + location of player + player shot + direction + gunName
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction + "," + player.gun.gunName);
   }
 
@@ -66,7 +66,6 @@ public class ssmHandler {
 
   public void getGameData() {
     data = GunSmashBros.ssm.readText();
-    System.out.println(GunSmashBros.ssm.readText());
     if (data != null){
       dataSplit = data.split(",");
       if (dataSplit[0].equals(ID)) {

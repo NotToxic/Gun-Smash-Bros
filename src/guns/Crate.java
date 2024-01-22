@@ -2,7 +2,7 @@ package guns;
 
 public class Crate {
 
-    public int size = 45;
+    public int size = 48;
     public int x; 
     public int y = 0-size;
     double ySpeed = 0;
