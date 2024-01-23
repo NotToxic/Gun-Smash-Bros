@@ -65,11 +65,13 @@ public class GamePanel extends JPanel implements ActionListener {
     g2d.fillRect(0, 0, 1280, 720);
 
     g2d.setColor(Color.BLACK);
-    player1.move(strMap);
-    player2.move(strMap);
+
     try{
       ssmh.sendData();
     } catch (NullPointerException e){}
+
+    player1.move(strMap);
+    player2.move(strMap);
 
     paintMap(strMap, g2d, Background1);
     
