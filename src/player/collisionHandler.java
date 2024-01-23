@@ -3,45 +3,47 @@ package player;
 import main.GamePanel;
 import player.Player;
 import guns.Crate;
+import guns.Gun;
+import guns.Bullet;
 
 public class collisionHandler {
 
-    Player player;
-    Crate crate;
+  Player p;
+  Crate c;
 
-    public collisionHandler(Player player){
-        this.player = player;
-    }
+  public collisionHandler(Player player){
+    this.p = player;
+  }
 
-    public collisionHandler(Crate crate){
-        this.crate = crate;
-    }
+  public collisionHandler(Crate crate){
+    this.c = crate;
+  }
 
-    /*
-    public void collision(String[][] map){
-    if (y > 800){
-      dead = true;
+  public void collision(String[][] map){
+    if (p.y > 800){
+      p.dead = true;
     }
 
     try{
       for (int i = 0; i < GamePanel.bulletList.size(); i++){
         Bullet b = (Bullet)GamePanel.bulletList.get(i);
-        if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
-          if (b.getDirection().equals("left")){
-            xSpeed -= b.getKnockback();
-          } else if (b.getDirection().equals("right")){
-            xSpeed += 20;
-          }
+        String hitDirection = bulletCollision(b);
+        if (hitDirection != null){
           System.out.println("hit");
           GamePanel.bulletList.remove(i);
-        }
+          if (hitDirection.equals("left")){
+            p.xSpeed -= b.getKnockback();
+          } else if (hitDirection.equals("right")){
+            p.xSpeed += b.getKnockback();
+          }
+        } 
       }
     } catch (NullPointerException e){}
 
     try{
       Crate c = (Crate)GamePanel.crateList.get(0);
-      if ((c.x >= x && c.x <= x+45 && c.y >= y && c.y <= y+90) || (c.x+48 > x && c.x+48 < x+45 && c.y+45 >= y && c.y+45 <= y+90)){
-        gun = new Gun(c.gunName);
+      if (crateCollision(c)){
+        p.gun = new Gun(c.gunName);
         GamePanel.crateList.remove(0);
       }
     } catch (NullPointerException e){
@@ -49,15 +51,15 @@ public class collisionHandler {
     
 
     // Variable to see how far away the player is from the platform
-    int platformDistance = platform(map, x, y);
-    if (platformDistance == 0 && ySpeed > 0){
-      ySpeed = 0;
-      jumpCounter = 0;
-    } else if (platformDistance > 0 && ySpeed > 0){
-      if (platformDistance < ySpeed){
-        ySpeed = 0;
-        jumpCounter = 0;
-        y += platformDistance;
+    int platformDistance = platform(map, p.x, p.y);
+    if (platformDistance == 0 && p.ySpeed > 0){
+      p.ySpeed = 0;
+      p.jumpCounter = 0;
+    } else if (platformDistance > 0 && p.ySpeed > 0){
+      if (platformDistance < p.ySpeed){
+        p.ySpeed = 0;
+        p.jumpCounter = 0;
+        p.y += platformDistance;
       }
     }
   }
@@ -74,5 +76,30 @@ public class collisionHandler {
       return -1;
     }
   }
-  */
+
+  public String bulletCollision(Bullet b){
+    if (b.getX() > p.x && b.getX() < p.x+45 && b.getY() > p.y && b.getY() < p.y+90){
+      return b.getDirection();
+    } else if (b.getX()+b.getSize() > p.x && b.getX()+b.getSize() < p.x+45 && b.getY() > p.y && b.getY() < p.y+90){
+      return b.getDirection();
+    } else if (b.getX()+b.getSize() > p.x && b.getX()+b.getSize() < p.x+45 && b.getY()+b.getSize()> p.y && b.getY()+b.getSize() < p.y+90){
+      return b.getDirection();
+    } else if (b.getX() > p.x && b.getX() < p.x+45 && b.getY()+b.getSize() > p.y && b.getY()+b.getSize() < p.y+90){
+      return b.getDirection();
+    }
+    return null;
+  }
+
+  public boolean crateCollision(Crate c){
+    if (c.getX() > p.x && c.getX() < p.x+45 && c.getY() > p.y && c.getY() < p.y+90){
+      return true;
+    } else if (c.getX()+c.getSize() > p.x && c.getX()+c.getSize() < p.x+45 && c.getY() > p.y && c.getY() < p.y+90){
+      return true;
+    } else if (c.getX()+c.getSize() > p.x && c.getX()+c.getSize() < p.x+45 && c.getY()+c.getSize()> p.y && c.getY()+c.getSize() < p.y+90){
+      return true;
+    } else if (c.getX() > p.x && c.getX() < p.x+45 && c.getY()+c.getSize()> p.y && c.getY()+c.getSize() < p.y+90){
+      return true;
+    }
+    return false;
+  }
 }

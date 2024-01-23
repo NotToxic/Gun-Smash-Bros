@@ -8,6 +8,7 @@ import ssm.SuperSocketMaster;
 import java.awt.event.ActionListener;
 
 import guns.Gun;
+import guns.Crate;
 import inputs.KeyInputs;
 
 //Use ssm to find and set values for player positions
@@ -21,6 +22,7 @@ public class ssmHandler {
   String data;
   String[] dataSplit; 
   public String ID = "<>:*{}.data";
+  String previousMsg = "";
 
   public ssmHandler (int playerID, Player player, GamePanel gamePanel, DisplayPanel displayPanel) {
     this.playerID = playerID;
@@ -54,15 +56,18 @@ public class ssmHandler {
   public void sendData() {
     //Send data: ID + player + game/chat + location of player + player shot + direction + gunName
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction + "," + player.gun.gunName);
-    System.out.println("sent");
   }
 
-  public void sendText(String ID, int playerID, String chatMessage){
+  public void sendText(int playerID, String chatMessage){
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "chat" + "," + chatMessage);
-    System.out.println("chat");
+  }
+
+  public void sendCrate(int crateX, String gunType){
+    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "crate" + "," + gunType + "," + crateX);
   }
 
   // A method to a specific index of the ssm message
+  /* 
   public String chatData(int index){
     data = GunSmashBros.ssm.readText();
     if (data != null){
@@ -76,25 +81,10 @@ public class ssmHandler {
       return null;
     }
   }
-
-  /* 
-  public void getChatData(){
-    data = GunSmashBros.ssm.readText();
-    //System.out.println(GunSmashBros.ssm.readText());
-    if (data != null){
-      dataSplit = data.split(",");
-      if (dataSplit[0].equals(ID)) {
-        if (dataSplit.equals("chat")){
-          displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
-        }
-      }
-    }
-  }
   */
 
-  public void getGameData() {
+  public void getData() {
     data = GunSmashBros.ssm.readText();
-    System.out.println("get");
     if (data != null){
       dataSplit = data.split(",");
       if (dataSplit[0].equals(ID)) {
@@ -103,13 +93,20 @@ public class ssmHandler {
         if (dataSplit[1].equals("1")) {
           switch (dataSplit[2]) {
             case "game":
-              System.out.println("game data");
               gamePanel.player1.x = Integer.parseInt(dataSplit[3]);
               gamePanel.player1.y = Integer.parseInt(dataSplit[4]);
               gamePanel.player1.shoot = Boolean.valueOf(dataSplit[5]);
               gamePanel.player1.direction = dataSplit[6];
               gamePanel.player1.gun = new Gun(dataSplit[7]);
               break;
+            case "crate":
+              Crate c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
+              gamePanel.crateList.add(c);
+            case "chat":
+              if (!previousMsg.equals(dataSplit[3])){
+                previousMsg = dataSplit[3];
+                displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
+              }
           }
         } else if (dataSplit[1].equals("2")){
           switch (dataSplit[2]){
@@ -120,6 +117,14 @@ public class ssmHandler {
               gamePanel.player2.direction = dataSplit[6];
               gamePanel.player2.gun = new Gun(dataSplit[7]);
               break;
+            case "crate":
+              Crate c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
+              gamePanel.crateList.add(c);
+            case "chat":
+              if (!previousMsg.equals(dataSplit[3])){
+                previousMsg = dataSplit[3];
+                displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
+              }
           }
         }
       }

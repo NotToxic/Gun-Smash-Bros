@@ -28,12 +28,6 @@ public class GunSmashBros extends JFrame implements ActionListener{
     } 
     
     else if (e.getSource() == ssm){
-      if (displayPanel.gamePanel.ssmh.chatData(2).equals("chat")){
-        if (!previousMsg.equals(displayPanel.gamePanel.ssmh.chatData(3))){
-          previousMsg = displayPanel.gamePanel.ssmh.chatData(3);
-          displayPanel.chatPanel.chatArea.append("Opponent: " + displayPanel.gamePanel.ssmh.chatData(3) + "\n");
-        }
-      }
     } 
     
     else if (e.getSource() == displayPanel.connectPanel.hostButton){
@@ -61,10 +55,12 @@ public class GunSmashBros extends JFrame implements ActionListener{
 
     else if (e.getSource() == displayPanel.connectPanel.gameButton1){
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1.csv");
+      displayPanel.connectPanel.gameButton1.setEnabled(false);
     } 
 
-    else if (e.getSource() == displayPanel.connectPanel.gameButton1){
+    else if (e.getSource() == displayPanel.connectPanel.gameButton2){
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2.csv");
+      displayPanel.connectPanel.gameButton2.setEnabled(false);
     } 
   }
 

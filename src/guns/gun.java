@@ -27,7 +27,7 @@ public class Gun{
             Bullet b = new Bullet(x+45, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
             GamePanel.bulletList.add(b);
         } else if (direction.equals("left")){
-            Bullet b = new Bullet(x, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
+            Bullet b = new Bullet(x-bulletSize, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
             GamePanel.bulletList.add(b);
         }
     }

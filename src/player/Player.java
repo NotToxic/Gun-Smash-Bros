@@ -112,21 +112,22 @@ public class Player {
     try{
       for (int i = 0; i < GamePanel.bulletList.size(); i++){
         Bullet b = (Bullet)GamePanel.bulletList.get(i);
-        if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
-          if (b.getDirection().equals("left")){
-            xSpeed -= b.getKnockback();
-          } else if (b.getDirection().equals("right")){
-            xSpeed += 20;
-          }
+        String hitDirection = collisionHandler(b);
+        if (hitDirection != null){
           System.out.println("hit");
           GamePanel.bulletList.remove(i);
-        }
+          if (hitDirection.equals("left")){
+            xSpeed -= b.getKnockback();
+          } else if (hitDirection.equals("right")){
+            xSpeed += b.getKnockback();
+          }
+        } 
       }
     } catch (NullPointerException e){}
 
     try{
       Crate c = (Crate)GamePanel.crateList.get(0);
-      if ((c.x >= x && c.x <= x+45 && c.y >= y && c.y <= y+90) || (c.x+48 > x && c.x+48 < x+45 && c.y+45 >= y && c.y+45 <= y+90)){
+      if (collisionHandler(c)){
         gun = new Gun(c.gunName);
         GamePanel.crateList.remove(0);
       }
@@ -159,6 +160,32 @@ public class Player {
     } catch (IndexOutOfBoundsException e){
       return -1;
     }
+  }
+
+  public String collisionHandler(Bullet b){
+    if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
+      return b.getDirection();
+    } else if (b.getX()+b.getSize() > x && b.getX()+b.getSize() < x+45 && b.getY() > y && b.getY() < y+90){
+      return b.getDirection();
+    } else if (b.getX()+b.getSize() > x && b.getX()+b.getSize() < x+45 && b.getY()+b.getSize()> y && b.getY()+b.getSize() < y+90){
+      return b.getDirection();
+    } else if (b.getX() > x && b.getX() < x+45 && b.getY()+b.getSize()> y && b.getY()+b.getSize() < y+90){
+      return b.getDirection();
+    }
+    return null;
+  }
+
+  public boolean collisionHandler(Crate c){
+    if (c.getX() > x && c.getX() < x+45 && c.getY() > y && c.getY() < y+90){
+      return true;
+    } else if (c.getX()+c.getSize() > x && c.getX()+c.getSize() < x+45 && c.getY() > y && c.getY() < y+90){
+      return true;
+    } else if (c.getX()+c.getSize() > x && c.getX()+c.getSize() < x+45 && c.getY()+c.getSize()> y && c.getY()+c.getSize() < y+90){
+      return true;
+    } else if (c.getX() > x && c.getX() < x+45 && c.getY()+c.getSize()> y && c.getY()+c.getSize() < y+90){
+      return true;
+    }
+    return false;
   }
 
   public ArrayList getBulletList(){

@@ -36,7 +36,7 @@ public class GamePanel extends JPanel{
   public JTextField chatField = new JTextField();
 
   BufferedReader map1CSV;
-  String[][] strMap;
+  public String[][] strMap;
 
   public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
   // The crate has a 1/100000 to spawn
@@ -54,13 +54,14 @@ public class GamePanel extends JPanel{
     player2.move(strMap);
     try{
       ssmh.sendData();
-      ssmh.getGameData();
+      ssmh.getData();
     } catch (NullPointerException e){}
+
     paintMap(strMap, g2d, Background1);
+    
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
     g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
 
-    //System.out.println("2: " + player2.getBulletList().size());
     try{
       for (int i = 0; i < bulletList.size(); i++){
         Bullet b = (Bullet)bulletList.get(i);
@@ -73,9 +74,8 @@ public class GamePanel extends JPanel{
         }
       }
     } catch (NullPointerException e){}
-
-    if (crateList != null){
-      if (crateList.size() == 0){
+    try{
+      if (crateList.size() == 0 && ssmh.playerID == 1){
         if ((int)(Math.random() * 100) + 1 == 1){
           System.out.println("crate");
           // max - min
@@ -88,13 +88,15 @@ public class GamePanel extends JPanel{
             Crate c = new Crate(strMap, "lightGuy", x);
             crateList.add(c);
             System.out.println("light");
+            ssmh.sendCrate(x, "light");
           } else {
             Crate c = new Crate(strMap, "heavyGuy", x);
             crateList.add(c);
             System.out.println("heavy");
+            ssmh.sendCrate(x, "heavy");
           }
         }
-      } else {
+      } else if (crateList.size() == 1){
         Crate c = (Crate)crateList.get(0);
         if (c.visible){
           c.move();
@@ -104,7 +106,7 @@ public class GamePanel extends JPanel{
           crateList.remove(0);
         }
       }
-    }
+    } catch (NullPointerException e){}
 
     if (player1.getDead()){
       player1.deathTimer -= 1;
