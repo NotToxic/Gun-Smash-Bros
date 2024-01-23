@@ -17,6 +17,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
   Timer gameTimer = new Timer(1000/60, this);
 
   String previousMsg = "";
+  static String strName = null;
 
   public static SuperSocketMaster ssm;
   public static ssmHandler ssmh;
@@ -56,11 +57,15 @@ public class GunSmashBros extends JFrame implements ActionListener{
     else if (e.getSource() == displayPanel.connectPanel.gameButton1){
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1.csv");
       displayPanel.connectPanel.gameButton1.setEnabled(false);
+      displayPanel.gamePanel.strMapName = "CPTMap1.csv";
+      strName = "CPTMap1.csv";
     } 
 
     else if (e.getSource() == displayPanel.connectPanel.gameButton2){
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2.csv");
       displayPanel.connectPanel.gameButton2.setEnabled(false);
+      displayPanel.gamePanel.strMapName = "CPTMap2.csv";
+      //strName = "CPTMap2.csv";
     } 
   }
 

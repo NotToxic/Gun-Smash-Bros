@@ -23,7 +23,7 @@ import guns.Crate;
 public class GamePanel extends JPanel{
 
   BufferedImage Background1 = null;
-  public String strMapName;
+  public String strMapName = "CPTMap1.csv";
 
   public static DisplayPanel displayPanel;
   public Player player1 = new Player(300, 0, 45, 90, this);
@@ -37,6 +37,7 @@ public class GamePanel extends JPanel{
 
   BufferedReader map1CSV;
   public String[][] strMap;
+  String[] image;
 
   public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
   // The crate has a 1/100000 to spawn
@@ -147,14 +148,19 @@ public class GamePanel extends JPanel{
       setLayout(null);
 
     });
+    
+    System.out.println(strMapName);
+    image = strMapName.split(".");
+    System.out.println(image[0]);
+  
 
     try{
-      Background1 = ImageIO.read(new File("assets/maps/CPTMap1.png"));
+      Background1 = ImageIO.read(new File("assets/maps/"+image+".png"));
     }catch (IOException e){
     }
     
     if(Background1 == null){
-      System.out.println("Cant fine image");
+      System.out.println("Cant find image");
     }
 
     chatArea.setOpaque(true);
@@ -177,7 +183,7 @@ public class GamePanel extends JPanel{
     chatButton.setSize(100,50);
     chatButton.setLocation(1180,670);
     add(chatButton, "chat");
-    strMap = loadMap(strMapName);
+    //strMap = loadMap(strMapName);
 
   }
 
