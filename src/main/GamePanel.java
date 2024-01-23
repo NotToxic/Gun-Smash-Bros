@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
@@ -20,7 +22,7 @@ import guns.Bullet;
 import guns.Crate;
 
 // Comment
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel implements ActionListener {
 
   public BufferedImage Background1 = null;
   public String strMapName = "CPTMap1.csv";
@@ -32,7 +34,7 @@ public class GamePanel extends JPanel{
   public static ssmHandler ssmh;
   UIButton backButton;
   UIButton chatButton;
-  JTextArea chatArea = new JTextArea();
+  public JTextArea chatArea = new JTextArea();
   public JScrollPane scrollArea = new JScrollPane(chatArea);
   public JTextField chatField = new JTextField();
 
@@ -44,6 +46,16 @@ public class GamePanel extends JPanel{
   // The crate has a 1/100000 to spawn
   public static ArrayList<Crate> crateList = new ArrayList<Crate>();
   public Crate c;
+
+  public void actionPerformed(ActionEvent e){
+		if(e.getSource() == chatField){
+			ssmh.sendMsg(ssmh.playerID, chatField.getText());
+			if (!chatField.getText().equals("")){
+				chatArea.append("You: " + chatField.getText() + "\n");
+			}
+			chatField.setText("");
+		}
+  }
 
   @Override
   public void paintComponent(Graphics g) {
@@ -169,6 +181,7 @@ public class GamePanel extends JPanel{
     chatField.setSize(500, 40);
     chatField.setLocation(0, 680);
     chatField.setVisible(false);
+    chatField.addActionListener(this);
     add(chatField);
 
     backButton.setSize(100,50);

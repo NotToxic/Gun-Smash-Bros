@@ -88,11 +88,9 @@ public class ssmHandler {
               System.out.println("Crate: " + dataSplit[3] + "," + dataSplit[4]);
               break;
             case "chat":
-              if (!previousMsg.equals(dataSplit[3])){
-                previousMsg = dataSplit[3];
-                displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
-                break;
-              }
+              previousMsg = dataSplit[3];
+              displayPanel.gamePanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
+              break;
           }
         } else if (dataSplit[1].equals("2")){
           switch (dataSplit[2]){
@@ -109,11 +107,9 @@ public class ssmHandler {
               gamePanel.crateList.add(gamePanel.c);
               break;
             case "chat":
-              if (!previousMsg.equals(dataSplit[3])){
-                previousMsg = dataSplit[3];
-                displayPanel.chatPanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
-                break;
-              }
+              previousMsg = dataSplit[3];
+              displayPanel.gamePanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
+              break;
           }
         }
       }
