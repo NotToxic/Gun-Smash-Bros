@@ -18,7 +18,6 @@ public class GunSmashBros extends JFrame implements ActionListener{
 
   String previousMsg = "";
 
-  
   public static SuperSocketMaster ssm;
   public static ssmHandler ssmh;
 
@@ -58,15 +57,22 @@ public class GunSmashBros extends JFrame implements ActionListener{
     else if (e.getSource() == displayPanel.connectPanel.disconnectButton){
       ssmHandler.disconnect();
       displayPanel.connectPanel.disconnect();
+    }
+
+    else if (e.getSource() == displayPanel.connectPanel.gameButton1){
+      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1.csv");
+    } 
+
+    else if (e.getSource() == displayPanel.connectPanel.gameButton1){
+      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2.csv");
     } 
   }
-
 
   public GunSmashBros() {
     setContentPane(displayPanel);
     
     pack();
-    setTitle("heheh");
+    setTitle("GunSmashBros");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 

@@ -25,9 +25,8 @@ public class ConnectPanel extends JPanel{
     public UIButton joinButton = new UIButton("Join");
     public UIButton disconnectButton = new UIButton("Disconnect");
     UIButton backButton;
-    UIButton gameButton1 = new UIButton("Map 1: Fight In The Sky");
-    UIButton gameButton2 = new UIButton("Map 2: Fight At Our School!");
-    public static String strMapName = null;
+    public UIButton gameButton1 = new UIButton("Map 1: Fight In The Sky");
+    public UIButton gameButton2 = new UIButton("Map 2: Fight At Our School!");
 
     public void hostMode() {
         ipDisplay.setText("IP: " + GunSmashBros.ssm.getMyAddress());
@@ -53,16 +52,6 @@ public class ConnectPanel extends JPanel{
         joinButton.setEnabled(true);
         hostButton.setEnabled(true);
         displayPanel.menuPanel.playButton.setEnabled(false);
-    }
-
-    public void mapChosen(ActionListener listener){
-        if(listener == gameButton1){
-            strMapName = "CPTMap1.csv";
-            System.out.println(strMapName);
-        }else if(listener == gameButton2){
-            strMapName = "CPTMap2.csv";
-            System.out.println(strMapName);
-        }
     }
 
     public ConnectPanel(DisplayPanel displayPanel, ActionListener listener){

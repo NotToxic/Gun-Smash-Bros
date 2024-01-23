@@ -28,6 +28,7 @@ import guns.Crate;
 public class GamePanel extends JPanel{
 
   BufferedImage Background1 = null;
+  public String strMapName;
 
   public static DisplayPanel displayPanel;
   public Player player1 = new Player(300, 0, 45, 90, this);
@@ -162,7 +163,7 @@ public class GamePanel extends JPanel{
     chatButton.setSize(100,50);
     chatButton.setLocation(1180,670);
     add(chatButton, "chat");
-    strMap = loadMap(ConnectPanel.strMapName);
+    strMap = loadMap(strMapName);
 
   }
 
@@ -241,21 +242,5 @@ public class GamePanel extends JPanel{
         //intY = intY + 8;
     }
   }
-
-  public void playerControl(int playerNum) {
-    if (playerNum == 1) {
-      addKeyListener(new KeyInputs(player1));
-      ssh = new ssmHandler(1, player1, this, displayPanel);
-    }
-    else if (playerNum == 2) {
-      addKeyListener(new KeyInputs(player2));
-      ssh = new ssmHandler(2, player2, this, displayPanel);
-    }
-  } 
-
-  public void setPlayer(int playerNum){
-
-  }
-
 }
 
