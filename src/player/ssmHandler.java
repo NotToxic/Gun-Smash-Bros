@@ -3,7 +3,12 @@ package player;
 import main.GamePanel;
 import ui.DisplayPanel;
 import main.GunSmashBros;
+import ssm.SuperSocketMaster;
+
+import java.awt.event.ActionListener;
+
 import guns.Gun;
+import inputs.KeyInputs;
 
 //Use ssm to find and set values for player positions
 public class ssmHandler {
@@ -22,6 +27,28 @@ public class ssmHandler {
     this.player = player;
     this.gamePanel = gamePanel;
     this.displayPanel = displayPanel;
+  }
+
+  public static void hostMode(DisplayPanel displayPanel, ActionListener listener, int port) {
+    GunSmashBros.ssm = new SuperSocketMaster(port, listener);
+    GunSmashBros.ssm.connect();
+
+    displayPanel.gamePanel.addKeyListener(new KeyInputs(displayPanel.gamePanel.player1));
+    GunSmashBros.ssmh = new ssmHandler(1, displayPanel.gamePanel.player1, displayPanel.gamePanel, displayPanel);
+    System.out.println("Socket started in server mode");
+  }
+
+  public static void clientMode(DisplayPanel displayPanel, ActionListener listener, int port, String IP) {
+    GunSmashBros.ssm = new SuperSocketMaster(IP, port, listener);
+    GunSmashBros.ssm.connect();
+    
+    displayPanel.gamePanel.addKeyListener(new KeyInputs(displayPanel.gamePanel.player1));
+    GunSmashBros.ssmh = new ssmHandler(2, displayPanel.gamePanel.player2, displayPanel.gamePanel, displayPanel);
+    System.out.println("Socket started in client mode");
+  }
+
+  public static void disconnect() {
+    GunSmashBros.ssm.disconnect();
   }
 
   public void sendData() {

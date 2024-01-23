@@ -29,9 +29,7 @@ public class ConnectPanel extends JPanel{
     UIButton gameButton2 = new UIButton("Map 2: Fight At Our School!");
     public static String strMapName = null;
 
-    public void host(ActionListener listener){
-        GunSmashBros.ssm = new SuperSocketMaster(Integer.parseInt(portField.getText()), listener);
-        GunSmashBros.ssm.connect();
+    public void hostMode() {
         ipDisplay.setText("IP: " + GunSmashBros.ssm.getMyAddress());
         portDisplay.setText("Port: " + portField.getText());
         connectDisplay.setText("Hosting");
@@ -40,9 +38,7 @@ public class ConnectPanel extends JPanel{
         hostButton.setEnabled(false);
         displayPanel.menuPanel.playButton.setEnabled(true);
     }
-    public void connect(ActionListener listener){
-        GunSmashBros.ssm = new SuperSocketMaster(ipField.getText(), Integer.parseInt(portField.getText()), listener);
-        GunSmashBros.ssm.connect();
+    public void cilentMode() {
         ipDisplay.setText("IP: " + ipField.getText());
         portDisplay.setText("Port: " + portField.getText());
         connectDisplay.setText("Connected");
@@ -51,9 +47,8 @@ public class ConnectPanel extends JPanel{
         hostButton.setEnabled(false);
         displayPanel.menuPanel.playButton.setEnabled(true);
     }
-    public void disconnect(){
-        
-        GunSmashBros.ssm.disconnect();
+
+    public void disconnect() {
         disconnectButton.setVisible(false);
         joinButton.setEnabled(true);
         hostButton.setEnabled(true);

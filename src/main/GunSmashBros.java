@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import player.ssmHandler;
 //你好
 import ssm.SuperSocketMaster;
 import ui.DisplayPanel;
@@ -18,41 +19,48 @@ public class GunSmashBros extends JFrame implements ActionListener{
   String previousMsg = "";
 
   
-  public static SuperSocketMaster ssm = null;
+  public static SuperSocketMaster ssm;
+  public static ssmHandler ssmh;
 
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == gameTimer) {
       displayPanel.repaint();
-    } else if (e.getSource() == ssm){
+    } 
+    
+    else if (e.getSource() == ssm){
       if (displayPanel.gamePanel.ssh.chatData(2).equals("chat")){
         if (!previousMsg.equals(displayPanel.gamePanel.ssh.chatData(3))){
           previousMsg = displayPanel.gamePanel.ssh.chatData(3);
           displayPanel.chatPanel.chatArea.append("Opponent: " + displayPanel.gamePanel.ssh.chatData(3) + "\n");
         }
       }
-      
-    } else if (e.getSource() == displayPanel.connectPanel.hostButton){
-      try{
-        displayPanel.connectPanel.host(this);
-        displayPanel.gamePanel.playerControl(1);
-        System.out.println("Start socket in server mode");
-      } catch (NumberFormatException ex){
+    } 
+    
+    else if (e.getSource() == displayPanel.connectPanel.hostButton){
+      try {
+        ssmHandler.hostMode(displayPanel, this, Integer.parseInt(displayPanel.connectPanel.portField.getText()));
+        displayPanel.connectPanel.hostMode();
+      } catch (NumberFormatException ex) {
         System.out.println("Please enter a port number");
-      }
-        
-    } else if (e.getSource() == displayPanel.connectPanel.joinButton){
+      } 
+    } 
+    
+    else if (e.getSource() == displayPanel.connectPanel.joinButton){
       try{
-        displayPanel.connectPanel.connect(this);
-        displayPanel.gamePanel.playerControl(2);
-        System.out.println("Start socket in join mode");
+        ssmHandler.clientMode(displayPanel, this, Integer.parseInt(displayPanel.connectPanel.portField.getText()), displayPanel.connectPanel.ipField.getText());
+        displayPanel.connectPanel.cilentMode();
       } catch (NumberFormatException ex){
         System.out.println("Please enter a port number and IP addess");
       }
-    } else if (e.getSource() == displayPanel.connectPanel.disconnectButton){
+    } 
+    
+    else if (e.getSource() == displayPanel.connectPanel.disconnectButton){
+      ssmHandler.disconnect();
       displayPanel.connectPanel.disconnect();
     } 
   }
+
 
   public GunSmashBros() {
     setContentPane(displayPanel);
