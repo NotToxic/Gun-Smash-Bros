@@ -155,17 +155,14 @@ public class GamePanel extends JPanel{
       System.out.println("Cant fine image");
     }
 
-    chatArea.setOpaque(false);
+    chatArea.setOpaque(true);
+    chatArea.setFocusable(false);
 
     scrollArea.setSize(500, 300);
     scrollArea.setLocation(0,420);
-    scrollArea.getViewport().setOpaque(false);
-    scrollArea.setOpaque(false);
+    scrollArea.setOpaque(true);
     scrollArea.setVisible(false);
     add(scrollArea);
-
-
-
 
     backButton.setSize(100,50);
     backButton.setLocation(0,0);

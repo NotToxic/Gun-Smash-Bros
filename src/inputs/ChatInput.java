@@ -10,6 +10,7 @@ public class ChatInput implements KeyListener{
 
     private DisplayPanel displayPanel;
     private String path;
+    public int chatState = 0;
 
     @Override
     // Unused
@@ -20,13 +21,28 @@ public class ChatInput implements KeyListener{
       int key = e.getKeyCode();
         
       if (key == KeyEvent.VK_ENTER) {
-        displayPanel.gamePanel.scrollArea.setVisible(true);
+        if (chatState == 0) {
+          displayPanel.gamePanel.scrollArea.setVisible(true);
+          chatState = 1;
+        } 
+        else if (chatState == 2) {
+          displayPanel.gamePanel.scrollArea.setVisible(false);
+          chatState = 0;
+        }
       }
     }
     
     @Override
     // Unused
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+      int key = e.getKeyCode();
+        
+      if (key == KeyEvent.VK_ENTER) {
+        if (chatState == 1) {
+          chatState = 2;
+        }
+      }
+    }
 
     public ChatInput(String path, DisplayPanel displayPanel){
        this.path = path;
