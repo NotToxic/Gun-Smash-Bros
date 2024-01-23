@@ -58,7 +58,7 @@ public class ssmHandler {
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction + "," + player.gun.gunName);
   }
 
-  public void sendText(int playerID, String chatMessage){
+  public void sendMsg(int playerID, String chatMessage){
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "chat" + "," + chatMessage);
   }
 
@@ -100,8 +100,9 @@ public class ssmHandler {
               gamePanel.player1.gun = new Gun(dataSplit[7]);
               break;
             case "crate":
-              Crate c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
-              gamePanel.crateList.add(c);
+              gamePanel.c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
+              gamePanel.crateList.add(gamePanel.c);
+              System.out.println("Crate: " + dataSplit[3] + "," + dataSplit[4]);
             case "chat":
               if (!previousMsg.equals(dataSplit[3])){
                 previousMsg = dataSplit[3];
@@ -118,8 +119,9 @@ public class ssmHandler {
               gamePanel.player2.gun = new Gun(dataSplit[7]);
               break;
             case "crate":
-              Crate c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
-              gamePanel.crateList.add(c);
+              gamePanel.c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
+              System.out.println(dataSplit[3] + " , " + dataSplit[4]);
+              gamePanel.crateList.add(gamePanel.c);
             case "chat":
               if (!previousMsg.equals(dataSplit[3])){
                 previousMsg = dataSplit[3];

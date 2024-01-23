@@ -42,6 +42,7 @@ public class GamePanel extends JPanel{
   public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
   // The crate has a 1/100000 to spawn
   public static ArrayList<Crate> crateList = new ArrayList<Crate>();
+  public Crate c;
 
   @Override
   public void paintComponent(Graphics g) {
@@ -55,7 +56,6 @@ public class GamePanel extends JPanel{
     player2.move(strMap);
     try{
       ssmh.sendData();
-      ssmh.getData();
     } catch (NullPointerException e){}
 
     paintMap(strMap, g2d, Background1);
@@ -78,7 +78,6 @@ public class GamePanel extends JPanel{
     try{
       if (crateList.size() == 0 && ssmh.playerID == 1){
         if ((int)(Math.random() * 100) + 1 == 1){
-          System.out.println("crate");
           // max - min
           int range = 950 - 250 + 1;
           // randomNum + min
@@ -211,7 +210,6 @@ public class GamePanel extends JPanel{
       mapCSV.close();
 
     }catch(FileNotFoundException e){
-      System.out.println("Mac file not found");
     }catch(IOException e){
       System.out.println("error");
     }
