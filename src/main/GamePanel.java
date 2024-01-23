@@ -33,7 +33,7 @@ public class GamePanel extends JPanel{
   UIButton chatButton;
   JTextArea chatArea = new JTextArea();
   public JScrollPane scrollArea = new JScrollPane(chatArea);
-  JTextField chatField = new JTextField();
+  public JTextField chatField = new JTextField();
 
   BufferedReader map1CSV;
   String[][] strMap;
@@ -55,7 +55,6 @@ public class GamePanel extends JPanel{
     try{
       ssmh.sendData();
       ssmh.getGameData();
-      System.out.println("get");
     } catch (NullPointerException e){}
     paintMap(strMap, g2d, Background1);
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
@@ -159,11 +158,16 @@ public class GamePanel extends JPanel{
     chatArea.setOpaque(true);
     chatArea.setFocusable(false);
 
-    scrollArea.setSize(500, 300);
+    scrollArea.setSize(500, 260);
     scrollArea.setLocation(0,420);
     scrollArea.setOpaque(true);
     scrollArea.setVisible(false);
     add(scrollArea);
+
+    chatField.setSize(500, 40);
+    chatField.setLocation(0, 680);
+    chatField.setVisible(false);
+    add(chatField);
 
     backButton.setSize(100,50);
     backButton.setLocation(0,0);
