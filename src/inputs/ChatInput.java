@@ -3,6 +3,7 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import main.GunSmashBros;
 import ui.DisplayPanel;
 
 public class ChatInput implements KeyListener{
@@ -18,9 +19,8 @@ public class ChatInput implements KeyListener{
     public void keyPressed(KeyEvent e) {
       int key = e.getKeyCode();
         
-      if (key == KeyEvent.VK_P) {
-        displayPanel.changePanel(path);
-        System.out.println(path);
+      if (key == KeyEvent.VK_ENTER) {
+        displayPanel.gamePanel.scrollArea.setVisible(true);
       }
     }
     

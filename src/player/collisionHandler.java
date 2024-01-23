@@ -17,6 +17,7 @@ public class collisionHandler {
         this.crate = crate;
     }
 
+    /*
     public void collision(String[][] map){
     if (y > 800){
       dead = true;
@@ -73,4 +74,5 @@ public class collisionHandler {
       return -1;
     }
   }
+  */
 }

@@ -12,7 +12,7 @@ import ui.DisplayPanel;
 
 public class GunSmashBros extends JFrame implements ActionListener{
 
-  DisplayPanel displayPanel = new DisplayPanel(this, ssm);
+  public DisplayPanel displayPanel = new DisplayPanel(this, ssm);
 
   Timer gameTimer = new Timer(1000/60, this);
 

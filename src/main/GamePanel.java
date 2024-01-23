@@ -9,16 +9,11 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.image.*;
 import java.io.*;
-import javax.imageio.*;
 
 import inputs.ChatInput;
-import inputs.KeyInputs;
 import player.ssmHandler;
 import player.Player;
-import ui.ChatPanel;
-import ui.ConnectPanel;
 import ui.DisplayPanel;
 import ui.UIButton;
 import guns.Bullet;
@@ -36,6 +31,10 @@ public class GamePanel extends JPanel{
   public static ssmHandler ssh;
   UIButton backButton;
   UIButton chatButton;
+  JTextArea chatArea = new JTextArea();
+  public JScrollPane scrollArea = new JScrollPane(chatArea);
+  JTextField chatField = new JTextField();
+
   BufferedReader map1CSV;
   String[][] strMap;
 
@@ -155,6 +154,17 @@ public class GamePanel extends JPanel{
     if(Background1 == null){
       System.out.println("Cant fine image");
     }
+
+    chatArea.setOpaque(false);
+
+    scrollArea.setSize(500, 300);
+    scrollArea.setLocation(0,420);
+    scrollArea.getViewport().setOpaque(false);
+    scrollArea.setOpaque(false);
+    scrollArea.setVisible(false);
+    add(scrollArea);
+
+
 
 
     backButton.setSize(100,50);
