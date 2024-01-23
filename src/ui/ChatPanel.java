@@ -25,8 +25,8 @@ public class ChatPanel extends JPanel implements ActionListener{
 
   	public void actionPerformed(ActionEvent evt){
 		if(evt.getSource() == sendField){
-			System.out.println(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
-			GunSmashBros.ssm.sendText(GamePanel.ssh.ID + "," + GamePanel.ssh.playerID + "," + "chat" + "," + sendField.getText());
+			System.out.println(GamePanel.ssmh.ID + "," + GamePanel.ssmh.playerID + "," + "chat" + "," + sendField.getText());
+			GunSmashBros.ssm.sendText(GamePanel.ssmh.ID + "," + GamePanel.ssmh.playerID + "," + "chat" + "," + sendField.getText());
 			if (!sendField.getText().equals("")){
 				chatArea.append("You: " + sendField.getText() + "\n");
 			}
@@ -36,8 +36,8 @@ public class ChatPanel extends JPanel implements ActionListener{
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		displayPanel.gamePanel.ssh.getGameData();
-		displayPanel.gamePanel.ssh.sendData();
+		displayPanel.gamePanel.ssmh.getGameData();
+		displayPanel.gamePanel.ssmh.sendData();
 	}
   
 	// Constructor

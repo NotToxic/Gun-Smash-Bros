@@ -34,7 +34,7 @@ public class ssmHandler {
     GunSmashBros.ssm.connect();
 
     displayPanel.gamePanel.addKeyListener(new KeyInputs(displayPanel.gamePanel.player1));
-    GunSmashBros.ssmh = new ssmHandler(1, displayPanel.gamePanel.player1, displayPanel.gamePanel, displayPanel);
+    displayPanel.gamePanel.ssmh = new ssmHandler(1, displayPanel.gamePanel.player1, displayPanel.gamePanel, displayPanel);
     System.out.println("Socket started in server mode");
   }
 
@@ -42,8 +42,8 @@ public class ssmHandler {
     GunSmashBros.ssm = new SuperSocketMaster(IP, port, listener);
     GunSmashBros.ssm.connect();
     
-    displayPanel.gamePanel.addKeyListener(new KeyInputs(displayPanel.gamePanel.player1));
-    GunSmashBros.ssmh = new ssmHandler(2, displayPanel.gamePanel.player2, displayPanel.gamePanel, displayPanel);
+    displayPanel.gamePanel.addKeyListener(new KeyInputs(displayPanel.gamePanel.player2));
+    displayPanel.gamePanel.ssmh = new ssmHandler(2, displayPanel.gamePanel.player2, displayPanel.gamePanel, displayPanel);
     System.out.println("Socket started in client mode");
   }
 
@@ -54,11 +54,12 @@ public class ssmHandler {
   public void sendData() {
     //Send data: ID + player + game/chat + location of player + player shot + direction + gunName
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction + "," + player.gun.gunName);
+    System.out.println("sent");
   }
 
   public void sendText(String ID, int playerID, String chatMessage){
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "chat" + "," + chatMessage);
-    System.out.println("s");
+    System.out.println("chat");
   }
 
   // A method to a specific index of the ssm message
@@ -93,6 +94,7 @@ public class ssmHandler {
 
   public void getGameData() {
     data = GunSmashBros.ssm.readText();
+    System.out.println("get");
     if (data != null){
       dataSplit = data.split(",");
       if (dataSplit[0].equals(ID)) {
@@ -101,6 +103,7 @@ public class ssmHandler {
         if (dataSplit[1].equals("1")) {
           switch (dataSplit[2]) {
             case "game":
+              System.out.println("game data");
               gamePanel.player1.x = Integer.parseInt(dataSplit[3]);
               gamePanel.player1.y = Integer.parseInt(dataSplit[4]);
               gamePanel.player1.shoot = Boolean.valueOf(dataSplit[5]);

@@ -28,7 +28,7 @@ public class GamePanel extends JPanel{
   public static DisplayPanel displayPanel;
   public Player player1 = new Player(300, 0, 45, 90, this);
   public Player player2 = new Player(800, 0, 45, 90, this);
-  public static ssmHandler ssh;
+  public static ssmHandler ssmh;
   UIButton backButton;
   UIButton chatButton;
   JTextArea chatArea = new JTextArea();
@@ -53,8 +53,9 @@ public class GamePanel extends JPanel{
     player1.move(strMap);
     player2.move(strMap);
     try{
-      ssh.sendData();
-      ssh.getGameData();
+      ssmh.sendData();
+      ssmh.getGameData();
+      System.out.println("get");
     } catch (NullPointerException e){}
     paintMap(strMap, g2d, Background1);
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);

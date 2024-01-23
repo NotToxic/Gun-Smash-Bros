@@ -28,10 +28,10 @@ public class GunSmashBros extends JFrame implements ActionListener{
     } 
     
     else if (e.getSource() == ssm){
-      if (displayPanel.gamePanel.ssh.chatData(2).equals("chat")){
-        if (!previousMsg.equals(displayPanel.gamePanel.ssh.chatData(3))){
-          previousMsg = displayPanel.gamePanel.ssh.chatData(3);
-          displayPanel.chatPanel.chatArea.append("Opponent: " + displayPanel.gamePanel.ssh.chatData(3) + "\n");
+      if (displayPanel.gamePanel.ssmh.chatData(2).equals("chat")){
+        if (!previousMsg.equals(displayPanel.gamePanel.ssmh.chatData(3))){
+          previousMsg = displayPanel.gamePanel.ssmh.chatData(3);
+          displayPanel.chatPanel.chatArea.append("Opponent: " + displayPanel.gamePanel.ssmh.chatData(3) + "\n");
         }
       }
     } 
