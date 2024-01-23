@@ -1,7 +1,10 @@
 package main;
 
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import player.ssmHandler;
@@ -58,15 +61,19 @@ public class GunSmashBros extends JFrame implements ActionListener{
     else if (e.getSource() == displayPanel.connectPanel.gameButton1){
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1.csv");
       displayPanel.connectPanel.gameButton1.setEnabled(false);
-      displayPanel.gamePanel.strMapName = "CPTMap1.csv";
-      strName = "CPTMap1.csv";
+      displayPanel.connectPanel.gameButton2.setEnabled(true);
+      try {
+        displayPanel.gamePanel.Background1 = ImageIO.read(new File("assets/maps/CPTMap1.png"));
+      } catch (IOException e1) {}
     } 
 
     else if (e.getSource() == displayPanel.connectPanel.gameButton2){
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2.csv");
       displayPanel.connectPanel.gameButton2.setEnabled(false);
-      displayPanel.gamePanel.strMapName = "CPTMap2.csv";
-      //strName = "CPTMap2.csv";
+      displayPanel.connectPanel.gameButton1.setEnabled(true);
+      try {
+        displayPanel.gamePanel.Background1 = ImageIO.read(new File("assets/maps/CPTMap2.png"));
+      } catch (IOException e1) {}
     } 
   }
 

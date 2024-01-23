@@ -66,23 +66,6 @@ public class ssmHandler {
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "crate" + "," + gunType + "," + crateX);
   }
 
-  // A method to a specific index of the ssm message
-  /* 
-  public String chatData(int index){
-    data = GunSmashBros.ssm.readText();
-    if (data != null){
-      dataSplit = data.split(",");
-      try{
-        return dataSplit[index];
-      } catch (ArrayIndexOutOfBoundsException e){
-        return "";
-      }
-    } else {
-      return null;
-    }
-  }
-  */
-
   public void getData() {
     data = GunSmashBros.ssm.readText();
     if (data != null){
