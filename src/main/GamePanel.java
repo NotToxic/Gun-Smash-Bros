@@ -59,7 +59,11 @@ public class GamePanel extends JPanel implements ActionListener {
       scrollArea.setVisible(false);
       chatField.setVisible(false);
       requestFocus();
-		}
+		} else if (e.getSource() == player1.deathTimer){
+      playerRespawn(player1);
+    } else if (e.getSource() == player2.deathTimer){
+      playerRespawn(player2);
+    }
   }
 
   @Override
@@ -72,7 +76,7 @@ public class GamePanel extends JPanel implements ActionListener {
     g2d.setColor(Color.BLACK);
 
     p1Lives.setText("Host :" + player1.lives + " lives");
-    p1Lives.setText("Client :" + player2.lives + " lives");
+    p2Lives.setText("Client :" + player2.lives + " lives");
 
 
     player1.move(strMap);
@@ -139,33 +143,18 @@ public class GamePanel extends JPanel implements ActionListener {
       }
     } catch (NullPointerException e){}
 
-    if (player1.getDead()){
-      player1.deathTimer -= 1;
-      System.out.println(player1.deathTimer);
-      if (player1.lives == 1){
-        player1.respawn();
-        displayPanel.winPanel.victory("Client");
-      }
-      if (player1.deathTimer == 0){
-        if (displayPanel.gamePanel.ssmh.playerID == 1){
-          player1.lives--;
-        }
-        player1.respawn();
-      }
+    if (player1.getDead() && player1.deathTimer.isRunning() == false){
+      playerDeath(player1);
     }
-    if (player2.getDead()){
-      player2.deathTimer -= 1;
-      System.out.println(player2.deathTimer);
-      if (player2.lives == 1){
-        player2.respawn();
-        displayPanel.winPanel.victory("Host");
-      }
-      if (player2.deathTimer == 0){
-        if (displayPanel.gamePanel.ssmh.playerID == 2){
           player2.lives--;
-        }
-        player2.respawn();
-      }
+    if (player2.getDead() && player2.deathTimer.isRunning() == false){
+      playerDeath(player2);
+    }
+    if (player1.lives == 0){
+      displayPanel.winPanel.victory("Client");
+    }
+    if (player2.lives == 0){
+      displayPanel.winPanel.victory("Host");
     }
 
   }
@@ -206,9 +195,9 @@ public class GamePanel extends JPanel implements ActionListener {
     chatArea.setFocusable(false);
 
     p1Lives.setSize(200, 100);
-    p1Lives.setLocation(700, 100);
+    p1Lives.setLocation(600, 50);
     p2Lives.setSize(200, 100);
-    p2Lives.setLocation(900, 100);
+    p2Lives.setLocation(1000, 50);
     add(p1Lives);
     add(p2Lives);
 
@@ -312,6 +301,17 @@ public class GamePanel extends JPanel implements ActionListener {
       strMap = loadMap(strMapName);
       strPreMapName = strMapName;
     }
+  }
+
+  public void playerDeath(Player player){
+    player.deathTimer.start();
+    player.lives--;
+    System.out.println(player.lives);
+  }
+
+  public void playerRespawn(Player player){
+    player.respawn();
+    player.deathTimer.stop();
   }
 }
 

@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.Timer;
 
 public class Player {
 
@@ -42,7 +43,7 @@ public class Player {
   public boolean doubleJumped = false;
 
   public boolean dead = false;
-  public int deathTimer = 90;
+  public Timer deathTimer;
   public int lives = 5;
   public int hitTimer = 0;
 
@@ -57,6 +58,8 @@ public class Player {
     this.height = height;
     this.hitbox = new Rectangle(x, y, width, height);
     this.gamePanel = gamePanel;
+    
+    deathTimer = new Timer(1500, gamePanel);
 
     try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/characterLeft.png")) {
       imgPlayerLeft = ImageIO.read(is);
@@ -239,7 +242,6 @@ public class Player {
     y = -100;
     gun = new Gun("lightGuy");
     ySpeed = 0;
-    deathTimer = 90;
     dead = false;
   }
 }
