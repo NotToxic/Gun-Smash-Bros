@@ -2,6 +2,13 @@ package ui;
 
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 
 public class MenuPanel extends JPanel{
 
@@ -10,14 +17,28 @@ public class MenuPanel extends JPanel{
     public UIButton playButton;
     public UIButton connectButton;
     public UIButton helpButton;
+    BufferedImage imgMainHomeScreen = null;
 
     public MenuPanel(DisplayPanel displayPanel){
         this.displayPanel = displayPanel;
         playButton = new UIButton("PLAY", "game", displayPanel);
         connectButton = new UIButton("CONNECT", "connect", displayPanel);
         helpButton = new UIButton("HELP", "help", displayPanel);
+        
 
         setLayout(null);
+
+        InputStream imgClass = null;
+        imgClass = this.getClass().getResourceAsStream("/assets/images/CPTHomeScreen.png");
+        if(imgClass == null){
+			System.out.println("Cannot find home screen image");
+		} else {
+			try {
+				imgMainHomeScreen = ImageIO.read(imgClass);
+			} catch(IOException e) {
+				System.out.println("Cannot read home screen image file"); //Handle exception
+			}
+		}
 
         playButton.setSize(200, 100);
         playButton.setLocation(50, 300);
@@ -37,4 +58,8 @@ public class MenuPanel extends JPanel{
         setLayout(null);
         setPreferredSize(new Dimension(1280,720));
     }
+    public void paintComponent(Graphics g){
+		super.paintComponent(g);
+    g.drawImage(imgMainHomeScreen, 0, 0, null);
+  }
 }
