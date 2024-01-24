@@ -24,13 +24,9 @@ public class ChatInput implements KeyListener{
         if (chatState == 0) {
           displayPanel.gamePanel.scrollArea.setVisible(true);
           displayPanel.gamePanel.chatField.setVisible(true);
+          displayPanel.gamePanel.chatField.requestFocus();
           chatState = 1;
         } 
-        else if (chatState == 2) {
-          displayPanel.gamePanel.scrollArea.setVisible(false);
-          displayPanel.gamePanel.chatField.setVisible(false);
-          chatState = 0;
-        }
       }
     }
     
@@ -41,7 +37,7 @@ public class ChatInput implements KeyListener{
         
       if (key == KeyEvent.VK_ENTER) {
         if (chatState == 1) {
-          chatState = 2;
+          chatState = 0;
         }
       }
     }

@@ -54,6 +54,9 @@ public class GamePanel extends JPanel implements ActionListener {
 				chatArea.append("You: " + chatField.getText() + "\n");
 			}
 			chatField.setText("");
+      scrollArea.setVisible(false);
+      chatField.setVisible(false);
+      requestFocus();
 		}
   }
 
