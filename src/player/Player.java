@@ -236,9 +236,19 @@ public class Player {
 
   public void respawn(){
     // max - min
-    int range = 1100 - 200 + 1;
+    int range = 0;
+    int max = 0;
+    int min = 0;
+    if (gamePanel.ssmh.playerID == 1){
+      min = 100;
+      max = 650;
+    } else if (gamePanel.ssmh.playerID == 2){
+      max = 1150;
+      min = 650;
+    }
     // randomNum + min
-    x = (int)(Math.random() * range) + 200;
+    range = max - min + 1;
+    x = (int)(Math.random() * range) + min;
     y = -100;
     gun = new Gun("lightGuy");
     ySpeed = 0;

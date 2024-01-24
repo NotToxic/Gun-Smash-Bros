@@ -38,6 +38,14 @@ public class GamePanel extends JPanel implements ActionListener {
   public JScrollPane scrollArea = new JScrollPane(chatArea);
   public JTextField chatField = new JTextField();
 
+  Font labelFont;
+  int stringWidth;
+  int componentWidth;
+  double widthRatio;
+  int newFontSize;
+  int componentHeight;
+  int fontSizeToUse;
+
   BufferedReader map1CSV;
   public String[][] strMap;
   public int image = 1;
@@ -194,9 +202,13 @@ public class GamePanel extends JPanel implements ActionListener {
     chatArea.setFocusable(false);
 
     p1Lives.setSize(200, 100);
-    p1Lives.setLocation(600, 50);
+    p1Lives.setLocation(400, 0);
+    setFontSize(p1Lives);
+  
     p2Lives.setSize(200, 100);
-    p2Lives.setLocation(1000, 50);
+    p2Lives.setLocation(800, 0);
+    setFontSize(p2Lives);
+
     add(p1Lives);
     add(p2Lives);
 
@@ -311,6 +323,16 @@ public class GamePanel extends JPanel implements ActionListener {
   public void playerRespawn(Player player){
     player.respawn();
     player.deathTimer.stop();
+  }
+
+  public void setFontSize(JLabel label){
+    labelFont = label.getFont();
+
+    stringWidth = label.getFontMetrics(labelFont).stringWidth(label.getText());
+    componentWidth = label.getWidth();
+
+    // Set the label's font size to the newly determined size.
+    label.setFont(new Font(labelFont.getName(), Font.PLAIN, 25));
   }
 }
 
