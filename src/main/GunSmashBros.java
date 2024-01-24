@@ -59,21 +59,15 @@ public class GunSmashBros extends JFrame implements ActionListener{
     }
 
     else if (e.getSource() == displayPanel.connectPanel.gameButton1){
-      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1.csv");
+      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1");
       displayPanel.connectPanel.gameButton1.setEnabled(false);
       displayPanel.connectPanel.gameButton2.setEnabled(true);
-      try {
-        displayPanel.gamePanel.Background1 = ImageIO.read(new File("assets/maps/CPTMap1.png"));
-      } catch (IOException e1) {}
     } 
 
     else if (e.getSource() == displayPanel.connectPanel.gameButton2){
-      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2.csv");
+      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2");
       displayPanel.connectPanel.gameButton2.setEnabled(false);
       displayPanel.connectPanel.gameButton1.setEnabled(true);
-      try {
-        displayPanel.gamePanel.Background1 = ImageIO.read(new File("assets/maps/CPTMap2.png"));
-      } catch (IOException e1) {}
     } 
   }
 

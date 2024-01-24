@@ -41,48 +41,28 @@ public class Gun{
     }
 
     public void setStats(String gunName){
-        BufferedReader bulletStatsCSV;
-        String strLine;
-        String strSplit[];
         String[][] stats = new String[3][5];
 
-        try{
-            bulletStatsCSV = new BufferedReader(new FileReader("Gun-Smash-Bros/assets/objects/bulletStats.csv"));
-            for(int i = 0; i < 3; i++){
-                strLine = bulletStatsCSV.readLine();
-                strSplit = strLine.split(",");
+        try (InputStream is = Gun.class.getResourceAsStream("/assets/objects/bulletStats.csv");
+             InputStreamReader isr = new InputStreamReader(is);
+             BufferedReader bulletStatsCSV = new BufferedReader(isr)) {
 
-                for(int a = 0; a < 5; a++){
-                    stats[i][a] = strSplit[a];   
+            String strLine;
+
+            for (int i = 0; i < 3; i++) {
+                strLine = bulletStatsCSV.readLine();
+                if (strLine == null) {
+                    break;  // End of file reached
+                }
+                String[] strSplit = strLine.split(",");
+
+                for (int a = 0; a < 5; a++) {
+                    stats[i][a] = strSplit[a];
                 }
             }
 
-            bulletStatsCSV.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("Mac file not found");
-        }catch(IOException e){
-            System.out.println("error");
-        }
-
-        try{
-            bulletStatsCSV = new BufferedReader(new FileReader("assets/objects/bulletStats.csv"));
-            for(int i = 0; i < 3; i++){
-            strLine = bulletStatsCSV.readLine();
-            strSplit = strLine.split(",");
-
-            for(int a = 0; a < 5; a++){
-                stats[i][a] = strSplit[a];
-            }
-
-            }
-
-            bulletStatsCSV.close();
-
-        }catch(FileNotFoundException e){
-            System.out.println("Windows file not found");
-        }catch(IOException e){
-            System.out.println("error");
+        } catch (IOException e) {
+            System.out.println("Error reading file");
         } 
 
         for (int i = 0; i < 3; i++){

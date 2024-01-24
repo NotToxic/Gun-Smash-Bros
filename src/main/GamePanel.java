@@ -24,7 +24,7 @@ import guns.Crate;
 // Comment
 public class GamePanel extends JPanel implements ActionListener {
 
-  public BufferedImage Background1 = null;
+  public static BufferedImage imgMapBackground = null;
   public String strMapName = "CPTMap1.csv";
 
 
@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements ActionListener {
     player1.move(strMap);
     player2.move(strMap);
 
-    paintMap(strMap, g2d, Background1);
+    paintMap(strMap, g2d, imgMapBackground);
     
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
     g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
@@ -165,14 +165,6 @@ public class GamePanel extends JPanel implements ActionListener {
       setLayout(null);
 
     });
-  
-    try{
-      Background1 = ImageIO.read(new File("assets/maps/CPTMap"+image+".png"));
-    }catch (IOException e){}
-    
-    if(Background1 == null){
-      System.out.println("Cant find image");
-    }
 
     chatArea.setOpaque(true);
     chatArea.setFocusable(false);
@@ -199,57 +191,51 @@ public class GamePanel extends JPanel implements ActionListener {
 
   }
 
-  public static String[][] loadMap(String strMapName){
-    BufferedReader mapCSV;
-    int intCount;
-    int intCounter;
+  public static String[][] loadMap(String strMapName){;
     String strLine;
     String[] strSplit;
     String[][] map = new String[90][160];
 
-
-    try{
-      mapCSV = new BufferedReader(new FileReader("Gun-Smash-Bros/assets/maps/" + strMapName));
-      for(intCount = 0; intCount < 90; intCount++){
-        strLine = mapCSV.readLine();
-        strSplit = strLine.split(",");
-
-        for(intCounter = 0; intCounter < 160; intCounter++){
-          map[intCount][intCounter] = strSplit[intCounter];
+    // Use InputStream and InputStreamReader to read the file
+    try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".png")) {
+      if (is == null) {
+        System.out.println("cannot find map");
+      } else {
+        try {
+          imgMapBackground = ImageIO.read(is);
+          
+        } catch(IOException e) {
+          System.out.println("Cannot read map image file"); //Handle exception
         }
+      }
+    } catch (IOException e) {
+      System.out.println("Error reading map image");
+    } 
 
+    // Use InputStream and InputStreamReader to read the file
+    try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".csv");
+      InputStreamReader isr = new InputStreamReader(is);
+      BufferedReader mapCSV = new BufferedReader(isr)) {
+      
+        for (int i = 0;i < 90; i++) {
+          strLine = mapCSV.readLine();
+          strSplit = strLine.split(",");
+
+          for (int j = 0; j < 160; j++) {
+              map[i][j] = strSplit[j];
+          }
       }
 
       mapCSV.close();
 
-    }catch(FileNotFoundException e){
-    }catch(IOException e){
-      System.out.println("error");
+    } catch (IOException e) {
+      System.out.println("Error reading map file");
+    } catch (NullPointerException e) {
+      System.out.println("CSV was modified");
     }
-
-    try{
-      mapCSV = new BufferedReader(new FileReader("assets/maps/" + strMapName));
-      for(intCount = 0; intCount < 90; intCount++){
-        strLine = mapCSV.readLine();
-        strSplit = strLine.split(",");
-
-        for(intCounter = 0; intCounter < 160; intCounter++){
-          map[intCount][intCounter] = strSplit[intCounter];
-        }
-
-      }
-
-      mapCSV.close();
-
-    }catch(FileNotFoundException e){
-      System.out.println("Windows file not found");
-    }catch(IOException e){
-      System.out.println("error");
-    }
-
-    System.out.println(map[0][0]);
     return map;
   }
+
   public void paintMap(String[][] strMap, Graphics2D g2D, BufferedImage Background1){
 
     g2D.drawImage(Background1, 0, 0, null);

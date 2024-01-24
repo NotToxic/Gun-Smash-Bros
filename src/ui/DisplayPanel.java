@@ -14,6 +14,7 @@ public class DisplayPanel extends JPanel{
   SuperSocketMaster ssm;
   public GamePanel gamePanel = new GamePanel(this);
   public MenuPanel menuPanel = new MenuPanel(this);
+  public HelpPanel helpPanel = new HelpPanel(this);
   public ConnectPanel connectPanel = null;
 
   public CardLayout display = new CardLayout();
@@ -36,6 +37,7 @@ public class DisplayPanel extends JPanel{
     add(menuPanel, "menu");
     add(gamePanel, "game");
     add(connectPanel, "connect");
+    add(helpPanel, "help");
 
     display.show(this, "menu");
   }
