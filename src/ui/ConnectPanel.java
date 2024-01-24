@@ -48,6 +48,7 @@ public class ConnectPanel extends JPanel{
     }
 
     public void disconnect() {
+        connectDisplay.setText("Not Connected");
         disconnectButton.setVisible(false);
         joinButton.setEnabled(true);
         hostButton.setEnabled(true);

@@ -108,12 +108,12 @@ public class GamePanel extends JPanel implements ActionListener {
             Crate c = new Crate(strMap, "lightGuy", x);
             crateList.add(c);
             System.out.println("light");
-            ssmh.sendCrate(x, "light");
+            ssmh.sendCrate(x, "lightGuy");
           } else {
             Crate c = new Crate(strMap, "heavyGuy", x);
             crateList.add(c);
             System.out.println("heavy");
-            ssmh.sendCrate(x, "heavy");
+            ssmh.sendCrate(x, "heavyGuy");
           }
         }
       } else if (crateList.size() == 1){

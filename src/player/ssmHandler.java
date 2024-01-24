@@ -34,8 +34,13 @@ public class ssmHandler {
   public static void hostMode(DisplayPanel displayPanel, ActionListener listener, int port) {
     GunSmashBros.ssm = new SuperSocketMaster(port, listener);
     GunSmashBros.ssm.connect();
-    GunSmashBros.ssm2 = new SuperSocketMaster(port, listener);
-    GunSmashBros.ssm2.connect();
+    try{
+      GunSmashBros.ssm2 = new SuperSocketMaster(port+1, listener);
+      GunSmashBros.ssm2.connect();
+    } catch (IllegalArgumentException e){
+      GunSmashBros.ssm2 = new SuperSocketMaster(port-1, listener);
+      GunSmashBros.ssm2.connect();
+    }
 
     displayPanel.gamePanel.addKeyListener(new KeyInputs(displayPanel.gamePanel.player1));
     displayPanel.gamePanel.ssmh = new ssmHandler(1, displayPanel.gamePanel.player1, displayPanel.gamePanel, displayPanel);
@@ -45,8 +50,13 @@ public class ssmHandler {
   public static void clientMode(DisplayPanel displayPanel, ActionListener listener, int port, String IP) {
     GunSmashBros.ssm = new SuperSocketMaster(IP, port, listener);
     GunSmashBros.ssm.connect();
-    GunSmashBros.ssm2 = new SuperSocketMaster(IP, port, listener);
-    GunSmashBros.ssm2.connect();
+    try{
+      GunSmashBros.ssm2 = new SuperSocketMaster(IP, port+1, listener);
+      GunSmashBros.ssm2.connect();
+    } catch (IllegalArgumentException e){
+      GunSmashBros.ssm2 = new SuperSocketMaster(IP, port-1, listener);
+      GunSmashBros.ssm2.connect();
+    }
     
     displayPanel.gamePanel.addKeyListener(new KeyInputs(displayPanel.gamePanel.player2));
     displayPanel.gamePanel.ssmh = new ssmHandler(2, displayPanel.gamePanel.player2, displayPanel.gamePanel, displayPanel);
@@ -92,9 +102,9 @@ public class ssmHandler {
         } else if (dataSplit[1].equals("2")){
           switch (dataSplit[2]){
             case "crate":
-              gamePanel.c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
-              System.out.println(dataSplit[3] + " , " + dataSplit[4]);
-              gamePanel.crateList.add(gamePanel.c);
+              Crate c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
+              System.out.println(dataSplit[3] + "," + dataSplit[4]);
+              gamePanel.crateList.add(c);
               break;
             case "chat":
               previousMsg = dataSplit[3];
