@@ -1,11 +1,16 @@
 package guns;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import main.GamePanel;
+import player.Player;
 
 public class Gun{
+    public BufferedImage imgGun = null;
     public String gunName;
     int bulletSize;
     double bulletSpeed;
@@ -20,6 +25,7 @@ public class Gun{
     public Gun(String gunName){
         this.gunName = gunName;
         setStats(gunName);
+        setImage(gunName, "right");
     }
 
     public void shoot(int x, int y, String direction){
@@ -79,5 +85,54 @@ public class Gun{
                 break;
             }
         }
+    }
+    
+    public void setImage(String gunName, String direction) {
+        if (gunName.equals("lightGuy")) {
+            if (direction.equals("right")) {
+                try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/objects/lightGuyRight.png")) {
+                    imgGun = ImageIO.read(is);
+                } catch (IOException e) {
+                    System.out.println("Error reading light guy image");
+                } 
+            } else {
+                try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/objects/lightGuyLeft.png")) {
+                    imgGun = ImageIO.read(is);
+                } catch (IOException e) {
+                    System.out.println("Error reading light guy image");
+                } 
+            }
+        }
+        else if (gunName.equals("heavyGuy")) {
+            if (direction.equals("right")) {
+                try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/objects/heavyGuyRight.png")) {
+                    imgGun = ImageIO.read(is);
+                } catch (IOException e) {
+                    System.out.println("Error reading heavy guy image");
+                } 
+            } else {
+                try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/objects/heavyGuyLeft.png")) {
+                    imgGun = ImageIO.read(is);
+                } catch (IOException e) {
+                    System.out.println("Error reading heavy guy image");
+                } 
+            }
+        }
+    }
+
+    public int getGunX(Player player) {
+        int GunX = 0;
+        if (player.direction.equals("right")) {
+            GunX = player.x + player.width - 10;
+        }
+        else if (player.direction.equals("left")) {
+            GunX = player.x - 15;
+        }
+        return GunX;
+    }
+
+    public int getGunY(Player player) {
+        int GunY = player.y + 32;
+        return GunY;
     }
 }
