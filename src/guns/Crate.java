@@ -1,6 +1,16 @@
 package guns;
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.imageio.ImageIO;
+
 public class Crate {
+
+    public static BufferedImage imgCrate;
 
     public int size = 48;
     public int x; 
@@ -14,6 +24,12 @@ public class Crate {
         this.x = x;
         this.gunName = gunName;
         this.map = map;
+
+        try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/crate.png")) {
+          imgCrate = ImageIO.read(is);
+        } catch (IOException e) {
+          System.out.println("cannot find gun image");
+        }
     }
 
     public void move(){
