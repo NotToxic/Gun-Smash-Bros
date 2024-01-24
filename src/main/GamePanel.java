@@ -137,6 +137,7 @@ public class GamePanel extends JPanel implements ActionListener {
       player1.deathTimer -= 1;
       System.out.println(player1.deathTimer);
       if (player1.lives == 1){
+        player1.respawn();
         displayPanel.winPanel.victory("Client");
       }
       if (player1.deathTimer == 0){
@@ -150,6 +151,7 @@ public class GamePanel extends JPanel implements ActionListener {
       player2.deathTimer -= 1;
       System.out.println(player2.deathTimer);
       if (player2.lives == 1){
+        player2.respawn();
         displayPanel.winPanel.victory("Host");
       }
       if (player2.deathTimer == 0){

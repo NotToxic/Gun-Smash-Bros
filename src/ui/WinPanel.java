@@ -18,9 +18,6 @@ public class WinPanel extends JPanel{
     public void resetScreen(String winner) { 
         winLabel.setText(winner + " Victory!");
     }
-    public void resetTimer(){
-
-    }
 
     public void victory(String winner){
         displayPanel.changePanel("win");
