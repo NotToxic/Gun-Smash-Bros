@@ -214,8 +214,10 @@ public class Player {
 
   public BufferedImage getCharModel() {
     if (direction.equals("right")) {
+      gun.setImage(gun.gunName, "right");
       return imgPlayerRight;
     } else {
+      gun.setImage(gun.gunName, "left");
       return imgPlayerLeft;
     }
   }

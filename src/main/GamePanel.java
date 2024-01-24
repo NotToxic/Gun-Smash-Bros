@@ -84,9 +84,10 @@ public class GamePanel extends JPanel implements ActionListener {
     //g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
 
     g.drawImage(player1.getCharModel(), player1.x, player1.y, null);
-    g.drawImage(player2.getCharModel(), player2.x, player2.y, null);
-
     g.drawImage(player1.gun.imgGun, player1.gun.getGunX(player1), player1.gun.getGunY(player1), null);
+
+    g.drawImage(player2.getCharModel(), player2.x, player2.y, null);
+    g.drawImage(player2.gun.imgGun, player2.gun.getGunX(player2), player2.gun.getGunY(player2), null);
 
     try{
       for (int i = 0; i < bulletList.size(); i++){
