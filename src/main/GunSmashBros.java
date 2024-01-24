@@ -32,6 +32,9 @@ public class GunSmashBros extends JFrame implements ActionListener{
     if (e.getSource() == gameTimer) {
       displayPanel.repaint();
     } 
+    if (e.getSource() == displayPanel.winPanel.deadTimer){
+      displayPanel.winPanel.resetGame();
+    }
     
     else if (e.getSource() == ssm2){
       displayPanel.gamePanel.ssmh.getOtherData();

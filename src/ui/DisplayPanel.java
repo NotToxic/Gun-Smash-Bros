@@ -16,17 +16,19 @@ public class DisplayPanel extends JPanel{
   public MenuPanel menuPanel = new MenuPanel(this);
   public HelpPanel helpPanel = new HelpPanel(this);
   public ConnectPanel connectPanel = null;
+  public WinPanel winPanel = null;
 
   public CardLayout display = new CardLayout();
 
   public void changePanel(String path){
       display.show(DisplayPanel.this, path);
-  }
+  } 
 
   public DisplayPanel(ActionListener listener, SuperSocketMaster ssm){
     this.ssm = ssm;
     
     connectPanel = new ConnectPanel(this, listener);
+    winPanel = new WinPanel(this, listener);
 
     setFocusable(true);
     requestFocusInWindow();
@@ -38,6 +40,7 @@ public class DisplayPanel extends JPanel{
     add(gamePanel, "game");
     add(connectPanel, "connect");
     add(helpPanel, "help");
+    add(winPanel, "win");
 
     display.show(this, "menu");
   }

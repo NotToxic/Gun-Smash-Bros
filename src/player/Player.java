@@ -43,6 +43,7 @@ public class Player {
 
   public boolean dead = false;
   public int deathTimer = 90;
+  public int lives = 5;
   public int hitTimer = 0;
 
   public int jumpCounter = 0;
@@ -231,8 +232,12 @@ public class Player {
   }
 
   public void respawn(){
-    x = 750;
+    // max - min
+    int range = 1100 - 200 + 1;
+    // randomNum + min
+    x = (int)(Math.random() * range) + 200;
     y = -100;
+    gun = new Gun("lightGuy");
     ySpeed = 0;
     deathTimer = 90;
     dead = false;
