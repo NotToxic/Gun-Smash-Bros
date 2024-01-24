@@ -32,6 +32,8 @@ public class GamePanel extends JPanel implements ActionListener {
   public static ssmHandler ssmh;
   UIButton backButton;
   UIButton chatButton;
+  public JLabel p1Lives = new JLabel("Host: " + player1.lives + " lives");
+  public JLabel p2Lives = new JLabel("Client: " + player2.lives + " lives");
   public JTextArea chatArea = new JTextArea();
   public JScrollPane scrollArea = new JScrollPane(chatArea);
   public JTextField chatField = new JTextField();
@@ -68,6 +70,10 @@ public class GamePanel extends JPanel implements ActionListener {
     g2d.fillRect(0, 0, 1280, 720);
 
     g2d.setColor(Color.BLACK);
+
+    p1Lives.setText("Host :" + player1.lives + " lives");
+    p1Lives.setText("Client :" + player2.lives + " lives");
+
 
     player1.move(strMap);
     player2.move(strMap);
@@ -198,6 +204,13 @@ public class GamePanel extends JPanel implements ActionListener {
 
     chatArea.setOpaque(true);
     chatArea.setFocusable(false);
+
+    p1Lives.setSize(200, 100);
+    p1Lives.setLocation(700, 100);
+    p2Lives.setSize(200, 100);
+    p2Lives.setLocation(900, 100);
+    add(p1Lives);
+    add(p2Lives);
 
     scrollArea.setSize(500, 260);
     scrollArea.setLocation(0,420);
