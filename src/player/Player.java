@@ -74,6 +74,11 @@ public class Player {
     }
   }
 
+  public void ihaveissues() {
+    x = 0;
+    y = 0;
+  }
+
   public void move(String[][] map) {
     if (keyLeft && keyRight || !keyLeft && !keyRight) {
       xSpeed *= 0.7;

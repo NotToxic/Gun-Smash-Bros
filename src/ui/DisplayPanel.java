@@ -16,6 +16,7 @@ public class DisplayPanel extends JPanel{
   public GamePanel gamePanel = new GamePanel(this);
   public MenuPanel menuPanel = new MenuPanel(this);
   public HelpPanel helpPanel = new HelpPanel(this);
+  public TutorialPanel tutorialPanel = new TutorialPanel(this);
   public ConnectPanel connectPanel = null;
   public WinPanel winPanel = null;
 
@@ -43,6 +44,7 @@ public class DisplayPanel extends JPanel{
     add(gamePanel, "game");
     add(connectPanel, "connect");
     add(helpPanel, "help");
+    add(tutorialPanel, "tutorial");
     add(winPanel, "win");
 
     display.show(this, "menu");
