@@ -23,6 +23,8 @@ public class GunSmashBros extends JFrame implements ActionListener{
   static String strName = null;
 
   public static SuperSocketMaster ssm;
+  // ssm for all the chats and crates
+  public static SuperSocketMaster ssm2;
   public static ssmHandler ssmh;
 
   @Override
@@ -31,14 +33,16 @@ public class GunSmashBros extends JFrame implements ActionListener{
       displayPanel.repaint();
     } 
     
-    else if (e.getSource() == ssm){
-      displayPanel.gamePanel.ssmh.getData();
+    else if (e.getSource() == ssm2){
+      displayPanel.gamePanel.ssmh.getOtherData();
     } 
     
     else if (e.getSource() == displayPanel.connectPanel.hostButton){
       try {
         ssmHandler.hostMode(displayPanel, this, Integer.parseInt(displayPanel.connectPanel.portField.getText()));
         displayPanel.connectPanel.hostMode();
+        displayPanel.connectPanel.gameButton2.setEnabled(true);
+        displayPanel.connectPanel.gameButton2.setEnabled(true);
       } catch (NumberFormatException ex) {
         System.out.println("Please enter a port number");
       } 
@@ -59,12 +63,14 @@ public class GunSmashBros extends JFrame implements ActionListener{
     }
 
     else if (e.getSource() == displayPanel.connectPanel.gameButton1){
+      displayPanel.gamePanel.strMapName = "CPTMap1";
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1");
       displayPanel.connectPanel.gameButton1.setEnabled(false);
       displayPanel.connectPanel.gameButton2.setEnabled(true);
     } 
 
     else if (e.getSource() == displayPanel.connectPanel.gameButton2){
+      displayPanel.gamePanel.strMapName = "CPTMap2";
       displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2");
       displayPanel.connectPanel.gameButton2.setEnabled(false);
       displayPanel.connectPanel.gameButton1.setEnabled(true);

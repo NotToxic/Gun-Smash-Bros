@@ -24,10 +24,10 @@ public class Gun{
 
     public void shoot(int x, int y, String direction){
         if (direction.equals("right")){
-            Bullet b = new Bullet(x+45, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
+            Bullet b = new Bullet(x+47+bulletSize, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
             GamePanel.bulletList.add(b);
         } else if (direction.equals("left")){
-            Bullet b = new Bullet(x-bulletSize, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
+            Bullet b = new Bullet(x-bulletSize-2, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
             GamePanel.bulletList.add(b);
         }
     }
@@ -61,9 +61,12 @@ public class Gun{
                 }
             }
 
-        } catch (IOException e) {
-            System.out.println("Error reading file");
-        } 
+            bulletStatsCSV.close();
+
+        }catch(FileNotFoundException e){
+        }catch(IOException e){
+            System.out.println("error");
+        }
 
         for (int i = 0; i < 3; i++){
             if (stats[i][0].equals(gunName)){

@@ -25,8 +25,6 @@ import guns.Crate;
 public class GamePanel extends JPanel implements ActionListener {
 
   public static BufferedImage imgMapBackground = null;
-  public String strMapName = "CPTMap1.csv";
-
 
   public static DisplayPanel displayPanel;
   public Player player1 = new Player(300, 0, 45, 90, this);
@@ -41,6 +39,8 @@ public class GamePanel extends JPanel implements ActionListener {
   BufferedReader map1CSV;
   public String[][] strMap;
   public int image = 1;
+  public String strMapName = "CPTMap1.csv";
+  public String strPreMapName = "CPTMap1.csv";
 
   public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
   // The crate has a 1/100000 to spawn
@@ -69,13 +69,15 @@ public class GamePanel extends JPanel implements ActionListener {
 
     g2d.setColor(Color.BLACK);
 
-    try{
-      ssmh.sendData();
-    } catch (NullPointerException e){}
-
     player1.move(strMap);
     player2.move(strMap);
 
+    try{
+      ssmh.sendData();
+      ssmh.getGameData();
+    } catch (NullPointerException e){}
+
+    checkMapChange();
     paintMap(strMap, g2d, imgMapBackground);
     
     g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
@@ -165,6 +167,15 @@ public class GamePanel extends JPanel implements ActionListener {
       setLayout(null);
 
     });
+  
+    try{
+      imgMapBackground = ImageIO.read(new File("assets/maps/CPTMap"+image+".png"));
+    }catch (IOException e){}
+    strMap = loadMap("CPTMap1");
+    
+    if(imgMapBackground == null){
+      System.out.println("Cant find image");
+    }
 
     chatArea.setOpaque(true);
     chatArea.setFocusable(false);
@@ -257,6 +268,26 @@ public class GamePanel extends JPanel implements ActionListener {
          // intX = intX + 8;
         }
         //intY = intY + 8;
+    }
+  }
+
+  public void checkMapChange(){
+    if (!strPreMapName.equals(strMapName)){
+      System.out.println("Check 1");
+      String strLoadMapName;
+      if (strMapName.equals("CPTMap1")){
+        try {
+          imgMapBackground = ImageIO.read(new File("assets/maps/CPTMap1.png"));
+          System.out.println("Check 2");
+        } catch (IOException ex) {}
+      } else {
+        try {
+          imgMapBackground = ImageIO.read(new File("assets/maps/CPTMap2.png"));
+          System.out.println("Check 2");
+        } catch (IOException ex) {}
+      }
+      strMap = loadMap(strMapName);
+      strPreMapName = strMapName;
     }
   }
 }

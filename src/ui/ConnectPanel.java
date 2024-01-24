@@ -103,8 +103,10 @@ public class ConnectPanel extends JPanel{
 
         gameButton1.setSize(200, 100);
         gameButton1.setLocation(500,0);
+        gameButton1.setEnabled(false);
         gameButton2.setSize(200, 100);
         gameButton2.setLocation(800,0);
+        gameButton2.setEnabled(false);
 
         add(ipField);
         add(portField);
