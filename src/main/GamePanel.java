@@ -118,8 +118,7 @@ public class GamePanel extends JPanel implements ActionListener {
         Crate c = (Crate)crateList.get(0);
         if (c.visible){
           c.move();
-          g.setColor(Color.RED);
-          g.fillRect(c.x, c.y, c.size, c.size);
+          g.drawImage(c.imgCrate, c.x, c.y, null);
         } else {
           crateList.remove(0);
         }
@@ -198,16 +197,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     // Use InputStream and InputStreamReader to read the file
     try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".png")) {
-      if (is == null) {
-        System.out.println("cannot find map");
-      } else {
-        try {
-          imgMapBackground = ImageIO.read(is);
-          
-        } catch(IOException e) {
-          System.out.println("Cannot read map image file"); //Handle exception
-        }
-      }
+      imgMapBackground = ImageIO.read(is);
     } catch (IOException e) {
       System.out.println("Error reading map image");
     } 
