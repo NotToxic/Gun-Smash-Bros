@@ -11,6 +11,7 @@ import ssm.SuperSocketMaster;
 
 public class DisplayPanel extends JPanel{
 
+  //Accessible Panels 
   SuperSocketMaster ssm;
   public GamePanel gamePanel = new GamePanel(this);
   public MenuPanel menuPanel = new MenuPanel(this);
@@ -18,12 +19,14 @@ public class DisplayPanel extends JPanel{
   public ConnectPanel connectPanel = null;
   public WinPanel winPanel = null;
 
+  //Layered Panel Layout
   public CardLayout display = new CardLayout();
 
   public void changePanel(String path){
       display.show(DisplayPanel.this, path);
   } 
 
+  //Adding All Lisenting and Encapsulated Componets i.e Panels
   public DisplayPanel(ActionListener listener, SuperSocketMaster ssm){
     this.ssm = ssm;
     
