@@ -146,7 +146,6 @@ public class GamePanel extends JPanel implements ActionListener {
     if (player1.getDead() && player1.deathTimer.isRunning() == false){
       playerDeath(player1);
     }
-          player2.lives--;
     if (player2.getDead() && player2.deathTimer.isRunning() == false){
       playerDeath(player2);
     }
