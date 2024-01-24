@@ -6,12 +6,20 @@ import guns.Gun;
 import guns.Crate;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class Player {
 
   @SuppressWarnings("unused")
   private GamePanel gamePanel;
+
+  BufferedImage imgPlayerLeft = null;
+  BufferedImage imgPlayerRight = null;
 
   public int x;
   public int y;
@@ -47,6 +55,18 @@ public class Player {
     this.height = height;
     this.hitbox = new Rectangle(x, y, width, height);
     this.gamePanel = gamePanel;
+
+    try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/characterLeft.png")) {
+      imgPlayerLeft = ImageIO.read(is);
+    } catch (IOException e) {
+      System.out.println("cannot find left char image");
+    }
+
+    try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/characterRight.png")) {
+      imgPlayerRight = ImageIO.read(is);
+    } catch (IOException e) {
+      System.out.println("cannot find right char image");
+    }
   }
 
   public void move(String[][] map) {
@@ -186,6 +206,14 @@ public class Player {
       return true;
     }
     return false;
+  }
+
+  public BufferedImage getCharModel() {
+    if (direction.equals("right")) {
+      return imgPlayerRight;
+    } else {
+      return imgPlayerLeft;
+    }
   }
 
   public ArrayList getBulletList(){
