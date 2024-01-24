@@ -34,6 +34,7 @@ public class WinPanel extends JPanel{
         displayPanel.gamePanel.player2.lives = 5;
         displayPanel.gamePanel.player2.respawn();
         displayPanel.changePanel("game");
+        deadTimer.stop();
     }
 
     public WinPanel(DisplayPanel displayPanel, ActionListener listener){

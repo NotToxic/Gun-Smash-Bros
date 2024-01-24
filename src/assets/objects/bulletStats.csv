@@ -1,3 +1,3 @@
 Gun Name,dblSize,dblSpeed,Fire Rate,knockback(speed increase)
-heavyGuy,16,15,30,200
-lightGuy,8,20,10,70
+heavyGuy,16,15,30,125
+lightGuy,8,20,10,45

@@ -70,7 +70,7 @@ public class ssmHandler {
 
   public void sendData() {
     //Send data: ID + player + game/chat + location of player + player shot + direction + gunName
-    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.ySpeed + "," + player.xSpeed + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + "," + gamePanel.strMapName);
+    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.ySpeed + "," + player.xSpeed + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + player.lives + "," + "," + gamePanel.strMapName);
   }
 
   public void sendMsg(int playerID, String chatMessage){
@@ -133,7 +133,8 @@ public class ssmHandler {
               gamePanel.player1.shoot = Boolean.valueOf(dataSplit[7]);
               gamePanel.player1.direction = dataSplit[8];
               gamePanel.player1.gun = new Gun(dataSplit[9]);
-              gamePanel.strMapName = dataSplit[10];
+              gamePanel.player1.lives = Integer.parseInt(dataSplit[10]);
+              gamePanel.strMapName = dataSplit[11];
               break;
           }
         } else if (dataSplit[1].equals("2")){
@@ -146,6 +147,7 @@ public class ssmHandler {
               gamePanel.player2.shoot = Boolean.valueOf(dataSplit[7]);
               gamePanel.player2.direction = dataSplit[8];
               gamePanel.player2.gun = new Gun(dataSplit[9]);
+              gamePanel.player2.lives = Integer.parseInt(dataSplit[10]);
               break;
           }
         }

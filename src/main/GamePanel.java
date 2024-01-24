@@ -140,18 +140,22 @@ public class GamePanel extends JPanel implements ActionListener {
         displayPanel.winPanel.victory("Client");
       }
       if (player1.deathTimer == 0){
-        player1.lives--;
+        if (displayPanel.gamePanel.ssmh.playerID == 1){
+          player1.lives--;
+        }
         player1.respawn();
       }
     }
     if (player2.getDead()){
       player2.deathTimer -= 1;
       System.out.println(player2.deathTimer);
-      if (player1.lives == 1){
+      if (player2.lives == 1){
         displayPanel.winPanel.victory("Host");
       }
       if (player2.deathTimer == 0){
-        player2.lives--;
+        if (displayPanel.gamePanel.ssmh.playerID == 2){
+          player2.lives--;
+        }
         player2.respawn();
       }
     }
