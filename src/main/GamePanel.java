@@ -80,8 +80,11 @@ public class GamePanel extends JPanel implements ActionListener {
     checkMapChange();
     paintMap(strMap, g2d, imgMapBackground);
     
-    g2d.fillRect(player1.x, player1.y, player1.width, player1.height);
-    g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
+    //g2d.fillRect(player1.x, player1.y, player1.width, player1.height); 
+    //g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
+
+    g.drawImage(player1.getCharModel(), player1.x, player1.y, null);
+    g.drawImage(player2.getCharModel(), player2.x, player2.y, null);
 
     try{
       for (int i = 0; i < bulletList.size(); i++){
