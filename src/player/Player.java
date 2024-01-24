@@ -43,6 +43,7 @@ public class Player {
 
   public boolean dead = false;
   public int deathTimer = 90;
+  public int hitTimer = 0;
 
   public int jumpCounter = 0;
 
@@ -73,11 +74,13 @@ public class Player {
     if (keyLeft && keyRight || !keyLeft && !keyRight) {
       xSpeed *= 0.7;
     }
-    else if (keyRight) {
+    else if (keyRight && hitTimer == 0) {
       xSpeed ++;
     }
-    else if (keyLeft) {
+    else if (keyLeft && hitTimer == 0) {
       xSpeed --;
+    } else if (hitTimer != 0){
+      hitTimer -= 1;
     }
 
     if (xSpeed > 0 && xSpeed < 0.75) {
@@ -87,8 +90,8 @@ public class Player {
       xSpeed = 0;
     }
 
-    if (xSpeed > 8) xSpeed -= 1;
-    if (xSpeed < -8) xSpeed += 1;
+    if (xSpeed > 8 && hitTimer == 0) xSpeed -= 1;
+    if (xSpeed < -8 && hitTimer == 0) xSpeed += 1;
 
     ySpeed += 0.7;
   
@@ -135,6 +138,7 @@ public class Player {
         String hitDirection = collisionHandler(b);
         if (hitDirection != null){
           System.out.println("hit");
+          hitTimer = (int)b.getKnockback();
           GamePanel.bulletList.remove(i);
           if (hitDirection.equals("left")){
             xSpeed -= b.getKnockback();

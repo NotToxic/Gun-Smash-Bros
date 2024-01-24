@@ -70,7 +70,7 @@ public class ssmHandler {
 
   public void sendData() {
     //Send data: ID + player + game/chat + location of player + player shot + direction + gunName
-    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + "," + gamePanel.strMapName);
+    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.ySpeed + "," + player.xSpeed + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + "," + gamePanel.strMapName);
   }
 
   public void sendMsg(int playerID, String chatMessage){
@@ -128,10 +128,12 @@ public class ssmHandler {
             case "game":
               gamePanel.player1.x = Integer.parseInt(dataSplit[3]);
               gamePanel.player1.y = Integer.parseInt(dataSplit[4]);
-              gamePanel.player1.shoot = Boolean.valueOf(dataSplit[5]);
-              gamePanel.player1.direction = dataSplit[6];
-              gamePanel.player1.gun = new Gun(dataSplit[7]);
-              gamePanel.strMapName = dataSplit[8];
+              gamePanel.player1.ySpeed = Double.parseDouble(dataSplit[5]);
+              //gamePanel.player1.xSpeed = Double.parseDouble(dataSplit[6]);
+              gamePanel.player1.shoot = Boolean.valueOf(dataSplit[7]);
+              gamePanel.player1.direction = dataSplit[8];
+              gamePanel.player1.gun = new Gun(dataSplit[9]);
+              gamePanel.strMapName = dataSplit[10];
               break;
           }
         } else if (dataSplit[1].equals("2")){
@@ -139,9 +141,11 @@ public class ssmHandler {
             case "game":
               gamePanel.player2.x = Integer.parseInt(dataSplit[3]);
               gamePanel.player2.y = Integer.parseInt(dataSplit[4]);
-              gamePanel.player2.shoot = Boolean.valueOf(dataSplit[5]);
-              gamePanel.player2.direction = dataSplit[6];
-              gamePanel.player2.gun = new Gun(dataSplit[7]);
+              gamePanel.player2.ySpeed = Double.parseDouble(dataSplit[5]);
+              //gamePanel.player2.xSpeed = Double.parseDouble(dataSplit[6]);
+              gamePanel.player2.shoot = Boolean.valueOf(dataSplit[7]);
+              gamePanel.player2.direction = dataSplit[8];
+              gamePanel.player2.gun = new Gun(dataSplit[9]);
               break;
           }
         }
