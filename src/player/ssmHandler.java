@@ -70,7 +70,7 @@ public class ssmHandler {
 
   public void sendData() {
     //Send data: ID + player + game/chat + location of player + player shot + direction + gunName
-    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.ySpeed + "," + player.xSpeed + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + player.lives + "," + "," + gamePanel.strMapName);
+    GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.ySpeed + "," + player.xSpeed + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + "," + player.lives + "," + gamePanel.strMapName);
   }
 
   public void sendMsg(int playerID, String chatMessage){
