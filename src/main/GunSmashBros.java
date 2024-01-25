@@ -39,7 +39,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
       displayPanel.repaint();
     } 
     /**Restart the game after the winPanel has been shown for a period of time. */
-    if (e.getSource() == displayPanel.winPanel.deadTimer){
+    if (e.getSource() == displayPanel.winPanel.winTimer){
       displayPanel.winPanel.resetGame();
     }
     

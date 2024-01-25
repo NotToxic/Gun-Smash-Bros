@@ -10,23 +10,33 @@ import javax.swing.JLabel;
 import inputs.KeyInputs;
 import player.Player;
 
+/**This class is to access the tutorial */
 public class TutorialPanel extends GraphicsPanel {
 
+  /** This player is what you shoot off during the tutorial */
   public Player dummy = new Player(500, -100, 45, 90, this);
+
+  /**This variable is for checking how far into the tutorial stage you are in */
   private int intTutorialStage = 0;
 
+  /**A JLabel to tell the player how to lpay the game */
   JLabel tutorialText = new JLabel("", JLabel.CENTER);
 
+  /**Method to check how far into the tutorial the player has been in */
   public void tutorialStage() {
+    /**Stage to teach the player how to move up left and right */
     if (intTutorialStage == 0) {
       tutorialText.setText("Press W, A, D, to move up, left, right");
     } 
+    /**Stage to teach the player how to go down platforms */
     else if (intTutorialStage == 1) {
       tutorialText.setText("Press S to go down platforms");
     } 
+    /**Stage to teach the player how to shoot */
     else if (intTutorialStage == 2) {
       tutorialText.setText("Press J to shoot guns");
     } 
+    /**Stage to teach the player how to pick up a crate */
     else if (intTutorialStage == 3) {
       if (player1.gun.gunName.equals("heavyGuy")) {
         intTutorialStage = 4;
@@ -36,6 +46,7 @@ public class TutorialPanel extends GraphicsPanel {
         spawnCrates("heavyGuy", 500);
       }
     } 
+    /**Stage to teach the player how to shoot the enemy off the platform */
     else if (intTutorialStage == 4) {
       tutorialText.setText("Shoot the enemy off the platform");
       dummy.move(strArrayMap);
@@ -43,12 +54,14 @@ public class TutorialPanel extends GraphicsPanel {
         intTutorialStage = 5;
       }
     } 
+    /**Stage telling the player that they've comlpeted the tutorial */
     else if (intTutorialStage == 5) {
       tutorialText.setText("Congrats, you have completed the tutorial");
     } 
   }
 
   @Override
+  /**Updating the screen */
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
@@ -69,6 +82,7 @@ public class TutorialPanel extends GraphicsPanel {
     }
   }
 
+  /**Constructor for the tutorial panel*/
   public TutorialPanel(DisplayPanel displayPanel) {
     super(displayPanel);
 
