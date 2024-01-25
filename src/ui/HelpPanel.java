@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -31,17 +32,24 @@ public class HelpPanel extends JPanel {
     add(backButton);
 
     //Add image
-    InputStream imgClass = null;
-    imgClass = this.getClass().getResourceAsStream("/assets/images/Help.png");
-    if(imgClass == null){
-			System.out.println("Cannot find help screen image");
-		} else {
-			try {
-				imgHelpScreen = ImageIO.read(imgClass);
-			} catch(IOException e) {
-				System.out.println("Cannot read help screen image file"); //Handle exception
-			}
-		}
+
+    InputStream imageclass1 = null;
+    imageclass1 = this.getClass().getResourceAsStream("/assets/images/Help.png");
+    if (imageclass1 == null){
+    }else{
+      try{
+          imgHelpScreen = ImageIO.read(imageclass1);
+      }catch(IOException e){
+          System.out.println("Unable to load image from jar");
+      }
+    }
+    if (imgHelpScreen == null){
+      try{
+          imgHelpScreen = ImageIO.read(new File("/assets/images/Help.png"));
+      } catch(IOException e){
+          System.out.println("Unable to load image");
+      }
+    }
   }
 
   public void paintComponent(Graphics g){

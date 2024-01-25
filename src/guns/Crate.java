@@ -41,16 +41,22 @@ public class Crate {
       this.map = map;
 
       //Try to load the image
-      try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/crate.png")) {
-        imgCrate = ImageIO.read(is);
-      } catch (IOException e) {
-        System.out.println("cannot find gun image");
+
+      InputStream imageclass1 = null;
+      imageclass1 = this.getClass().getResourceAsStream("/assets/objects/crate.png");
+      if (imageclass1 == null){
+      }else{
+        try{
+            imgCrate = ImageIO.read(imageclass1);
+        }catch(IOException e){
+            System.out.println("Unable to load image from jar");
+        }
       }
       if (imgCrate == null){
         try{
-          imgCrate = ImageIO.read(new File("/assets/objects/crate.png"));
-        }catch(IOException e){
-          System.out.println("cannot find gun image");
+            imgCrate = ImageIO.read(new File("/assets/objects/crate.png"));
+        } catch(IOException e){
+            System.out.println("Unable to load image");
         }
       }
   }

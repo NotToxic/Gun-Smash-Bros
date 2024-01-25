@@ -151,16 +151,43 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     if (!strPreMapName.equals(strMapName)){
       System.out.println("Check 1");
       if (strMapName.equals("CPTMap1")){
-        try {
-          imgMap = ImageIO.read(new File("assets/maps/CPTMap1.png"));
-          System.out.println("Check 2");
-        } catch (IOException ex) {}
+        InputStream imageclass1 = null;
+        imageclass1 = this.getClass().getResourceAsStream("/assets/maps/CPTMap1.png");
+        if (imageclass1 == null){
+        }else{
+          try{
+              imgMap = ImageIO.read(imageclass1);
+          }catch(IOException e){
+              System.out.println("Unable to load image from jar");
+          }
+        }
+        if (imgMap == null){
+          try{
+              imgMap = ImageIO.read(new File("/assets/maps/CPTMap1.png"));
+          } catch(IOException e){
+              System.out.println("Unable to load image");
+          }
+        }
       } else {
-        try {
-          imgMap= ImageIO.read(new File("assets/maps/CPTMap2.png"));
-          System.out.println("Check 2");
-        } catch (IOException ex) {}
+        InputStream imageclass1 = null;
+        imageclass1 = this.getClass().getResourceAsStream("/assets/maps/CPTMap2.png");
+        if (imageclass1 == null){
+        }else{
+          try{
+              imgMap = ImageIO.read(imageclass1);
+          }catch(IOException e){
+              System.out.println("Unable to load image from jar");
+          }
+        }
+        if (imgMap == null){
+          try{
+              imgMap = ImageIO.read(new File("/assets/maps/CPTMap2.png"));
+          } catch(IOException e){
+              System.out.println("Unable to load image");
+          }
+        }
       }
+
       loadMap(strMapName);
       strPreMapName = strMapName;
     }

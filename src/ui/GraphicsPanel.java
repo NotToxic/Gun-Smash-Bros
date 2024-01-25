@@ -11,6 +11,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -96,6 +97,7 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     String[][] map = new String[90][160];
 
     // Use InputStream and InputStreamReader to read the file
+
     try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".csv");
       InputStreamReader isr = new InputStreamReader(is);
       BufferedReader mapCSV = new BufferedReader(isr)) {
@@ -116,6 +118,7 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     } catch (NullPointerException e) {
       System.out.println("CSV was modified");
     }
+
     return map;
   }
 
@@ -124,17 +127,22 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
    * @return the BufferedImage from inputstream
   */
   public BufferedImage loadMapImage(String strMapName) {
-    BufferedImage imgMap = null;
-    try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".png")) {
-      imgMap = ImageIO.read(is);
-    } catch (IOException e) {
-      System.out.println("Error reading map image");
-    } 
-    if(imgMap == null){
+
+    InputStream imageclass1 = null;
+    imageclass1 = this.getClass().getResourceAsStream("/assets/maps/" + strMapName + ".png");
+    if (imageclass1 == null){
+    }else{
       try{
-        imgMap = ImageIO.read(new File("/assets/objects/characterLeft.png"));
+          imgMap = ImageIO.read(imageclass1);
       }catch(IOException e){
-        System.out.println("cannot load image");
+          System.out.println("Unable to load image from jar");
+      }
+    }
+    if (imgMap == null){
+      try{
+          imgMap = ImageIO.read(new File("/assets/maps/" + strMapName + ".png"));
+      } catch(IOException e){
+          System.out.println("Unable to load image");
       }
     }
     return imgMap;
