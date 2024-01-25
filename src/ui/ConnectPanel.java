@@ -88,12 +88,12 @@ public class ConnectPanel extends JPanel{
     public ConnectPanel(DisplayPanel displayPanel, ActionListener listener){
         this.displayPanel = displayPanel;
 
-        /**Set size of the panel*/
+        //Set size of the panel
         setPreferredSize(new Dimension(1280,720));
 
         backButton = new UIButton("Back", "menu", displayPanel);
 
-        /**Set size and location of JComponents*/
+        //Set size and location of JComponents
         ipLabel.setSize(25,25);
         ipLabel.setLocation(315, 425);
 
@@ -136,7 +136,7 @@ public class ConnectPanel extends JPanel{
         gameButton2.setLocation(800,0);
         gameButton2.setEnabled(false);
 
-        /**Add all JComponents to panel*/
+        //Add all JComponents to panel
         add(ipField);
         add(portField);
         add(ipLabel);
@@ -151,7 +151,7 @@ public class ConnectPanel extends JPanel{
         add(gameButton1);
         add(gameButton2);
 
-        /**Add action listeners to know when buttons are pressed*/
+        //Add action listeners to know when buttons are pressed
         gameButton1.addActionListener(listener);
         gameButton2.addActionListener(listener);
         hostButton.addActionListener(listener);

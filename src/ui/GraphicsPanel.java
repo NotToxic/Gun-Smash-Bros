@@ -29,27 +29,42 @@ import main.GamePanel;
 import player.Player;
 import player.ssmHandler;
 
+/**Parent Class for GamePanel and TutorialPanel*/
 public abstract class GraphicsPanel extends JPanel implements ActionListener{
   
+  /**Display panel to swap through JPanels*/
   public static DisplayPanel displayPanel;
+  /**SsmHandler to manage sent and received data*/
   public static ssmHandler ssmh = null;
 
+  /**Create player model for game*/
   public Player player1 = new Player(75, -100, 45, 90, this);
 
-  public BufferedImage imgMap = null;  
+  /**Background image of map*/
+  public BufferedImage imgMap = null;
+  /**String array that contains platform information of selected map*/ 
   public String[][] strArrayMap;
 
+  /**Initialize crate that contains gun*/ 
   public Crate c;
+  /**List of bullets that need to be drawn*/ 
   public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
+  /**List of crates that are loaded into the game*/ 
   public static ArrayList<Crate> crateList = new ArrayList<Crate>();
-  //public Player player1 = new Player(300, 0, 45, 90, this);
 
+  /**Button to return to main menu*/ 
   public UIButton backButton;
 
+  /**Text area to display chat messages*/
   public JTextArea chatArea = new JTextArea();
+  /**Scroll pane to contain text area*/
   public JScrollPane scrollArea = new JScrollPane(chatArea);
+  /**Area to send text messages*/
   public JTextField chatField = new JTextField();
 
+  /**Action listener to detect when chat opens
+   * @param e event that actionlistener catches, detects when text messages are sent
+  */
   public void actionPerformed(ActionEvent e) {
     if(e.getSource() == chatField) {
 			if (!chatField.getText().equals("")){
@@ -62,11 +77,18 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
 		}
   }
 
+  /**Method that sets the background image and background string array variables
+   * @param strMapName is the selected map of choice, either "CPTMap1" or "CPTMap2"
+  */
   public void loadMap(String strMapName) {
     strArrayMap = loadMapCSV(strMapName);
     imgMap = loadMapImage(strMapName);
   }
 
+  /**Method that reads CSV data files for maps
+   * @param strMapName is the selected map of choice, either "CPTMap1" or "CPTMap2"
+   * @return the data from the CSV file as a string array
+  */
   public String[][] loadMapCSV(String strMapName) {;
     String strLine;
     String[] strSplit;
@@ -96,6 +118,10 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     return map;
   }
 
+  /**Method that gets map image files
+   * @param strMapName is the selected map of choice, either "CPTMap1" or "CPTMap2"
+   * @return the BufferedImage from inputstream
+  */
   public BufferedImage loadMapImage(String strMapName) {
     BufferedImage imgMap = null;
     try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".png")) {
@@ -106,6 +132,11 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     return imgMap;
   }
 
+  /**Draws the map and platforms where the character can stand
+   * @param strArrayMap data from CSV file in selected map
+   * @param g2d the graphics component to paint images
+   * @param imgMap the background image from the selected map
+  */
   public void paintMap(String[][] strArrayMap, Graphics2D g2d, BufferedImage imgMap){
 
     g2d.drawImage(imgMap, 0, 0, null);
@@ -131,14 +162,25 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     }
   }
 
+  /**Method to draw player models
+   * @param g  the graphics component to paint images
+   * @param player the player to be drawn - use to find direction and bufferedimage of player
+  */
   public void drawPlayer(Graphics g, Player player) {
     g.drawImage(player.getCharModel(), player.x, player.y, null);
   }
 
+  /**Method to draw gun models
+   * @param g  the graphics component to paint images
+   * @param player get the image associated with the player's gun and correct x and y positions
+  */
   public void drawGun(Graphics g, Player player) {
     g.drawImage(player.gun.imgGun, player.gun.getGunX(player), player.gun.getGunY(player), null);
   }
 
+  /**Method to draw gun bullets
+   * @param g  the graphics component to paint images
+  */
   public void drawBullets(Graphics g) {
     try{
       for (int i = 0; i < bulletList.size(); i++){
@@ -154,6 +196,7 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     } catch (NullPointerException e){}
   }
 
+  /**Method to generate a random crate*/
   public void spawnCrates(){
     if (crateList.size() == 0 && ssmh.playerID == 1){
       if ((int)(Math.random() * 100) + 1 == 1){
@@ -178,6 +221,10 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     } 
   }
 
+  /**Method to generate a crate but specified place and type
+   * @param crateType specifies if crate will give a heavy or light gun
+   * @param xLocation specifies the x position of the crate when it spawns
+  */
   public void spawnCrates(String crateType, int xLocation){
     if (crateList.size() == 0) {
       c = new Crate(strArrayMap, crateType, xLocation);
@@ -185,6 +232,9 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     }
   }
 
+  /**Method to generate a crate but specified place and type
+   * @param g the graphics component to paint images
+  */
   public void drawCrates(Graphics g) {
     if (crateList.size() == 1){
       c = (Crate)crateList.get(0);
@@ -197,11 +247,16 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     }
   }
 
+  /**Constructor for GraphicsPanel
+   * @param displayPanel to link up to other JPanels
+  */
   public GraphicsPanel(DisplayPanel displayPanel) {
     GraphicsPanel.displayPanel = displayPanel;
 
+    //Set size of panel
     setPreferredSize(new Dimension(1280, 720));
 
+    //Set size and location of JComponents and add to panel
     scrollArea.setSize(500, 260);
     scrollArea.setLocation(0,420);
     scrollArea.setOpaque(true);
