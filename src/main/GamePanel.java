@@ -98,6 +98,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     g.drawImage(player2.gun.imgGun, player2.gun.getGunX(player2), player2.gun.getGunY(player2), null);
 
     drawBullets(g2d);
+    spawnCrates();
     drawCrates(g2d);
 
     /**Player death functionality; Testing timers and components to outline winner */
@@ -131,7 +132,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     add(p1Lives);
     add(p2Lives);
 
-    strArrayMap = loadMap("CPTMap1");
+    loadMap("CPTMap1");
   }
 
   /**Map Change and Map Selection Method, Based on Connect Panel button selection, specific map CSV and PNG is selected */
@@ -149,7 +150,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
           System.out.println("Check 2");
         } catch (IOException ex) {}
       }
-      strArrayMap = loadMap(strMapName);
+      loadMap(strMapName);
       strPreMapName = strMapName;
     }
   }

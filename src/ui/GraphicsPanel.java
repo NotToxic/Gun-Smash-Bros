@@ -36,7 +36,7 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
 
   public Player player1 = new Player(75, -100, 45, 90, this);
 
-  public static BufferedImage imgMap = null;  
+  public BufferedImage imgMap = null;  
   public String[][] strArrayMap;
 
   public Crate c;
@@ -62,17 +62,15 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
 		}
   }
 
-  public static String[][] loadMap(String strMapName) {;
+  public void loadMap(String strMapName) {
+    strArrayMap = loadMapCSV(strMapName);
+    imgMap = loadMapImage(strMapName);
+  }
+
+  public String[][] loadMapCSV(String strMapName) {;
     String strLine;
     String[] strSplit;
     String[][] map = new String[90][160];
-
-    // Use InputStream and InputStreamReader to read the file
-    try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".png")) {
-      imgMap = ImageIO.read(is);
-    } catch (IOException e) {
-      System.out.println("Error reading map image");
-    } 
 
     // Use InputStream and InputStreamReader to read the file
     try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".csv");
@@ -96,6 +94,16 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
       System.out.println("CSV was modified");
     }
     return map;
+  }
+
+  public BufferedImage loadMapImage(String strMapName) {
+    BufferedImage imgMap = null;
+    try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".png")) {
+      imgMap = ImageIO.read(is);
+    } catch (IOException e) {
+      System.out.println("Error reading map image");
+    } 
+    return imgMap;
   }
 
   public void paintMap(String[][] strArrayMap, Graphics2D g2d, BufferedImage imgMap){
