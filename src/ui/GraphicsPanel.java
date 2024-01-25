@@ -98,7 +98,7 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
 
     // Use InputStream and InputStreamReader to read the file
 
-    try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".csv");
+    try (InputStream is = getClass().getClassLoader().getResourceAsStream("./assets/maps/" + strMapName + ".csv");
       InputStreamReader isr = new InputStreamReader(is);
       BufferedReader mapCSV = new BufferedReader(isr)) {
       
