@@ -74,11 +74,6 @@ public class Player {
     }
   }
 
-  public void ihaveissues() {
-    x = 0;
-    y = 0;
-  }
-
   public void move(String[][] map) {
     if (keyLeft && keyRight || !keyLeft && !keyRight) {
       xSpeed *= 0.7;
@@ -142,13 +137,13 @@ public class Player {
     }
 
     try{
-      for (int i = 0; i < GamePanel.bulletList.size(); i++){
-        Bullet b = (Bullet)GamePanel.bulletList.get(i);
+      for (int i = 0; i < gamePanel.bulletList.size(); i++){
+        Bullet b = (Bullet)gamePanel.bulletList.get(i);
         String hitDirection = collisionHandler(b);
         if (hitDirection != null){
           System.out.println("hit");
           hitTimer = (int)b.getKnockback();
-          GamePanel.bulletList.remove(i);
+          gamePanel.bulletList.remove(i);
           if (hitDirection.equals("left")){
             xSpeed -= b.getKnockback();
           } else if (hitDirection.equals("right")){
@@ -159,10 +154,10 @@ public class Player {
     } catch (NullPointerException e){}
 
     try{
-      Crate c = (Crate)GamePanel.crateList.get(0);
+      Crate c = (Crate)gamePanel.crateList.get(0);
       if (collisionHandler(c)){
         gun = new Gun(c.gunName);
-        GamePanel.crateList.remove(0);
+        gamePanel.crateList.remove(0);
       }
     } catch (NullPointerException e){
     } catch (IndexOutOfBoundsException ex){}
@@ -244,13 +239,16 @@ public class Player {
     int range = 0;
     int max = 0;
     int min = 0;
-    if (gamePanel.ssmh.playerID == 1){
+    if(gamePanel.ssmh == null) {
+
+    }
+    else if (gamePanel.ssmh.playerID == 1){
       min = 100;
       max = 650;
     } else if (gamePanel.ssmh.playerID == 2){
       max = 1150;
       min = 650;
-    }
+    } 
     // randomNum + min
     range = max - min + 1;
     x = (int)(Math.random() * range) + min;

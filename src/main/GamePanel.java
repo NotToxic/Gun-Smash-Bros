@@ -31,7 +31,6 @@ public class GamePanel extends JPanel implements ActionListener {
   public Player player2 = new Player(800, 0, 45, 90, this);
   public static ssmHandler ssmh;
   UIButton backButton;
-  UIButton chatButton;
   public JLabel p1Lives = new JLabel("Host: " + player1.lives + " lives");
   public JLabel p2Lives = new JLabel("Client: " + player2.lives + " lives");
   public JTextArea chatArea = new JTextArea();
@@ -170,7 +169,6 @@ public class GamePanel extends JPanel implements ActionListener {
     
     this.displayPanel = displayPanel;
     backButton = new UIButton("BACK", "menu", displayPanel);
-    chatButton = new UIButton("Chat","chat", displayPanel);
 
     setPreferredSize(new Dimension(1280, 720));
 
@@ -186,11 +184,10 @@ public class GamePanel extends JPanel implements ActionListener {
       setFocusable(true);
       requestFocusInWindow();
       setLayout(null);
-
     });
   
     try{
-      imgMapBackground = ImageIO.read(new File("assets/maps/CPTMap"+image+".png"));
+      imgMapBackground = ImageIO.read(new File("assets/maps/CPTMap1.png"));
     }catch (IOException e){}
     strMap = loadMap("CPTMap1");
     
@@ -227,14 +224,10 @@ public class GamePanel extends JPanel implements ActionListener {
     backButton.setSize(100,50);
     backButton.setLocation(0,0);
     add(backButton);
-    chatButton.setSize(100,50);
-    chatButton.setLocation(1180,670);
-    add(chatButton, "chat");
     //strMap = loadMap(strMapName);
-
   }
 
-  public static String[][] loadMap(String strMapName){;
+  public static String[][] loadMap(String strMapName) {;
     String strLine;
     String[] strSplit;
     String[][] map = new String[90][160];

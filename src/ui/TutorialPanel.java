@@ -3,20 +3,52 @@ package ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import guns.Bullet;
 import guns.Crate;
 import inputs.KeyInputs;
 import main.GamePanel;
+import main.GunSmashBros;
 import player.Player;
+import player.ssmHandler;
 
 public class TutorialPanel extends GamePanel{
+
+  public static BufferedImage imgMapBackground = null;
+  public static ssmHandler ssmh;
+  UIButton backButton;
+  public JLabel p1Lives = new JLabel("");
+  public JLabel p2Lives = new JLabel("");
+  public JTextArea chatArea = new JTextArea();
+  public JScrollPane scrollArea = new JScrollPane(chatArea);
+  public JTextField chatField = new JTextField();
+
+  BufferedReader map1CSV;
+  public String[][] strMap;
+  public int image = 1;
+  public String strMapName = null;
+  public String strPreMapName = null;
 
   public TutorialPanel(DisplayPanel displayPanel) {
     super(displayPanel);
     addKeyListener(new KeyInputs(player1));
     //need another map later
-    //strMap = loadMap("HelpScreenMap");
+    strMap = loadMap("TutorialMap");
+    System.out.println(strMapName);
+    System.out.println(strMap);
+    System.out.println(displayPanel.gamePanel.strMap);
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e){
   }
 
   @Override
@@ -26,9 +58,12 @@ public class TutorialPanel extends GamePanel{
 
     g2d.setColor(Color.BLACK);
 
-    //player1.move(strMap);
+
+    player1.move(strMap);
     //player2.move(strMap);
     //player2.ihaveissues();
+
+
 
     paintMap(strMap, g2d, imgMapBackground);
     
@@ -73,16 +108,10 @@ public class TutorialPanel extends GamePanel{
     } catch (NullPointerException e){}
 
     if (player1.getDead()){
-      player1.deathTimer -= 1;
-      if (player1.deathTimer == 0){
-        player1.respawn();
-      }
+      player1.respawn();
     }
     if (player2.getDead()){
-      player2.deathTimer -= 1;
-      if (player2.deathTimer == 0){
-        player2.respawn();
-      }
+      player2.respawn();
     }
   }
 }
