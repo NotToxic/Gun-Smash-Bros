@@ -37,7 +37,6 @@ public class DisplayPanel extends JPanel{
     setFocusable(true);
     requestFocusInWindow();
     setLayout(display);
-    addKeyListener(new ChatInput("game", this));
     setPreferredSize(new Dimension(1280,720));
 
     add(menuPanel, "menu");

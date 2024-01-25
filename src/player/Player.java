@@ -1,8 +1,10 @@
 package player;
 
 import main.GamePanel;
+import ui.GraphicsPanel;
 import guns.Bullet;
 import guns.Gun;
+import inputs.KeyInputs;
 import guns.Crate;
 
 import java.awt.*;
@@ -17,7 +19,7 @@ import javax.swing.Timer;
 public class Player {
 
   @SuppressWarnings("unused")
-  private GamePanel gamePanel;
+  private GraphicsPanel graphicsPanel;
 
   BufferedImage imgPlayerLeft = null;
   BufferedImage imgPlayerRight = null;
@@ -51,15 +53,15 @@ public class Player {
 
   public Gun gun = new Gun("lightGuy");
 
-  public Player(int x, int y, int width, int height, GamePanel gamePanel) {
+  public Player(int x, int y, int width, int height, GraphicsPanel graphicsPanel) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.hitbox = new Rectangle(x, y, width, height);
-    this.gamePanel = gamePanel;
+    this.graphicsPanel = graphicsPanel;
     
-    deathTimer = new Timer(1500, gamePanel);
+    deathTimer = new Timer(1500, graphicsPanel);
 
     try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/characterLeft.png")) {
       imgPlayerLeft = ImageIO.read(is);
@@ -137,13 +139,13 @@ public class Player {
     }
 
     try{
-      for (int i = 0; i < gamePanel.bulletList.size(); i++){
-        Bullet b = (Bullet)gamePanel.bulletList.get(i);
+      for (int i = 0; i < graphicsPanel.bulletList.size(); i++){
+        Bullet b = (Bullet)graphicsPanel.bulletList.get(i);
         String hitDirection = collisionHandler(b);
         if (hitDirection != null){
           System.out.println("hit");
           hitTimer = (int)b.getKnockback();
-          gamePanel.bulletList.remove(i);
+          graphicsPanel.bulletList.remove(i);
           if (hitDirection.equals("left")){
             xSpeed -= b.getKnockback();
           } else if (hitDirection.equals("right")){
@@ -154,10 +156,10 @@ public class Player {
     } catch (NullPointerException e){}
 
     try{
-      Crate c = (Crate)gamePanel.crateList.get(0);
+      Crate c = (Crate)graphicsPanel.crateList.get(0);
       if (collisionHandler(c)){
         gun = new Gun(c.gunName);
-        gamePanel.crateList.remove(0);
+        graphicsPanel.crateList.remove(0);
       }
     } catch (NullPointerException e){
     } catch (IndexOutOfBoundsException ex){}
@@ -239,13 +241,14 @@ public class Player {
     int range = 0;
     int max = 0;
     int min = 0;
-    if(gamePanel.ssmh == null) {
-
+    if(graphicsPanel.ssmh == null) {
+      min = 50;
+      max = 100;
     }
-    else if (gamePanel.ssmh.playerID == 1){
+    else if (graphicsPanel.ssmh.playerID == 1){
       min = 100;
       max = 650;
-    } else if (gamePanel.ssmh.playerID == 2){
+    } else if (graphicsPanel.ssmh.playerID == 2){
       max = 1150;
       min = 650;
     } 

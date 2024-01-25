@@ -77,7 +77,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
     //Button For Map1
     else if (e.getSource() == displayPanel.connectPanel.gameButton1){
       displayPanel.gamePanel.strMapName = "CPTMap1";
-      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap1");
+      displayPanel.gamePanel.strArrayMap = displayPanel.gamePanel.loadMap("CPTMap1");
       displayPanel.connectPanel.gameButton1.setEnabled(false);
       displayPanel.connectPanel.gameButton2.setEnabled(true);
     } 
@@ -85,7 +85,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
     //Button For Map2
     else if (e.getSource() == displayPanel.connectPanel.gameButton2){
       displayPanel.gamePanel.strMapName = "CPTMap2";
-      displayPanel.gamePanel.strMap = displayPanel.gamePanel.loadMap("CPTMap2");
+      displayPanel.gamePanel.strArrayMap = displayPanel.gamePanel.loadMap("CPTMap2");
       displayPanel.connectPanel.gameButton2.setEnabled(false);
       displayPanel.connectPanel.gameButton1.setEnabled(true);
     } 

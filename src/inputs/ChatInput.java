@@ -5,11 +5,11 @@ import java.awt.event.KeyListener;
 
 import main.GunSmashBros;
 import ui.DisplayPanel;
+import ui.GraphicsPanel;
 
 public class ChatInput implements KeyListener{
 
-    private DisplayPanel displayPanel;
-    private String path;
+    private GraphicsPanel graphicsPanel;
     public int chatState = 0;
 
     @Override
@@ -22,9 +22,9 @@ public class ChatInput implements KeyListener{
         
       if (key == KeyEvent.VK_ENTER) {
         if (chatState == 0) {
-          displayPanel.gamePanel.scrollArea.setVisible(true);
-          displayPanel.gamePanel.chatField.setVisible(true);
-          displayPanel.gamePanel.chatField.requestFocus();
+          graphicsPanel.scrollArea.setVisible(true);
+          graphicsPanel.chatField.setVisible(true);
+          graphicsPanel.chatField.requestFocus();
           chatState = 1;
         } 
       }
@@ -33,8 +33,7 @@ public class ChatInput implements KeyListener{
     @Override
     // Unused
     public void keyReleased(KeyEvent e) {
-      int key = e.getKeyCode();
-        
+      int key = e.getKeyCode();    
       if (key == KeyEvent.VK_ENTER) {
         if (chatState == 1) {
           chatState = 0;
@@ -42,8 +41,7 @@ public class ChatInput implements KeyListener{
       }
     }
 
-    public ChatInput(String path, DisplayPanel displayPanel){
-       this.path = path;
-       this.displayPanel = displayPanel;
+    public ChatInput(GraphicsPanel graphicsPanel){
+       this.graphicsPanel = graphicsPanel;
     }
 }

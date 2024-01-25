@@ -27,13 +27,17 @@ import guns.Crate;
 import inputs.ChatInput;
 import main.GamePanel;
 import player.Player;
+import player.ssmHandler;
 
 public abstract class GraphicsPanel extends JPanel implements ActionListener{
   
   public static DisplayPanel displayPanel;
+  public static ssmHandler ssmh = null;
+
+  public Player player1 = new Player(75, -100, 45, 90, this);
 
   public static BufferedImage imgMap = null;  
-  public String[][] strMapArray;
+  public String[][] strArrayMap;
 
   public Crate c;
   public static ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
@@ -45,12 +49,6 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
   public JTextArea chatArea = new JTextArea();
   public JScrollPane scrollArea = new JScrollPane(chatArea);
   public JTextField chatField = new JTextField();
-
-  @Override
-  public void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    Graphics2D g2d = (Graphics2D) g;
-  }
 
   public void actionPerformed(ActionEvent e) {
     if(e.getSource() == chatField) {
@@ -100,12 +98,12 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     return map;
   }
 
-  public void paintMap(String[][] strMap, Graphics2D g2D, BufferedImage Background1){
+  public void paintMap(String[][] strArrayMap, Graphics2D g2d, BufferedImage imgMap){
 
-    g2D.drawImage(Background1, 0, 0, null);
+    g2d.drawImage(imgMap, 0, 0, null);
 
     //get rid of this part later
-    g2D.setColor(Color.BLACK);
+    g2d.setColor(Color.BLACK);
     int intCount;
     int intCounter;
    // int intX = 0;
@@ -114,14 +112,80 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
       //intX = 0;
       
       for(intCounter = 0; intCounter < 160; intCounter++){
-          if(strMap[intCount][intCounter].equals("s")){
+          if(strArrayMap[intCount][intCounter].equals("s")){
             
-          }else if(strMap[intCount][intCounter].equals("p")){
-            g2D.fillRect(intCounter * 8, intCount * 8, 8, 8);
+          }else if(strArrayMap[intCount][intCounter].equals("p")){
+            g2d.fillRect(intCounter * 8, intCount * 8, 8, 8);
           }
          // intX = intX + 8;
         }
         //intY = intY + 8;
+    }
+  }
+
+  public void drawPlayer(Graphics g, Player player) {
+    g.drawImage(player.getCharModel(), player.x, player.y, null);
+  }
+
+  public void drawGun(Graphics g, Player player) {
+    g.drawImage(player.gun.imgGun, player.gun.getGunX(player), player.gun.getGunY(player), null);
+  }
+
+  public void drawBullets(Graphics g) {
+    try{
+      for (int i = 0; i < bulletList.size(); i++){
+        Bullet b = (Bullet)bulletList.get(i);
+        if (b.isVisible() == true){
+          b.bulletMove();
+          g.setColor(Color.RED);
+          g.fillOval(b.getX(), b.getY(), b.getSize(), b.getSize());
+        } else {
+          bulletList.remove(i);
+        }
+      }
+    } catch (NullPointerException e){}
+  }
+
+  public void spawnCrates(){
+    if (crateList.size() == 0 && ssmh.playerID == 1){
+      if ((int)(Math.random() * 100) + 1 == 1){
+        // max - min
+        int range = 950 - 250 + 1;
+        // randomNum + min
+        int x = (int)(Math.random() * range) + 250;
+        // if random number rounds to 0, spawn a lightgun crate
+        int gunType = (int)(Math.random() * 2) + 1;
+        if (gunType == 1){
+          Crate c = new Crate(strArrayMap, "lightGuy", x);
+          crateList.add(c);
+          System.out.println("light");
+          ssmh.sendCrate(x, "lightGuy");
+        } else {
+          Crate c = new Crate(strArrayMap, "heavyGuy", x);
+          crateList.add(c);
+          System.out.println("heavy");
+          ssmh.sendCrate(x, "heavyGuy");
+        }
+      }
+    } 
+  }
+
+  public void spawnCrates(String crateType, int xLocation){
+    if (crateList.size() == 0) {
+      Crate c = new Crate(strArrayMap, crateType, xLocation);
+      crateList.add(c);
+    }
+  }
+
+  public void drawCrates(Graphics g) {
+    if (crateList.size() == 1){
+      Crate c = (Crate)crateList.get(0);
+      if (c.visible){
+        c.move();
+        g.drawImage(c.imgCrate, c.x, c.y, null);
+      } else {
+        crateList.remove(0);
+      }
     }
   }
 
@@ -155,7 +219,7 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     });
 
     SwingUtilities.invokeLater(() -> {
-      addKeyListener(new ChatInput("chat", displayPanel));
+      addKeyListener(new ChatInput(this));
       setFocusable(true);
       requestFocusInWindow();
       setLayout(null);

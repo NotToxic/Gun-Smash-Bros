@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class Crate {
 
-    public static BufferedImage imgCrate;
+    public BufferedImage imgCrate;
 
     public int size = 48;
     public int x; 

@@ -90,7 +90,7 @@ public class ssmHandler {
         if (dataSplit[1].equals("1")) {
           switch (dataSplit[2]) {
             case "crate":
-              gamePanel.c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
+              gamePanel.c = new Crate(gamePanel.strArrayMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
               gamePanel.crateList.add(gamePanel.c);
               System.out.println("Crate: " + dataSplit[3] + "," + dataSplit[4]);
               break;
@@ -102,7 +102,7 @@ public class ssmHandler {
         } else if (dataSplit[1].equals("2")){
           switch (dataSplit[2]){
             case "crate":
-              Crate c = new Crate(gamePanel.strMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
+              Crate c = new Crate(gamePanel.strArrayMap, dataSplit[3], Integer.parseInt(dataSplit[4]));
               System.out.println(dataSplit[3] + "," + dataSplit[4]);
               gamePanel.crateList.add(c);
               break;
