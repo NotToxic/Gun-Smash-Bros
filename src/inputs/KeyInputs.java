@@ -10,7 +10,10 @@ import java.awt.event.KeyListener;
 /**Implemented to intake key inputs for player movements, shooting, etc */
 public class KeyInputs implements KeyListener {
 
+  //*The player's inputs which this class listens from */
   private Player player;
+
+  /**Constructor for KeyInputs */
   public KeyInputs(Player player) {
     this.player = player;
   }
@@ -20,7 +23,7 @@ public class KeyInputs implements KeyListener {
     // Unused
   }
 
-  //Key Pressed and Key Released Overriden methods for movement and shooting
+  /**Key Pressed and Key Released Overriden methods for movement and shooting*/
   @Override
   public void keyPressed(KeyEvent e) {
     int key = e.getKeyCode();

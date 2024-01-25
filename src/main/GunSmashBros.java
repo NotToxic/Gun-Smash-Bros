@@ -1,3 +1,7 @@
+// By Thomson, Pranay and Terry
+// Janurary 25, 2024
+// A real-time game where players must knock each other off the map by hitting each other with bullets, just like SuperSmashbros
+
 package main;
 
 import java.awt.event.*;
@@ -8,39 +12,38 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import player.ssmHandler;
-//你好
 import ssm.SuperSocketMaster;
 import ui.DisplayPanel;
 
-//Main Progam
+//Main Program
 
+//* This class is the main class, and is where all the repaint and SuperSocketMaster is handled */
 public class GunSmashBros extends JFrame implements ActionListener{
 
-  //General Display Panel to contain other panels
+  /**General Display Panel to contain other panels*/
   public DisplayPanel displayPanel = new DisplayPanel(this, ssm); 
 
-  //Refresh Rate
+  /**Refresh rate of the game @ 60 FPS*/
   Timer gameTimer = new Timer(1000/60, this);
-
-  String previousMsg = "";
-  static String strName = null;
 
   /**SSM implementation for opponenet movement, and bullet movement*/
   public static SuperSocketMaster ssm;
-  /**ssm for all the chats and crates*/
+  /**SSM for all the chats and crates*/
   public static SuperSocketMaster ssm2;
 
-  public static ssmHandler ssmh;
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    /**Refresh the panel. */
     if (e.getSource() == gameTimer) {
       displayPanel.repaint();
     } 
+    /**Restart the game after the winPanel has been shown for a period of time. */
     if (e.getSource() == displayPanel.winPanel.deadTimer){
       displayPanel.winPanel.resetGame();
     }
     
+    /**Obtain chat and crate data. */
     else if (e.getSource() == ssm2){
       displayPanel.gamePanel.ssmh.getOtherData();
     } 
@@ -103,6 +106,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
     gameTimer.start();
   }
 
+  /**Constructor for main*/
   public static void main(String[] args) {
     new GunSmashBros();
   }

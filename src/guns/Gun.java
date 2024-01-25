@@ -10,21 +10,28 @@ import main.GamePanel;
 import player.Player;
 
 /**Gun Class to Oriente Gun Details and Gun Types */
-public class Gun{
-    //Properties and Unique Bullet Features
+public class Gun{ 
+    
+    /**The BufferedImage of the gun. */
     public BufferedImage imgGun = null;
+    /**The name of the gun. */
     public String gunName;
+    /**The size of the bullets shot by the gun. */
     int bulletSize;
+    /**The speed the bullets fly at. */
     double bulletSpeed;
+    /**The knockback of the bullets shot. */
     double bulletKnockback;
+    /**How many frames before the next shot. */
     int fireRate;
 
+    /**The bullet list of the gun. */
     private static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
     int x;
     int y;
     
-    //Setting of Gun
+    /**Create a standard gun.*/
     public Gun(String gunName){
         this.gunName = gunName;
         setStats(gunName);
@@ -43,11 +50,12 @@ public class Gun{
             System.out.println("player: " + x + ". Bullet: " + (x-bulletSize-2));
         }
     }
-    //Firerate method
+    
+    /**Returns the fireRate of the gun. */
     public int getFireRate(){
         return fireRate;
     }
-    //Bullet List Array
+    /**Returns the bulletList of the gun. */
     public static ArrayList getBulletList(){
         return bullets;
     }
@@ -126,7 +134,7 @@ public class Gun{
         }
     }
 
-    /**Gun Location In Respect to Player Location */
+    /**Returns the xPosition of the gun in Respect to Player Location */
     public int getGunX(Player player) {
         int GunX = 0;
         if (player.direction.equals("right")) {
@@ -138,6 +146,7 @@ public class Gun{
         return GunX;
     }
 
+    //*Returns the yPosition of the gun relative to the player */
     public int getGunY(Player player) {
         int GunY = player.y + 32;
         return GunY;

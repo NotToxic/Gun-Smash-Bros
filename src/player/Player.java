@@ -1,10 +1,8 @@
 package player;
 
-import main.GamePanel;
 import ui.GraphicsPanel;
 import guns.Bullet;
 import guns.Gun;
-import inputs.KeyInputs;
 import guns.Crate;
 
 import java.awt.*;
@@ -19,7 +17,7 @@ import javax.swing.Timer;
 /**Class to Handle Character/Player Info And Details */
 public class Player {
 
-  @SuppressWarnings("unused")
+  //
   private GraphicsPanel graphicsPanel;
 
   BufferedImage imgPlayerLeft = null;

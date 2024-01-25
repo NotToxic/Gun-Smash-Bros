@@ -8,56 +8,65 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
-/**Crate Functionality Class */
+/**This class allows for the creation of Crates*/
 public class Crate {
 
-    public BufferedImage imgCrate;
+  /**The BufferedImage for the crate. */
+  public BufferedImage imgCrate;
 
-    public int size = 48;
-    public int x; 
-    public int y = 0-size;
-    double ySpeed = 0;
-    public boolean visible = true;
-    public String gunName;
-    String[][] map;
+  /**How wide and tall the crate is. */
+  public int size = 48;
+  /**The crate's x position. */
+  public int x; 
+  /**The crate's y position. */
+  public int y = 0-size;
+  /**The crate's ySpeed. */
+  double ySpeed = 0;
+  /**If false, the crate has been touched by a player. */
+  public boolean visible = true;
+  /**What gun the crate holds. */
+  public String gunName;
+  /**The map that the crate will spawn into. */
+  String[][] map;
 
-    /**Crate Constructing Method*/
-    public Crate(String[][] map, String gunName, int x){
-        this.x = x;
-        this.gunName = gunName;
-        this.map = map;
+  /**Crate Constructing Method*/
+  public Crate(String[][] map, String gunName, int x){
+      this.x = x;
+      this.gunName = gunName;
+      this.map = map;
 
-        try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/crate.png")) {
-          imgCrate = ImageIO.read(is);
-        } catch (IOException e) {
-          System.out.println("cannot find gun image");
-        }
-    }
+      try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/crate.png")) {
+        imgCrate = ImageIO.read(is);
+      } catch (IOException e) {
+        System.out.println("cannot find gun image");
+      }
+  }
 
-    //Crate Movement Method
-    public void move(){
-        ySpeed += 0.7;
+  /**Crate falling method. */
+  public void move(){
+      ySpeed += 0.7;
 
-        if (y > 730){
-            visible = false;
-        }
-        collision(map);
-        y += ySpeed;
-    }
+      if (y > 730){
+          visible = false;
+      }
+      collision(map);
+      y += ySpeed;
+  }
 
-    //Crate Collision Method
-    public void collision(String[][] map){
-        int platformDistance = platform(map, x, y);
-        if (platformDistance == 0 && ySpeed > 0){
+  /**Crate collision method to stop fall when touching a platform. */
+  public void collision(String[][] map){
+      int platformDistance = platform(map, x, y);
+      if (platformDistance == 0 && ySpeed > 0){
+        ySpeed = 0;
+      } else if (platformDistance > 0 && ySpeed > 0){
+        if (platformDistance < ySpeed){
           ySpeed = 0;
-        } else if (platformDistance > 0 && ySpeed > 0){
-          if (platformDistance < ySpeed){
-            ySpeed = 0;
-            y += platformDistance;
-          }
+          y += platformDistance;
         }
-    }
+      }
+  }
 
+  /**Returns how close the crate is to the platform. */
   public int platform(String[][] map, int x, int y){
     try{
       for (int i = 0; i < 6; i++){
@@ -71,12 +80,15 @@ public class Crate {
     }
   }
 
+  /**Returns the x position of the crate. */
   public int getX(){
     return x;
   }
+  /**Returns the y position of the crate. */
   public int getY(){
     return y;
   }
+  /**Returns the size of the crate. */
   public int getSize(){
     return size;
   }

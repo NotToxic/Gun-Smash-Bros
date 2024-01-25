@@ -20,11 +20,11 @@ public class ssmHandler {
   GamePanel gamePanel;
   DisplayPanel displayPanel;
 
+  /**String for incoming data */
   String data;
   String[] dataSplit; 
   //Unique ID For Sent Movement Data
   public String ID = "<>:*{}.data";
-  String previousMsg = "";
 
   public ssmHandler (int playerID, Player player, GamePanel gamePanel, DisplayPanel displayPanel) {
     this.playerID = playerID;
@@ -106,7 +106,6 @@ public class ssmHandler {
               System.out.println("Crate: " + dataSplit[3] + "," + dataSplit[4]);
               break;
             case "chat":
-              previousMsg = dataSplit[3];
               displayPanel.gamePanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
               break;
           }
@@ -118,7 +117,6 @@ public class ssmHandler {
               gamePanel.crateList.add(c);
               break;
             case "chat":
-              previousMsg = dataSplit[3];
               displayPanel.gamePanel.chatArea.append("Opponent: " + dataSplit[3] + "\n");
               break;
           }
