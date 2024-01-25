@@ -12,7 +12,9 @@ import guns.Crate;
 import inputs.KeyInputs;
 
 //Use ssm to find and set values for player positions
-/**ssmHandler Class to Manage ssm sent and recieved data to organize Player info and Characters on Host And Client Screens */
+/**ssmHandler Class to Manage ssm sent and recieved data to organize Player info and Characters on Host And Client Screens 
+ * Note that two SSMs are used for the network due to the massive amount of information being sent per frame - this is done to avoid any overriding of data or a slow connection
+*/
 public class ssmHandler {
   
   public int playerID;

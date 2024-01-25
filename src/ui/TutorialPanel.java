@@ -33,7 +33,9 @@ public class TutorialPanel extends GraphicsPanel {
         intTutorialStage = 4;
       }
       tutorialText.setText("Pick up a crate for a new gun");
-      spawnCrates("heavyGuy", 500);
+      if (player1.gun.gunName.equals("lightGuy")){
+        spawnCrates("heavyGuy", 500);
+      }
     } 
     else if (intTutorialStage == 4) {
       tutorialText.setText("Shoot the enemy off the platform");

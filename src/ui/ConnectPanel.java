@@ -11,6 +11,7 @@ import ssm.SuperSocketMaster;
 
 public class ConnectPanel extends JPanel{
 
+    //
     public DisplayPanel displayPanel;
 
     JLabel ipLabel = new JLabel("IP:", JLabel.CENTER);

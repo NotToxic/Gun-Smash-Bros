@@ -17,47 +17,69 @@ import javax.swing.Timer;
 /**Class to Handle Character/Player Info And Details */
 public class Player {
 
-  //
+  /**the graphics panel for the actionListener */
   private GraphicsPanel graphicsPanel;
 
+  /**The BufferedImgaes for when the player is looking left */
   BufferedImage imgPlayerLeft = null;
+  /**The BufferedImgaes for when the player is looking right */
   BufferedImage imgPlayerRight = null;
 
+  /**The player's x position */
   public int x;
+  /**The player's y position */
   public int y;
+  /**The player's width */
   public int width;
+  /**The player's heigth */
   public int height;
-  Rectangle hitbox;
 
+  /**The player's xSpeed */
   double xSpeed;
+  /**The player's ySpeed */
   double ySpeed;
 
+  /**True if the player's pressing right (d)*/
   public boolean keyRight;
+  /**True if the player's pressing left (a)*/
   public boolean keyLeft;
+  /**True if the player's pressing up (w)*/
   public boolean keyUp;
+  /**True if the player's pressing down (s)*/
   public boolean keyDown;
 
+  /**The direction that the player's looking at */
   public String direction = "right";
+  /**True if the player is shooting */
   public boolean shoot;
+  /**How long until the player can shoot again */
   public int shootTimer;
 
+  /** True if the player has jumped twice*/
   public boolean doubleJumped = false;
 
+  /**True if the player is off the map */
   public boolean dead = false;
+  /**Starts when the player dies */
   public Timer deathTimer;
+  /**Players start out with 5 lives */
   public int lives = 5;
+  /**How many frames until the player can move again when hit by a bullet */
   public int hitTimer = 0;
 
+  /**How many times the player can jump */
   public int jumpCounter = 0;
 
+  /**The Gun the player's using */
   public Gun gun = new Gun("lightGuy");
 
+  /**Player Constructor */
   public Player(int x, int y, int width, int height, GraphicsPanel graphicsPanel) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.hitbox = new Rectangle(x, y, width, height);
+
     this.graphicsPanel = graphicsPanel;
     
     deathTimer = new Timer(1500, graphicsPanel);
@@ -75,7 +97,9 @@ public class Player {
     }
   }
 
+  /**Reads the inputs of the player, and increases their speed */
   public void move(String[][] map) {
+    /**If no clear direction is being pressed, speed slows down by 70% per frame */
     if (keyLeft && keyRight || !keyLeft && !keyRight) {
       xSpeed *= 0.7;
     }
@@ -98,13 +122,16 @@ public class Player {
     if (xSpeed > 8 && hitTimer == 0) xSpeed -= 1;
     if (xSpeed < -8 && hitTimer == 0) xSpeed += 1;
 
+    /**Game's acceleration */
     ySpeed += 0.7;
   
+    /**Players can only jump twice before hitting the ground */
     if (keyUp && jumpCounter < 2) {
       jumpCounter++;
       ySpeed = -12.5;
       keyUp = false;
     }
+    /**Checks to see if the player wants to go down a platform */
     if (keyDown && platform(map, x, y) == 0){
       y += 6;
       ySpeed = 2.25;
@@ -116,6 +143,7 @@ public class Player {
     x += xSpeed;
     y += ySpeed;
 
+    //*If the player can shoot and they decide the shoot */
     if (shoot && shootTimer == 0){
       gun.shoot(x, y, direction);
       shootTimer = gun.getFireRate();
@@ -127,9 +155,6 @@ public class Player {
     }
     
     collision(map);
-
-    hitbox.x = x;
-    hitbox.y = y;
   }
 
   /**Player Collision Control */
@@ -138,6 +163,7 @@ public class Player {
       dead = true;
     }
 
+    /**If the player hits a bullet */
     try{
       for (int i = 0; i < graphicsPanel.bulletList.size(); i++){
         Bullet b = (Bullet)graphicsPanel.bulletList.get(i);
@@ -155,6 +181,7 @@ public class Player {
       }
     } catch (NullPointerException e){}
 
+    /**If the player touches a crate*/
     try{
       Crate c = (Crate)graphicsPanel.crateList.get(0);
       if (collisionHandler(c)){
@@ -179,6 +206,7 @@ public class Player {
     }
   }
 
+  /** Method to return how far away the player is from a platform*/
   public int platform(String[][] map, int x, int y){
     try{
       for (int i = 0; i < 6; i++){
@@ -192,7 +220,7 @@ public class Player {
     }
   }
 
-  //Implementation of collisionHandler to manage bullet location plus collision
+  /**Implementation of collisionHandler to manage bullet location plus collision*/
   public String collisionHandler(Bullet b){
     if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
       return b.getDirection();
@@ -205,7 +233,7 @@ public class Player {
     }
     return null;
   }
-  //Implementation of collisionHandler to manage crate location plus collision
+  /**Implementation of collisionHandler to manage crate location plus collision*/
   public boolean collisionHandler(Crate c){
     if (c.getX() > x && c.getX() < x+45 && c.getY() > y && c.getY() < y+90){
       return true;
@@ -218,7 +246,7 @@ public class Player {
     }
     return false;
   }
-  //Character Image Setting
+  /**Character Image Settings*/
   public BufferedImage getCharModel() {
     if (direction.equals("right")) {
       gun.setImage(gun.gunName, "right");
@@ -229,15 +257,16 @@ public class Player {
     }
   }
 
+  /**Get the gun's bulletList */
   public ArrayList getBulletList(){
     return Gun.getBulletList();
   }
   
-  //Death
+  /**Returns true if the player is off the map */
   public boolean getDead(){
     return dead;
   }
-  //Respwan Method
+  /**A method to respawn the player*/
   public void respawn(){
     // max - min
     int range = 0;
