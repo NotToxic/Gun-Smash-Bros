@@ -5,9 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import main.GunSmashBros;
-import player.Player;
-
 /**JPanel class that shows who won */
 public class WinPanel extends JPanel{
 
@@ -51,7 +48,7 @@ public class WinPanel extends JPanel{
     }
 
     /**Constructor for the winPanel
-     * @param displayPanel adds the winPanel to the chian of other JPanels linked to displayPanel
+     * @param displayPanel adds the winPanel to the chain of other JPanels linked to displayPanel
      * @param listener listens for actions, specically used for the Timer
      */
     public WinPanel(DisplayPanel displayPanel, ActionListener listener){

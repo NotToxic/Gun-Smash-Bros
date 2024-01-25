@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 /**This class displays the main menu*/
 public class MenuPanel extends JPanel{
 
-  /** DisplayPanel to link up with all the other JPanels*/
+  /**DisplayPanel to link up with all the other JPanels*/
   public DisplayPanel displayPanel;
 
   /**UI Button to play the main game */
