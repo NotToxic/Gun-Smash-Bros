@@ -10,18 +10,27 @@ import javax.swing.JPanel;
 
 public class HelpPanel extends JPanel {
 
+  /**To connect to the network of other JPanels */
   DisplayPanel displayPanel;
+  /**BufferedImage to display the helpImage */
   BufferedImage imgHelpScreen = null;
+  /**A UIButton to go back to the main menu */
   UIButton backButton;
 
+  /**Constructor of the helpPanel
+   * @param displayPanel to connect to the network of other Jpanels
+   */
   public HelpPanel(DisplayPanel displayPanel) {
     this.displayPanel = displayPanel;
+
+    //Construct the backbutton
     backButton = new UIButton("BACK", "menu", displayPanel);
     backButton.setSize(40, 40);
     backButton.setLocation(680, 0);
 
     add(backButton);
 
+    //Add image
     InputStream imgClass = null;
     imgClass = this.getClass().getResourceAsStream("/assets/images/Help.png");
     if(imgClass == null){

@@ -10,6 +10,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -129,6 +130,13 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
     } catch (IOException e) {
       System.out.println("Error reading map image");
     } 
+    if(imgMap == null){
+      try{
+        imgMap = ImageIO.read(new File("/assets/objects/characterLeft.png"));
+      }catch(IOException e){
+        System.out.println("cannot load image");
+      }
+    }
     return imgMap;
   }
 

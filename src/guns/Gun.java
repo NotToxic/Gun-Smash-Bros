@@ -119,17 +119,31 @@ public class Gun{
     public void setImage(String gunName, String direction) {
         if (gunName.equals("lightGuy")) {
             if (direction.equals("right")) {
-                try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/objects/lightGuyRight.png")) {
+                try (InputStream is = Gun.class.getClassLoader().getResourceAsStream("./assets/objects/lightGuyRight.png")) {
                     imgGun = ImageIO.read(is);
                 } catch (IOException e) {
                     System.out.println("Error reading light guy image");
                 } 
+                if (imgGun == null){
+                    try{
+                        imgGun = ImageIO.read(new File("/assets/objects/crate.png"));
+                    }catch(IOException e){
+                        System.out.println("cannot find gun image");
+                    }
+                }
             } else {
-                try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/objects/lightGuyLeft.png")) {
+                try (InputStream is = Gun.class.getClassLoader().getResourceAsStream("./assets/objects/lightGuyLeft.png")) {
                     imgGun = ImageIO.read(is);
                 } catch (IOException e) {
                     System.out.println("Error reading light guy image");
                 } 
+                if (imgGun == null){
+                    try{
+                        imgGun = ImageIO.read(new File("/assets/objects/crate.png"));
+                    }catch(IOException e){
+                        System.out.println("cannot find gun image");
+                    }
+                }
             }
         }
         else if (gunName.equals("heavyGuy")) {
@@ -138,13 +152,27 @@ public class Gun{
                     imgGun = ImageIO.read(is);
                 } catch (IOException e) {
                     System.out.println("Error reading heavy guy image");
-                } 
+                }
+                if (imgGun == null){
+                    try{
+                        imgGun = ImageIO.read(new File("/assets/objects/crate.png"));
+                    }catch(IOException e){
+                        System.out.println("cannot find gun image");
+                    }
+                }
             } else {
                 try (InputStream is = GamePanel.class.getClassLoader().getResourceAsStream("./assets/objects/heavyGuyLeft.png")) {
                     imgGun = ImageIO.read(is);
                 } catch (IOException e) {
                     System.out.println("Error reading heavy guy image");
                 } 
+                if (imgGun == null){
+                    try{
+                        imgGun = ImageIO.read(new File("/assets/objects/crate.png"));
+                    }catch(IOException e){
+                        System.out.println("cannot find gun image");
+                    }
+                }
             }
         }
     }

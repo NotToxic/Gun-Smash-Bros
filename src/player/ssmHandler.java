@@ -44,7 +44,7 @@ public class ssmHandler {
   /**Host Mode Method To Manage Connection \
    * @param displayPanel to add keylisteners to players in the gamePanel
    * @param listener for action listeners to send data through
-   * @param port to connect to a port
+   * @param port to connect to a port for the ssm
   */
   public static void hostMode(DisplayPanel displayPanel, ActionListener listener, int port) {
     GunSmashBros.ssm = new SuperSocketMaster(port, listener);
@@ -65,7 +65,8 @@ public class ssmHandler {
   /**Client Mode Method to Manage Connection via Client Side 
    * @param displayPanel to add keylisteners to players in the gamePanel
    * @param listener for action listeners to send data through
-   * @param port to connect to a port
+   * @param port to connect to a port for the ssm
+   * @param IP to connect to a certain IP for the ssm
   */
   public static void clientMode(DisplayPanel displayPanel, ActionListener listener, int port, String IP) {
     GunSmashBros.ssm = new SuperSocketMaster(IP, port, listener);
@@ -95,12 +96,20 @@ public class ssmHandler {
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.ySpeed + "," + player.xSpeed + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + "," + player.lives + "," + gamePanel.strMapName);
   }
 
-  /**ssm 2nd Implementation specfic to Chat Game Feature - Send over chat info */
+  /**ssm 2nd Implementation specfic to Chat Game Feature - Send over chat info 
+   * @param playerID either 1 or 2
+   * @param chatMessage the message that the other player is sending
+  */
   public void sendMsg(int playerID, String chatMessage){
     GunSmashBros.ssm2.sendText(ID + "," + playerID + "," + "chat" + "," + chatMessage);
   }
 
-  /**ss2 Usage specfic to crate details */
+  /**ssm2 sending the details of a newly spawned crate
+   * This is only sent by the host, since only they can generate the crate
+   * The client will then recieve the message that a crate has been spawned, and spawn it on their screen as well
+   * @param crateX for the xPosition of the crate
+   * @param gunType the gunType that the crate is hoisting
+  */
   public void sendCrate(int crateX, String gunType){
     GunSmashBros.ssm2.sendText(ID + "," + playerID + "," + "crate" + "," + gunType + "," + crateX);
   }

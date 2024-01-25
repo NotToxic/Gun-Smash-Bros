@@ -7,6 +7,7 @@ import guns.Crate;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -89,11 +90,25 @@ public class Player {
     } catch (IOException e) {
       System.out.println("cannot find left char image");
     }
+    if(imgPlayerLeft == null){
+      try{
+        imgPlayerLeft = ImageIO.read(new File("/assets/objects/characterLeft.png"));
+      }catch(IOException e){
+        System.out.println("cannot load image");
+      }
+    }
 
     try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/characterRight.png")) {
       imgPlayerRight = ImageIO.read(is);
     } catch (IOException e) {
       System.out.println("cannot find right char image");
+    }
+    if(imgPlayerRight == null){
+      try{
+        imgPlayerRight = ImageIO.read(new File("/assets/objects/characterRight.png"));
+      }catch(IOException e){
+        System.out.println("cannot load image");
+      }
     }
   }
 

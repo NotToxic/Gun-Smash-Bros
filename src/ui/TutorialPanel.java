@@ -85,7 +85,7 @@ public class TutorialPanel extends GraphicsPanel {
   }
 
   /**Constructor for the tutorial panel
-   * @param displayPanel used for actionListenera and KeyListeners
+   * @param displayPanel used for actionListener and KeyListeners
   */
   public TutorialPanel(DisplayPanel displayPanel) {
     super(displayPanel);
