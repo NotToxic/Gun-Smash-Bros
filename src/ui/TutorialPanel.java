@@ -15,7 +15,7 @@ public class TutorialPanel extends GraphicsPanel {
     super(displayPanel);
 
     addKeyListener(new KeyInputs(player1));
-    strArrayMap = loadMap("TutorialMap");
+    loadMap("TutorialMap");
   }
 
   @Override
