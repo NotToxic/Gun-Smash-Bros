@@ -1,5 +1,6 @@
 package guns;
 
+/**Bullet Class - Holds Unique Set Bullet Qualities and Functionalit - Set Via Gun Class */
 public class Bullet {
     int size;
     double baseSpeed;
@@ -10,6 +11,7 @@ public class Bullet {
     String direction;
     double knockback;
 
+    //Bullet Movement Method
     public void bulletMove(){
         this.x += speed;
         if (x > 1280 || x < 0){
@@ -17,6 +19,7 @@ public class Bullet {
         }
     }
 
+    /**Bullet Constructor */
     public Bullet(int x, int y, String direction, double baseSpeed, int size, double knockback){
         this.x = x;
         this.y = y;
@@ -31,6 +34,7 @@ public class Bullet {
         visible = true;
     }
 
+    /**Return of neccesary Gun Features */
     public boolean isVisible(){
         return visible;
     }

@@ -5,6 +5,9 @@ import player.Player;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+
+/**Class File to organize and be used to intake Key Inputs */
+/**Implemented to intake key inputs for player movements, shooting, etc */
 public class KeyInputs implements KeyListener {
 
   private Player player;
@@ -17,6 +20,7 @@ public class KeyInputs implements KeyListener {
     // Unused
   }
 
+  //Key Pressed and Key Released Overriden methods for movement and shooting
   @Override
   public void keyPressed(KeyEvent e) {
     int key = e.getKeyCode();

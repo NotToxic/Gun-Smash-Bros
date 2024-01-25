@@ -9,7 +9,9 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import player.Player;
 
+/**Gun Class to Oriente Gun Details and Gun Types */
 public class Gun{
+    //Properties and Unique Bullet Features
     public BufferedImage imgGun = null;
     public String gunName;
     int bulletSize;
@@ -22,12 +24,14 @@ public class Gun{
     int x;
     int y;
     
+    //Setting of Gun
     public Gun(String gunName){
         this.gunName = gunName;
         setStats(gunName);
         setImage(gunName, "right");
     }
 
+    /**Shoot functionality and Method; Usage of Bullet class properties for respective gun types. */
     public void shoot(int x, int y, String direction){
         if (direction.equals("right")){
             Bullet b = new Bullet(x+47+bulletSize, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
@@ -39,15 +43,16 @@ public class Gun{
             System.out.println("player: " + x + ". Bullet: " + (x-bulletSize-2));
         }
     }
-
+    //Firerate method
     public int getFireRate(){
         return fireRate;
     }
-
+    //Bullet List Array
     public static ArrayList getBulletList(){
         return bullets;
     }
 
+    /**Setting of Gun features via Array based on bulletStatsCSV */
     public void setStats(String gunName){
         String[][] stats = new String[3][5];
 
@@ -87,6 +92,7 @@ public class Gun{
         }
     }
     
+    /**Gun Visual's and Setting of Gun Orientation Images */
     public void setImage(String gunName, String direction) {
         if (gunName.equals("lightGuy")) {
             if (direction.equals("right")) {
@@ -120,6 +126,7 @@ public class Gun{
         }
     }
 
+    /**Gun Location In Respect to Player Location */
     public int getGunX(Player player) {
         int GunX = 0;
         if (player.direction.equals("right")) {

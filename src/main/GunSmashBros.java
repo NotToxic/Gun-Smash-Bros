@@ -25,9 +25,9 @@ public class GunSmashBros extends JFrame implements ActionListener{
   String previousMsg = "";
   static String strName = null;
 
-  //ssm for opponenet movement, and bullet movement
+  /**SSM implementation for opponenet movement, and bullet movement*/
   public static SuperSocketMaster ssm;
-  // ssm for all the chats and crates
+  /**ssm for all the chats and crates*/
   public static SuperSocketMaster ssm2;
 
   public static ssmHandler ssmh;
@@ -45,7 +45,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
       displayPanel.gamePanel.ssmh.getOtherData();
     } 
     
-    //Host Button Functionality - Hosting Game in Device
+    /**Host Button Functionality - Hosting Game in Device*/
     else if (e.getSource() == displayPanel.connectPanel.hostButton){
       try {
         ssmHandler.hostMode(displayPanel, this, Integer.parseInt(displayPanel.connectPanel.portField.getText()));
@@ -57,7 +57,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
       } 
     } 
     
-    //Join Button Functionality - Joining Game in Device
+    /**Join Button Functionality - Joining Game in Device*/
     else if (e.getSource() == displayPanel.connectPanel.joinButton){
       try{
         ssmHandler.clientMode(displayPanel, this, Integer.parseInt(displayPanel.connectPanel.portField.getText()), displayPanel.connectPanel.ipField.getText());
@@ -67,14 +67,14 @@ public class GunSmashBros extends JFrame implements ActionListener{
       }
     } 
     
-    //Disconnecting Functionality - If Disconnect Button is pressed
+    /**Disconnecting Functionality - If Disconnect Button is pressed*/
     else if (e.getSource() == displayPanel.connectPanel.disconnectButton){
       ssmHandler.disconnect();
       displayPanel.connectPanel.disconnect();
     }
 
-    //Button Action to Choose The Map That Will Be Used
-    //Button For Map1
+    /**Button Action to Choose The Map That Will Be Used*/
+    /**Button For Map1*/
     else if (e.getSource() == displayPanel.connectPanel.gameButton1){
       displayPanel.gamePanel.strMapName = "CPTMap1";
       displayPanel.gamePanel.strArrayMap = displayPanel.gamePanel.loadMap("CPTMap1");
@@ -82,7 +82,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
       displayPanel.connectPanel.gameButton2.setEnabled(true);
     } 
 
-    //Button For Map2
+    /**Button For Map2*/
     else if (e.getSource() == displayPanel.connectPanel.gameButton2){
       displayPanel.gamePanel.strMapName = "CPTMap2";
       displayPanel.gamePanel.strArrayMap = displayPanel.gamePanel.loadMap("CPTMap2");
@@ -91,7 +91,7 @@ public class GunSmashBros extends JFrame implements ActionListener{
     } 
   }
 
-  //Main Content Frame
+  /**Main Content Frame*/
   public GunSmashBros() {
     setContentPane(displayPanel);
     

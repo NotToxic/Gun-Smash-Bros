@@ -1,5 +1,7 @@
 package main;
 
+/**Neccesary Imports*/
+
 import java.util.ArrayList;
 
 import java.awt.*;
@@ -59,6 +61,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     }
   }
 
+  /**paintComponent method: Controls drawing of all background game map images, along with platforms */
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -75,6 +78,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     player1.move(strArrayMap);
     player2.move(strArrayMap);
 
+    /**Data Transfer */
     try{
       ssmh.sendData();
       ssmh.getGameData();
@@ -86,6 +90,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     //g2d.fillRect(player1.x, player1.y, player1.width, player1.height); 
     //g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
 
+    /**Drawing of Player characters and respective character components - Changes at constant movement/variable changes */
     g.drawImage(player1.getCharModel(), player1.x, player1.y, null);
     g.drawImage(player1.gun.imgGun, player1.gun.getGunX(player1), player1.gun.getGunY(player1), null);
 
@@ -95,6 +100,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     drawBullets(g2d);
     drawCrates(g2d);
 
+    /**Player death functionality; Testing timers and components to outline winner */
     if (player1.getDead() && player1.deathTimer.isRunning() == false){
       playerDeath(player1);
     }
@@ -109,7 +115,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     }
 
   }
-
+  /**Main Game Panel Constructor */
   public GamePanel(DisplayPanel displayPanel) {
     
     super(displayPanel);
@@ -128,6 +134,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     strArrayMap = loadMap("CPTMap1");
   }
 
+  /**Map Change and Map Selection Method, Based on Connect Panel button selection, specific map CSV and PNG is selected */
   public void checkMapChange(){
     if (!strPreMapName.equals(strMapName)){
       System.out.println("Check 1");
@@ -147,6 +154,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     }
   }
 
+  /**Player Death and Respawn Methods */
   public void playerDeath(Player player){
     player.deathTimer.start();
     player.lives--;

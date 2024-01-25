@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
+/**Crate Functionality Class */
 public class Crate {
 
     public BufferedImage imgCrate;
@@ -20,6 +21,7 @@ public class Crate {
     public String gunName;
     String[][] map;
 
+    /**Crate Constructing Method*/
     public Crate(String[][] map, String gunName, int x){
         this.x = x;
         this.gunName = gunName;
@@ -32,6 +34,7 @@ public class Crate {
         }
     }
 
+    //Crate Movement Method
     public void move(){
         ySpeed += 0.7;
 
@@ -42,6 +45,7 @@ public class Crate {
         y += ySpeed;
     }
 
+    //Crate Collision Method
     public void collision(String[][] map){
         int platformDistance = platform(map, x, y);
         if (platformDistance == 0 && ySpeed > 0){

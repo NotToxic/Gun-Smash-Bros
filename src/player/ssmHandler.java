@@ -12,6 +12,7 @@ import guns.Crate;
 import inputs.KeyInputs;
 
 //Use ssm to find and set values for player positions
+/**ssmHandler Class to Manage ssm sent and recieved data to organize Player info and Characters on Host And Client Screens */
 public class ssmHandler {
   
   public int playerID;
@@ -21,6 +22,7 @@ public class ssmHandler {
 
   String data;
   String[] dataSplit; 
+  //Unique ID For Sent Movement Data
   public String ID = "<>:*{}.data";
   String previousMsg = "";
 
@@ -31,6 +33,7 @@ public class ssmHandler {
     this.displayPanel = displayPanel;
   }
 
+  /**Host Mode Method To Manage Connection */
   public static void hostMode(DisplayPanel displayPanel, ActionListener listener, int port) {
     GunSmashBros.ssm = new SuperSocketMaster(port, listener);
     GunSmashBros.ssm.connect();
@@ -47,6 +50,7 @@ public class ssmHandler {
     System.out.println("Socket started in server mode");
   }
 
+  /**Client Mode Method to Manage Connection via Client Side */
   public static void clientMode(DisplayPanel displayPanel, ActionListener listener, int port, String IP) {
     GunSmashBros.ssm = new SuperSocketMaster(IP, port, listener);
     GunSmashBros.ssm.connect();
@@ -63,24 +67,31 @@ public class ssmHandler {
     System.out.println("Socket started in client mode");
   }
 
+  /**Disconnect Functionality - Disconnecting ssm usage */
   public static void disconnect() {
     GunSmashBros.ssm.disconnect();
     GunSmashBros.ssm2.disconnect();
   }
 
+  /**sendData Method to manage sent data from Device - Host or Client */
   public void sendData() {
-    //Send data: ID + player + game/chat + location of player + player shot + direction + gunName
+    /**Send data: ID + player + game/chat + location of player + player shot + direction + gunName*/
     GunSmashBros.ssm.sendText(ID + "," + playerID + "," + "game" + "," + player.x + "," + player.y + "," + player.ySpeed + "," + player.xSpeed + "," + player.shoot + "," + player.direction + "," + player.gun.gunName + "," + player.lives + "," + gamePanel.strMapName);
   }
 
+  /**ssm 2nd Implementation specfic to Chat Game Feature - Send over chat info */
   public void sendMsg(int playerID, String chatMessage){
     GunSmashBros.ssm2.sendText(ID + "," + playerID + "," + "chat" + "," + chatMessage);
   }
 
+  /**ss2 Usage specfic to crate details */
   public void sendCrate(int crateX, String gunType){
     GunSmashBros.ssm2.sendText(ID + "," + playerID + "," + "crate" + "," + gunType + "," + crateX);
   }
 
+  /**ssm Object Breakdown - Taking Recieved ssm Data to reconstruct via set properties on respective player screen for Opponent character/Common Fields*/
+
+  /*ssm2 - Spliting of Crate Details, Sent Chat Data */
   public void getOtherData(){
     data = GunSmashBros.ssm2.readText();
     if (data != null){
@@ -116,6 +127,7 @@ public class ssmHandler {
     }
   }
 
+  /**ssm, Splitting of Player location, x and y, Life Data, Gun Type Data, and Directional Data */
   public void getGameData() {
     data = GunSmashBros.ssm.readText();
     if (data != null){

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
+/**Class to Handle Character/Player Info And Details */
 public class Player {
 
   @SuppressWarnings("unused")
@@ -133,6 +134,7 @@ public class Player {
     hitbox.y = y;
   }
 
+  /**Player Collision Control */
   public void collision(String[][] map){
     if (y > 800){
       dead = true;
@@ -192,6 +194,7 @@ public class Player {
     }
   }
 
+  //Implementation of collisionHandler to manage bullet location plus collision
   public String collisionHandler(Bullet b){
     if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
       return b.getDirection();
@@ -204,7 +207,7 @@ public class Player {
     }
     return null;
   }
-
+  //Implementation of collisionHandler to manage crate location plus collision
   public boolean collisionHandler(Crate c){
     if (c.getX() > x && c.getX() < x+45 && c.getY() > y && c.getY() < y+90){
       return true;
@@ -217,7 +220,7 @@ public class Player {
     }
     return false;
   }
-
+  //Character Image Setting
   public BufferedImage getCharModel() {
     if (direction.equals("right")) {
       gun.setImage(gun.gunName, "right");
@@ -232,10 +235,11 @@ public class Player {
     return Gun.getBulletList();
   }
   
+  //Death
   public boolean getDead(){
     return dead;
   }
-
+  //Respwan Method
   public void respawn(){
     // max - min
     int range = 0;

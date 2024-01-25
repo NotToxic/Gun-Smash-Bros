@@ -6,6 +6,7 @@ import guns.Crate;
 import guns.Gun;
 import guns.Bullet;
 
+/**Class to Handle Collision with Platoforms and Objects */
 public class collisionHandler {
 
   Player p;
@@ -19,11 +20,13 @@ public class collisionHandler {
     this.c = crate;
   }
 
+  /**Collision in respect to Map Details */
   public void collision(String[][] map){
     if (p.y > 800){
       p.dead = true;
     }
 
+    /**Collision with Bullets - Using Bullet Class Properties */
     try{
       for (int i = 0; i < GamePanel.bulletList.size(); i++){
         Bullet b = (Bullet)GamePanel.bulletList.get(i);
@@ -40,6 +43,7 @@ public class collisionHandler {
       }
     } catch (NullPointerException e){}
 
+    //Setting of crate functionality - getting new gun from crate collision
     try{
       Crate c = (Crate)GamePanel.crateList.get(0);
       if (crateCollision(c)){
@@ -64,6 +68,7 @@ public class collisionHandler {
     }
   }
 
+  //Platoform Mapping
   public int platform(String[][] map, int x, int y){
     try{
       for (int i = 0; i < 6; i++){
@@ -77,6 +82,7 @@ public class collisionHandler {
     }
   }
 
+  /**Bullet Collision */
   public String bulletCollision(Bullet b){
     if (b.getX() > p.x && b.getX() < p.x+45 && b.getY() > p.y && b.getY() < p.y+90){
       return b.getDirection();
@@ -90,6 +96,7 @@ public class collisionHandler {
     return null;
   }
 
+  /**Crate Collision */
   public boolean crateCollision(Crate c){
     if (c.getX() > p.x && c.getX() < p.x+45 && c.getY() > p.y && c.getY() < p.y+90){
       return true;
