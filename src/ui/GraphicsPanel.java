@@ -164,12 +164,12 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
         // if random number rounds to 0, spawn a lightgun crate
         int gunType = (int)(Math.random() * 2) + 1;
         if (gunType == 1){
-          Crate c = new Crate(strArrayMap, "lightGuy", x);
+          c = new Crate(strArrayMap, "lightGuy", x);
           crateList.add(c);
           System.out.println("light");
           ssmh.sendCrate(x, "lightGuy");
         } else {
-          Crate c = new Crate(strArrayMap, "heavyGuy", x);
+          c = new Crate(strArrayMap, "heavyGuy", x);
           crateList.add(c);
           System.out.println("heavy");
           ssmh.sendCrate(x, "heavyGuy");
@@ -180,14 +180,14 @@ public abstract class GraphicsPanel extends JPanel implements ActionListener{
 
   public void spawnCrates(String crateType, int xLocation){
     if (crateList.size() == 0) {
-      Crate c = new Crate(strArrayMap, crateType, xLocation);
+      c = new Crate(strArrayMap, crateType, xLocation);
       crateList.add(c);
     }
   }
 
   public void drawCrates(Graphics g) {
     if (crateList.size() == 1){
-      Crate c = (Crate)crateList.get(0);
+      c = (Crate)crateList.get(0);
       if (c.visible){
         c.move();
         g.drawImage(c.imgCrate, c.x, c.y, null);

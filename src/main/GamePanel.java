@@ -91,11 +91,11 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     //g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
 
     /**Drawing of Player characters and respective character components - Changes at constant movement/variable changes */
-    g.drawImage(player1.getCharModel(), player1.x, player1.y, null);
-    g.drawImage(player1.gun.imgGun, player1.gun.getGunX(player1), player1.gun.getGunY(player1), null);
+    drawPlayer(g2d, player1);
+    drawGun(g2d, player1);
 
-    g.drawImage(player2.getCharModel(), player2.x, player2.y, null);
-    g.drawImage(player2.gun.imgGun, player2.gun.getGunX(player2), player2.gun.getGunY(player2), null);
+    drawPlayer(g2d, player2);
+    drawGun(g2d, player2);
 
     drawBullets(g2d);
     spawnCrates();
