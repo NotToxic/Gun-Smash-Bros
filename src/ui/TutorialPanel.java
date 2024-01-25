@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import inputs.KeyInputs;
 import player.Player;
 
-
 public class TutorialPanel extends GraphicsPanel {
 
   public Player dummy = new Player(500, -100, 45, 90, this);
