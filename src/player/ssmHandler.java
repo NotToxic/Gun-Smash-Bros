@@ -25,9 +25,15 @@ public class ssmHandler {
   /**String for incoming data */
   String data;
   String[] dataSplit; 
-  //Unique ID For Sent Movement Data
+  /**Unique ID For Sent Movement Data*/
   public String ID = "<>:*{}.data";
 
+  /**Constructor for ssmHandler
+   * @param playerID 1 or 2, depending on the hosting or joining respectively
+   * @param player connecting to all of a player's properties, for access to coordinates, shooting, etc
+   * @param gamePanel for an actionListener
+   * @param displayPanel to connect to a network of other JPanels in case necessary
+   */
   public ssmHandler (int playerID, Player player, GamePanel gamePanel, DisplayPanel displayPanel) {
     this.playerID = playerID;
     this.player = player;
@@ -35,7 +41,11 @@ public class ssmHandler {
     this.displayPanel = displayPanel;
   }
 
-  /**Host Mode Method To Manage Connection */
+  /**Host Mode Method To Manage Connection \
+   * @param displayPanel to add keylisteners to players in the gamePanel
+   * @param listener for action listeners to send data through
+   * @param port to connect to a port
+  */
   public static void hostMode(DisplayPanel displayPanel, ActionListener listener, int port) {
     GunSmashBros.ssm = new SuperSocketMaster(port, listener);
     GunSmashBros.ssm.connect();
@@ -52,7 +62,11 @@ public class ssmHandler {
     System.out.println("Socket started in server mode");
   }
 
-  /**Client Mode Method to Manage Connection via Client Side */
+  /**Client Mode Method to Manage Connection via Client Side 
+   * @param displayPanel to add keylisteners to players in the gamePanel
+   * @param listener for action listeners to send data through
+   * @param port to connect to a port
+  */
   public static void clientMode(DisplayPanel displayPanel, ActionListener listener, int port, String IP) {
     GunSmashBros.ssm = new SuperSocketMaster(IP, port, listener);
     GunSmashBros.ssm.connect();

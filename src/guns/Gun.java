@@ -31,14 +31,20 @@ public class Gun{
     int x;
     int y;
     
-    /**Create a standard gun.*/
+    /**Create a standard gun
+     * @param gunName The name of the gun, which leads to different stats
+    */
     public Gun(String gunName){
         this.gunName = gunName;
         setStats(gunName);
         setImage(gunName, "right");
     }
 
-    /**Shoot functionality and Method; Usage of Bullet class properties for respective gun types. */
+    /**Shoot functionality and Method; Usage of Bullet class properties for respective gun types
+     * @param x where the bullet shoots from on the x axis
+     * @param y where the bullet shoots from on the y axis
+     * @param direction which way the bullets goes
+     */
     public void shoot(int x, int y, String direction){
         if (direction.equals("right")){
             Bullet b = new Bullet(x+47+bulletSize, y + 45, direction, bulletSpeed, bulletSize, bulletKnockback);
@@ -51,16 +57,22 @@ public class Gun{
         }
     }
     
-    /**Returns the fireRate of the gun. */
+    /**Returns the fireRate of the gun 
+     * @return fireRate is how long it takes before you getto shoot another bullet
+    */
     public int getFireRate(){
         return fireRate;
     }
-    /**Returns the bulletList of the gun. */
+    /**Returns the bulletList of the gun
+     * @return bullets is the list of bullets on the screen
+    */
     public static ArrayList getBulletList(){
         return bullets;
     }
 
-    /**Setting of Gun features via Array based on bulletStatsCSV */
+    /**Setting of Gun features via Array based on bulletStatsCSV 
+     * @param gunName get the name of the gun for different stats
+    */
     public void setStats(String gunName){
         String[][] stats = new String[3][5];
 
@@ -100,7 +112,10 @@ public class Gun{
         }
     }
     
-    /**Gun Visual's and Setting of Gun Orientation Images */
+    /**Gun Visual's and Setting of Gun Orientation Images 
+     * @param gunName the name of the gun
+     * @param direction the direction the gun is facing in to load a different image
+    */
     public void setImage(String gunName, String direction) {
         if (gunName.equals("lightGuy")) {
             if (direction.equals("right")) {
@@ -134,7 +149,10 @@ public class Gun{
         }
     }
 
-    /**Returns the xPosition of the gun in Respect to Player Location */
+    /**Returns the xPosition of the gun in Respect to Player Location 
+     * @return x the x position of the gun
+     * @param player used for the player's position
+    */
     public int getGunX(Player player) {
         int GunX = 0;
         if (player.direction.equals("right")) {
@@ -146,7 +164,10 @@ public class Gun{
         return GunX;
     }
 
-    //*Returns the yPosition of the gun relative to the player */
+    /**Returns the yPosition of the gun relative to the player 
+        * @return y the y position of the gun
+        * @param player used for the player's position
+    */
     public int getGunY(Player player) {
         int GunY = player.y + 32;
         return GunY;

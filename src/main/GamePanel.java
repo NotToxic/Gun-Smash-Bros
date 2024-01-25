@@ -24,26 +24,33 @@ import ui.UIButton;
 import guns.Bullet;
 import guns.Crate;
 
-// Comment
+/** The gamePanel class is used for the main gaim where you fight another player */
 public class GamePanel extends GraphicsPanel implements ActionListener {
 
+  /**The client's controlled character */
   public Player player2 = new Player(800, 0, 45, 90, this);
 
+  /**Back button to access the main menu */
   UIButton backButton;
+  /**A label displaying how many lives the host player has */
   public JLabel p1Lives = new JLabel("Host: " + player1.lives + " lives");
+  /**A label displaying how many lives the client player has */
   public JLabel p2Lives = new JLabel("Client: " + player2.lives + " lives");
 
+  /**The map name */
   public String strMapName = "CPTMap1.csv";
+  /**A variable keeping track of the previous map */
   public String strPreMapName = "CPTMap1.csv";
 
+  /**The font of the lives labels */
   Font labelFont;
+  /**How long the lives labels are */
   int stringWidth;
   int componentWidth;
-  double widthRatio;
-  int newFontSize;
-  int componentHeight;
-  int fontSizeToUse;
 
+  /**A method used for chatting
+   * @param e whenever a chat is sent, or a deathTimer goes off
+   */
   public void actionPerformed(ActionEvent e){
 		if(e.getSource() == chatField){
 			ssmh.sendMsg(ssmh.playerID, chatField.getText());
@@ -61,7 +68,9 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     }
   }
 
-  /**paintComponent method: Controls drawing of all background game map images, along with platforms */
+  /**paintComponent method: Controls drawing of all background game map images, along with platforms 
+   * @param g for drawing images
+  */
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
@@ -78,7 +87,7 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     player1.move(strArrayMap);
     player2.move(strArrayMap);
 
-    /**Data Transfer */
+    //Data Transfer
     try{
       ssmh.sendData();
       ssmh.getGameData();
@@ -86,28 +95,28 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
 
     checkMapChange();
     paintMap(strArrayMap, g2d, imgMap);
-    
-    //g2d.fillRect(player1.x, player1.y, player1.width, player1.height); 
-    //g2d.fillRect(player2.x, player2.y, player2.width, player2.height);
 
-    /**Drawing of Player characters and respective character components - Changes at constant movement/variable changes */
+    //Drawing of Player characters and respective character components - Changes at constant movement/variable changes
     drawPlayer(g2d, player1);
     drawGun(g2d, player1);
 
     drawPlayer(g2d, player2);
     drawGun(g2d, player2);
 
+    //Draw the bullets and spawn the crates if possible
     drawBullets(g2d);
     spawnCrates();
     drawCrates(g2d);
 
-    /**Player death functionality; Testing timers and components to outline winner */
+    //Player death functionality; Testing timers and components to outline winner
+    // If a player's deathTimer is not running and they are out of the map, deem them as dead
     if (player1.getDead() && player1.deathTimer.isRunning() == false){
       playerDeath(player1);
     }
     if (player2.getDead() && player2.deathTimer.isRunning() == false){
       playerDeath(player2);
     }
+    // Accessing the victory screen
     if (player1.lives == 0){
       displayPanel.winPanel.victory("Client");
     }
@@ -116,7 +125,9 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     }
 
   }
-  /**Main Game Panel Constructor */
+  /**Main Game Panel Constructor 
+   * @param displayPanel links the GamePanel to the network of other JPanels
+  */
   public GamePanel(DisplayPanel displayPanel) {
     
     super(displayPanel);
@@ -155,18 +166,26 @@ public class GamePanel extends GraphicsPanel implements ActionListener {
     }
   }
 
-  /**Player Death and Respawn Methods */
+  /**WHenever a player falls off the map
+   * @param player accessing the player deathTimers and subtracting their lives
+  */
   public void playerDeath(Player player){
     player.deathTimer.start();
     player.lives--;
     System.out.println(player.lives);
   }
 
+  /**Occurs after a player's death timer has finished
+   * @param player respawning them and stopping their death timers
+   */
   public void playerRespawn(Player player){
     player.respawn();
     player.deathTimer.stop();
   }
 
+  /**Set the font size of the lives labels
+   * @param label reads the label for the font and then enlarges the font
+   */
   public void setFontSize(JLabel label){
     labelFont = label.getFont();
 

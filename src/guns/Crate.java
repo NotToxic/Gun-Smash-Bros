@@ -2,6 +2,7 @@ package guns;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,16 +30,28 @@ public class Crate {
   /**The map that the crate will spawn into. */
   String[][] map;
 
-  /**Crate Constructing Method*/
+  /**Crate Constructing Method
+   * @param map For platform collision detection
+   * @param gunName the gun that the crate holds inside of it
+   * @param x the x position of the crate
+  */
   public Crate(String[][] map, String gunName, int x){
       this.x = x;
       this.gunName = gunName;
       this.map = map;
 
+      //Try to load the image
       try (InputStream is = Crate.class.getResourceAsStream("/assets/objects/crate.png")) {
         imgCrate = ImageIO.read(is);
       } catch (IOException e) {
         System.out.println("cannot find gun image");
+      }
+      if (imgCrate == null){
+        try{
+          imgCrate = ImageIO.read(new File("/assets/objects/crate.png"));
+        }catch(IOException e){
+          System.out.println("cannot find gun image");
+        }
       }
   }
 
@@ -53,7 +66,9 @@ public class Crate {
       y += ySpeed;
   }
 
-  /**Crate collision method to stop fall when touching a platform. */
+  /**Crate collision method to stop fall when touching a platform
+   * @param map for the platform collision
+  */
   public void collision(String[][] map){
       int platformDistance = platform(map, x, y);
       if (platformDistance == 0 && ySpeed > 0){
@@ -66,7 +81,11 @@ public class Crate {
       }
   }
 
-  /**Returns how close the crate is to the platform. */
+  /**Returns how close the crate is to the platform
+   * @param map to see how close the crate is to platforms
+   * @param x where the crate is relative to the map on the x-axis
+   * @param y where the crate is relative to the map on the y-axis
+  */
   public int platform(String[][] map, int x, int y){
     try{
       for (int i = 0; i < 6; i++){
@@ -80,15 +99,21 @@ public class Crate {
     }
   }
 
-  /**Returns the x position of the crate. */
+  /**Returns the x position of the crate
+   * @return x the x position of the crate
+  */
   public int getX(){
     return x;
   }
-  /**Returns the y position of the crate. */
+  /**Returns the y position of the crate
+   * @return y the y position of the crate
+   */
   public int getY(){
     return y;
   }
-  /**Returns the size of the crate. */
+  /**Returns the size of the crate
+   * @return size the size of the crate (width and height are the same)
+   */
   public int getSize(){
     return size;
   }

@@ -27,7 +27,9 @@ public class MenuPanel extends JPanel{
   /**The image for the homescreen */
   BufferedImage imgMainHomeScreen = null;
 
-  /**Constructor for MenuPanel */
+  /**Constructor for MenuPanel 
+   * @param displayPanel to link up to other JPanels
+  */
   public MenuPanel(DisplayPanel displayPanel){
     this.displayPanel = displayPanel;
     playButton = new UIButton("PLAY", "game", displayPanel);
@@ -37,7 +39,7 @@ public class MenuPanel extends JPanel{
 
     setLayout(null);
 
-    /**Trying to find and load the image */
+    //Trying to find and load the image 
     InputStream imgClass = null;
     imgClass = this.getClass().getResourceAsStream("/assets/images/CPTHomeScreen.png");
     if(imgClass == null){
@@ -73,7 +75,9 @@ public class MenuPanel extends JPanel{
     setPreferredSize(new Dimension(1280,720));
   }
   
-  /**Repainting this panel */
+  /**Repainting this panel 
+   * @param g for drawing images
+  */
   public void paintComponent(Graphics g){
 		super.paintComponent(g);
     g.drawImage(imgMainHomeScreen, 0, 0, null);

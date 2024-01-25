@@ -27,7 +27,14 @@ public class Bullet {
         }
     }
 
-    /**Constructs a bullet.*/
+    /**Constructs a bullet.
+     * @param x the x position of the bullet
+     * @param y the y position of the bullet
+     * @param direction the direction the bullet is going in
+     * @param baseSpeed the baseSpeed of the bullet
+     * @param size how large the bullet is
+     * @param knockback how far the player gets knockedback when hit
+    */
     public Bullet(int x, int y, String direction, double baseSpeed, int size, double knockback){
         this.x = x;
         this.y = y;
@@ -37,37 +44,50 @@ public class Bullet {
         if (this.direction.equals("right")){
             this.speed = baseSpeed;
         } else if (this.direction.equals("left")){
+            //multiply the basespeed by -1 so that it heads in the opposite direction
             this.speed = baseSpeed * -1;
         }
         visible = true;
     }
 
-    /**Returns the visible variable for this bullet. */
+    /**Returns the visible variable for this bullet 
+     * @return visible which determins if the bullet is off the screen or not
+    */
     public boolean isVisible(){
         return visible;
     }
 
-    /**Returns the x position of this bullet. */
+    /**Returns the x position of this bullet 
+     * @return x coordinate of the bullet
+    */
     public int getX(){
         return x;
     }
 
-    /**Returns the y position of this bullet. */
+    /**Returns the y position of this bullet 
+     * @return y coordinate of the bullet
+    */
     public int getY(){
         return y;
     }
 
-    /**Returns the direction of this bullet. */
+    /**Returns the direction of this bullet
+     * @return direction which is which direction the bullet is heading towrads
+    */
     public String getDirection(){
         return direction;
     }
 
-    /**Returns the knockback of this bullet. */
+    /**Returns the knockback of this bullet
+     * @return knockback which is how far the player gets moved whenever they get hit
+     */
     public double getKnockback(){
         return knockback;
     }
 
-    /**Returns the size of this bullet. */
+    /**Returns the size of this bullet
+     * @return size which is how large the bullet is
+     */
     public int getSize(){
         return size;
     }

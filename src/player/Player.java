@@ -157,13 +157,15 @@ public class Player {
     collision(map);
   }
 
-  /**Player Collision Control */
+  /**Player Collision Control 
+   * @param map used for the location of the platforms
+  */
   public void collision(String[][] map){
     if (y > 800){
       dead = true;
     }
 
-    /**If the player hits a bullet */
+    //If the player hits a bullet
     try{
       for (int i = 0; i < graphicsPanel.bulletList.size(); i++){
         Bullet b = (Bullet)graphicsPanel.bulletList.get(i);
@@ -181,7 +183,7 @@ public class Player {
       }
     } catch (NullPointerException e){}
 
-    /**If the player touches a crate*/
+    //If the player touches a crate
     try{
       Crate c = (Crate)graphicsPanel.crateList.get(0);
       if (collisionHandler(c)){
@@ -206,7 +208,11 @@ public class Player {
     }
   }
 
-  /** Method to return how far away the player is from a platform*/
+  /** Method to return how far away the player is from a platform
+   * @param map to see how close the crate is to platforms
+   * @param x where the crate is relative to the map on the x-axis
+   * @param y where the crate is relative to the map on the y-axis
+  */
   public int platform(String[][] map, int x, int y){
     try{
       for (int i = 0; i < 6; i++){
@@ -220,7 +226,10 @@ public class Player {
     }
   }
 
-  /**Implementation of collisionHandler to manage bullet location plus collision*/
+  /**Implementation of collisionHandler to manage bullet location plus collision, checking to see if the sides of the player and bullet overlap
+   * @param b gets the bullets's size and location in order to determine a square for the collision
+   * @return boolean returns true if the player is overlapping with the bullet, and false if not
+  */
   public String collisionHandler(Bullet b){
     if (b.getX() > x && b.getX() < x+45 && b.getY() > y && b.getY() < y+90){
       return b.getDirection();
@@ -233,7 +242,10 @@ public class Player {
     }
     return null;
   }
-  /**Implementation of collisionHandler to manage crate location plus collision*/
+  /**Implementation of collisionHandler to manage crate location plus collision, checking to see if the sides of the player and crate overlap
+   * @param c gets the crate's size and location in order to determine a square for the collision
+   * @return boolean returns true if the player is overlapping with the crate, and false if not
+  */
   public boolean collisionHandler(Crate c){
     if (c.getX() > x && c.getX() < x+45 && c.getY() > y && c.getY() < y+90){
       return true;
@@ -262,7 +274,9 @@ public class Player {
     return Gun.getBulletList();
   }
   
-  /**Returns true if the player is off the map */
+  /**Returns true if the player is off the map 
+   * @return dead checks to see if the player has fallen off the map or not
+  */
   public boolean getDead(){
     return dead;
   }
@@ -272,6 +286,7 @@ public class Player {
     int range = 0;
     int max = 0;
     int min = 0;
+    // Sets a upper and lower bound for the coordinate where the player can spawn
     if(graphicsPanel.ssmh == null) {
       min = 50;
       max = 100;
@@ -285,6 +300,7 @@ public class Player {
     } 
     // randomNum + min
     range = max - min + 1;
+    //x spawn is randomized
     x = (int)(Math.random() * range) + min;
     y = -100;
     gun = new Gun("lightGuy");

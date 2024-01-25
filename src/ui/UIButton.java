@@ -12,10 +12,10 @@ public class UIButton extends JButton {
 	public String path;
 	/**Customize properties when creating button*/
 	private void initialize() {
-		/**Set the background color to a dark gray*/
+		//Set the background color to a dark gray
 		setBackground(new Color(0, 0, 0));
 		
-		/**Set the foreground color to white*/
+		//Set the foreground color to white
 		setForeground(new Color(219, 226, 239));
 		
 		setOpaque(true);

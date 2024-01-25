@@ -33,6 +33,9 @@ public class GunSmashBros extends JFrame implements ActionListener{
 
 
   @Override
+  /**To read any data being sent in and out, and to refresh the diplayPanel 
+   * @param e for any actionEvents
+  */
   public void actionPerformed(ActionEvent e) {
     /**Refresh the panel. */
     if (e.getSource() == gameTimer) {

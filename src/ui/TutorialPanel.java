@@ -24,19 +24,19 @@ public class TutorialPanel extends GraphicsPanel {
 
   /**Method to check how far into the tutorial the player has been in */
   public void tutorialStage() {
-    /**Stage to teach the player how to move up left and right */
+    //Stage to teach the player how to move up left and right 
     if (intTutorialStage == 0) {
       tutorialText.setText("Press W, A, D, to move up, left, right");
     } 
-    /**Stage to teach the player how to go down platforms */
+    //Stage to teach the player how to go down platforms 
     else if (intTutorialStage == 1) {
       tutorialText.setText("Press S to go down platforms");
     } 
-    /**Stage to teach the player how to shoot */
+    //Stage to teach the player how to shoot 
     else if (intTutorialStage == 2) {
       tutorialText.setText("Press J to shoot guns");
     } 
-    /**Stage to teach the player how to pick up a crate */
+    //Stage to teach the player how to pick up a crate 
     else if (intTutorialStage == 3) {
       if (player1.gun.gunName.equals("heavyGuy")) {
         intTutorialStage = 4;
@@ -46,7 +46,7 @@ public class TutorialPanel extends GraphicsPanel {
         spawnCrates("heavyGuy", 500);
       }
     } 
-    /**Stage to teach the player how to shoot the enemy off the platform */
+    //Stage to teach the player how to shoot the enemy off the platform 
     else if (intTutorialStage == 4) {
       tutorialText.setText("Shoot the enemy off the platform");
       dummy.move(strArrayMap);
@@ -54,14 +54,16 @@ public class TutorialPanel extends GraphicsPanel {
         intTutorialStage = 5;
       }
     } 
-    /**Stage telling the player that they've comlpeted the tutorial */
+    //Stage telling the player that they've comlpeted the tutorial 
     else if (intTutorialStage == 5) {
       tutorialText.setText("Congrats, you have completed the tutorial");
     } 
   }
 
   @Override
-  /**Updating the screen */
+  /**Updating the screen 
+   * @param g the graphics component to paint images
+  */
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
@@ -82,7 +84,9 @@ public class TutorialPanel extends GraphicsPanel {
     }
   }
 
-  /**Constructor for the tutorial panel*/
+  /**Constructor for the tutorial panel
+   * @param displayPanel used for actionListenera and KeyListeners
+  */
   public TutorialPanel(DisplayPanel displayPanel) {
     super(displayPanel);
 
@@ -95,10 +99,14 @@ public class TutorialPanel extends GraphicsPanel {
     addKeyListener(new KeyListener() {
 
       @Override
+      //Unused
       public void keyTyped(KeyEvent e) {
       }
 
       @Override
+      /**the method to check if certain keypresses have been acheived to advance the tutorial stage
+       * @param e for KeyEvents
+       */
       public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         if (intTutorialStage == 0) {
@@ -119,6 +127,7 @@ public class TutorialPanel extends GraphicsPanel {
       }
 
       @Override
+      //Unused
       public void keyReleased(KeyEvent e) {
       }
       
