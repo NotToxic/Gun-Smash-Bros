@@ -17,7 +17,7 @@ import ui.DisplayPanel;
 public class GunSmashBros extends JFrame implements ActionListener{
 
   //General Display Panel to contain other panels
-  public DisplayPanel displayPanel = new DisplayPanel(this, ssm);
+  public DisplayPanel displayPanel = new DisplayPanel(this, ssm); 
 
   //Refresh Rate
   Timer gameTimer = new Timer(1000/60, this);
